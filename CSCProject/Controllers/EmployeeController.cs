@@ -19,9 +19,9 @@ namespace CSCProject.Controllers
             return EmployeeModel.GetEmployeeTypes();
         }
 
-        public void AddEmployee(Employee employee, Address address)
+        public void AddEmployee(Employee employee)
         {
-            EmployeeModel.AddEmployee(employee, address);
+            EmployeeModel.AddEmployee(employee);
         }
 
         public void RemoveEmployee(int employeeId)

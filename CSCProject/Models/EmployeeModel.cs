@@ -21,38 +21,31 @@ namespace CSCProject.Models
             return db.EmployeeTypes.ToList();
         }
 
-        public static void AddEmployee(Employee employee, Address address)
+        public static void AddEmployee(Employee employee)
         {
-            Regex nameRegex = new Regex(@"^[A-Za-z]+[\s][A-Za-z]+[.][A-Za-z]+$");
+            Regex nameRegex = new Regex(@"^([a-zA-Z]+?)([-\s'][a-zA-Z]+)*?$");
+            Regex phoneRegex = new Regex(@"^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$");
 
             // Check if the name of the employee is valid
             if (!nameRegex.IsMatch(employee.FirstName) || !nameRegex.IsMatch(employee.LastName))
             {
-                throw new System.ArgumentException("Invalid employee name");
+                throw new ArgumentException("Invalid employee name");
+            }
+
+            // Check for valid phone number
+            if (!phoneRegex.IsMatch(employee.Phone))
+            {
+                throw new ArgumentException("Invalid phone number");
             }
 
             // Check for valid address
-            if (!nameRegex.IsMatch(address.City))
+            if (!nameRegex.IsMatch(employee.Address.City))
             {
-                throw new System.ArgumentException("Invalid city name");
-            }
-            else if (!nameRegex.IsMatch(address.Street))
-            {
-                throw new System.ArgumentException("Invalid street name");
-            }
-
-            try
-            {
-                // Add the address to the address list
-                db.Addresses.Add(address);
-            }
-            catch
-            {
-                throw new System.ArgumentException("Address already taken");
+                throw new ArgumentException("Invalid city name");
             }
             
             // Set the address of the employee
-            employee.PostalCode = address.PostalCode;
+            employee.PostalCode = employee.Address.PostalCode;
 
             // Add the employee
             db.Employees.Add(employee);
