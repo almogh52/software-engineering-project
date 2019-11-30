@@ -63,16 +63,19 @@ namespace CSCProject.Models
 
         public static void RemoveEmployee(int employeeId)
         {
-            Employee employee = (from e in db.Employees where e.Id == employeeId select e).FirstOrDefault();
+            Employee employee = db.Employees.SingleOrDefault(e => e.Id == employeeId);
 
             // Check if the employee is found
             if (employee.Id != employeeId)
             {
-                throw new System.ArgumentException("Employee not found");
+                throw new ArgumentException("Employee not found");
             }
 
-            // Remove the employee
-            db.Employees.Remove(employee);
+            // Set the employee as deleted
+            employee.Deleted = true;
+
+            // Set the entity as changed
+            db.Entry(employee).State = System.Data.Entity.EntityState.Modified;
 
             // Save the datavase
             db.SaveChanges();
@@ -97,9 +100,7 @@ namespace CSCProject.Models
 
         private static bool CheckIfAddressExists(int postalCode)
         {
-            List<Address> addresses = (from a in db.Addresses where a.PostalCode == postalCode select a).ToList();
-
-            return addresses.Count() != 0;
+            return db.Addresses.Count(a => a.PostalCode == postalCode) != 0;
         }
     }
 }

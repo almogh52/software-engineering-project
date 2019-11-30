@@ -21,7 +21,7 @@ namespace CSCProject
         public string Phone { get; set; }
         public int PostalCode { get; set; }
         public int EmployeeTypeId { get; set; }
-        public sbyte Deleted { get; set; }
+        public bool Deleted { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual EmployeeType EmployeeType { get; set; }

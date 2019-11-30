@@ -24,7 +24,7 @@
           <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="postal_code" Type="int" Nullable="false" />
           <Property Name="employee_type_id" Type="int" Nullable="false" />
-          <Property Name="deleted" Type="tinyint" Nullable="false" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="employee_type">
           <Key>
@@ -115,7 +115,7 @@
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PostalCode" Type="Int32" Nullable="false" />
           <Property Name="EmployeeTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Deleted" Type="SByte" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="dbModel.employees_postal_code_fk" FromRole="employee" ToRole="Address" />
           <NavigationProperty Name="EmployeeType" Relationship="dbModel.employees_employee_type_id_fk" FromRole="employee" ToRole="EmployeeType" />
         </EntityType>

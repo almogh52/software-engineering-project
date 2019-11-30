@@ -35,7 +35,7 @@ namespace CSCProject.Windows
         private void Update()
         {
             // Get the employees
-            employeesDataGrid.ItemsSource = controller.GetEmployees();
+            employeesDataGrid.ItemsSource = controller.GetEmployees().Where(e => !e.Deleted);
 
             // Get the employee types
             employeeTypesDataGrid.ItemsSource = controller.GetEmployeeTypes();
