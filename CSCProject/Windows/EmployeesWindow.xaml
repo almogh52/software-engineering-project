@@ -13,30 +13,41 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Employees" Height="450" Width="800">
+        Title="Employees" Height="450" Width="950">
     <materialDesign:DialogHost Identifier="RootDialog">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="700*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="25"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="51"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
                 <RowDefinition Height="25"/>
-                <RowDefinition Height="300*"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
-            <Menu Grid.ColumnSpan="3">
+            <Menu Grid.ColumnSpan="5">
                 <MenuItem Header="_Employees">
                     <MenuItem Header="_New Employee" Click="NewEmployeeBtnClicked">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="UserAdd" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="_New Employee Type" Click="NewEmployeeTypeBtnClicked">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Add" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
-            <materialDesign:Card Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch">
+            <TextBlock Text="Employees" Style="{StaticResource MaterialDesignTitleTextBlock}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="8,0,0,0"/>
+            <TextBlock Text="Employee Types" Style="{StaticResource MaterialDesignTitleTextBlock}" Grid.Column="3" Grid.Row="2" Margin="8,0,0,0" VerticalAlignment="Center"/>
+            <materialDesign:Card Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch">
                 <DataGrid x:Name="employeesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
@@ -51,6 +62,27 @@
                     <DataGrid.Resources>
                         <ContextMenu x:Key="DataRowContextMenu">
                             <MenuItem Header="Remove" Click="RemoveEmployeeBtnClicked">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="Remove" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.Resources>
+                    <DataGrid.RowStyle >
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="ContextMenu" Value="{StaticResource DataRowContextMenu}" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="4" Grid.Column="3" VerticalAlignment="Stretch">
+                <DataGrid x:Name="employeeTypesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <ContextMenu x:Key="DataRowContextMenu">
+                            <MenuItem Header="Remove" Click="RemoveEmployeeTypeBtnClicked">
                                 <MenuItem.Icon>
                                     <materialDesign:PackIcon Kind="Remove" />
                                 </MenuItem.Icon>

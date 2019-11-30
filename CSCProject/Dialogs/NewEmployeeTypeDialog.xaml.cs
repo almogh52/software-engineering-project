@@ -17,20 +17,14 @@ using System.Windows.Shapes;
 
 namespace CSCProject.Dialogs
 {
-    public class NewEmployeeDialogContext
-    {
-        public Employee Employee { get; set; }
-        public List<EmployeeType> EmployeeTypes { get; set; }
-    }
-
     /// <summary>
     /// Interaction logic for NewEmployeeDialog.xaml
     /// </summary>
-    public partial class NewEmployeeDialog : UserControl
+    public partial class NewEmployeeTypeDialog : UserControl
     {
         public ICommand CloseCommand { get; } = new Misc.RelayCommand(o => DialogHost.CloseDialogCommand.Execute(true, null), o => !Misc.Utils.IsAnyNullOrEmpty(o));
 
-        public NewEmployeeDialog()
+        public NewEmployeeTypeDialog()
         {
             InitializeComponent();
         }

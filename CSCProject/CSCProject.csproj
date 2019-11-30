@@ -92,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialogs\NewEmployeeTypeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\NewEmployeeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +126,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\NewEmployeeTypeDialog.xaml.cs">
+      <DependentUpon>NewEmployeeTypeDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\NewEmployeeDialog.xaml.cs">
       <DependentUpon>NewEmployeeDialog.xaml</DependentUpon>

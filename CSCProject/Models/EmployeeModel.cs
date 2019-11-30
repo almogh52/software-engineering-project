@@ -70,5 +70,22 @@ namespace CSCProject.Models
             // Save the datavase
             db.SaveChanges();
         }
+
+        public static void AddEmployeeType(EmployeeType employeeType)
+        {
+            Regex nameRegex = new Regex(@"^([a-zA-Z]+?)([-\s'][a-zA-Z]+)*?$");
+
+            // Check if the name of the employee type is valid
+            if (!nameRegex.IsMatch(employeeType.Name))
+            {
+                throw new ArgumentException("Invalid employee type name");
+            }
+
+            // Add the employee type
+            db.EmployeeTypes.Add(employeeType);
+
+            // Save changes to the database
+            db.SaveChanges();
+        }
     }
 }

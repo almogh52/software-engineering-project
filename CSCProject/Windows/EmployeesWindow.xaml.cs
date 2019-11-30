@@ -36,6 +36,9 @@ namespace CSCProject.Windows
         {
             // Get the employees
             employeesDataGrid.ItemsSource = controller.GetEmployees();
+
+            // Get the employee types
+            employeeTypesDataGrid.ItemsSource = controller.GetEmployeeTypes();
         }
 
         private async void NewEmployeeBtnClicked(object sender, RoutedEventArgs e)
@@ -82,6 +85,35 @@ namespace CSCProject.Windows
                 // Update the employees data
                 Update();
             }
+        }
+
+        private async void NewEmployeeTypeBtnClicked(object sender, RoutedEventArgs e)
+        {
+            EmployeeType employeeType = new EmployeeType();
+
+            Dialogs.NewEmployeeTypeDialog newEmployeeTypeDialog = new Dialogs.NewEmployeeTypeDialog
+            {
+                DataContext = employeeType
+            };
+
+            // Show the new employee type dialog
+            await DialogHost.Show(newEmployeeTypeDialog, (object _, DialogClosingEventArgs args) =>
+            {
+                // If not cancelled
+                if (args.Parameter.GetType() == typeof(bool) && (bool)args.Parameter)
+                {
+                    // Add the employee type
+                    controller.AddEmployeeType(employeeType);
+
+                    // Update the employees data
+                    Update();
+                }
+            });
+        }
+
+        private void RemoveEmployeeTypeBtnClicked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

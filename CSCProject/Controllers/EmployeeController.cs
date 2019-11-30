@@ -28,5 +28,10 @@ namespace CSCProject.Controllers
         {
             EmployeeModel.RemoveEmployee(employeeId);
         }
+
+        public void AddEmployeeType(EmployeeType employeeType)
+        {
+            EmployeeModel.AddEmployeeType(employeeType);
+        }
     }
 }
