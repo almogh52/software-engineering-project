@@ -17,13 +17,13 @@ namespace CSCProject
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EmployeeType()
         {
-            this.employees = new HashSet<Employee>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> employees { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

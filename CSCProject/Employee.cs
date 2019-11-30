@@ -23,7 +23,7 @@ namespace CSCProject
         public int EmployeeTypeId { get; set; }
         public sbyte Deleted { get; set; }
     
-        public virtual Address address { get; set; }
-        public virtual EmployeeType employee_type { get; set; }
+        public virtual Address Address { get; set; }
+        public virtual EmployeeType EmployeeType { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace CSCProject
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Address()
         {
-            this.employees = new HashSet<Employee>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public int PostalCode { get; set; }
@@ -25,6 +25,6 @@ namespace CSCProject
         public string Street { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> employees { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
