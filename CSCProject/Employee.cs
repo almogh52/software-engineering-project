@@ -17,7 +17,7 @@ namespace CSCProject
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
         public string Phone { get; set; }
         public int PostalCode { get; set; }
         public int EmployeeTypeId { get; set; }

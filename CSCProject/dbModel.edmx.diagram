@@ -6,11 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="cd0b498169b5473ca71bd74a93096366" Name="Diagram1">
         <EntityTypeShape EntityType="dbModel.Address" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.Employee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="dbModel.EmployeeType" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <AssociationConnector Association="dbModel.employees_postal_code_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="dbModel.employees_employee_type_id_fk" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="dbModel.Employee" Width="1.5" PointX="3" PointY="2.875" />
+        <AssociationConnector Association="dbModel.employees_postal_code_fk" />
+        <AssociationConnector Association="dbModel.employees_employee_type_id_fk" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
