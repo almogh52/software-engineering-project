@@ -68,5 +68,20 @@ namespace CSCProject.Windows
                 }
             });
         }
+
+        private void RemoveEmployeeBtnClicked(object sender, RoutedEventArgs e)
+        {
+            Employee employee = employeesDataGrid.SelectedItem as Employee;
+
+            // If the employee isn't null
+            if (employee != null)
+            {
+                // Remove the employee
+                controller.RemoveEmployee(employee.Id);
+
+                // Update the employees data
+                Update();
+            }
+        }
     }
 }

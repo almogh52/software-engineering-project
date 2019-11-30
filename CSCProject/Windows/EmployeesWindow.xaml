@@ -48,6 +48,20 @@
                         <DataGridTextColumn Binding="{Binding Address.Street}" Header="Street" />
                         <DataGridTextColumn Binding="{Binding EmployeeType.Name}" Header="Employee Type" />
                     </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <ContextMenu x:Key="DataRowContextMenu">
+                            <MenuItem Header="Remove" Click="RemoveEmployeeBtnClicked">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="Remove" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.Resources>
+                    <DataGrid.RowStyle >
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="ContextMenu" Value="{StaticResource DataRowContextMenu}" />
+                        </Style>
+                    </DataGrid.RowStyle>
                 </DataGrid>
             </materialDesign:Card>
         </Grid>
