@@ -161,5 +161,11 @@ namespace CSCProject.Windows
         {
 
         }
+
+        private async void AboutBtnClicked(object sender, RoutedEventArgs e)
+        {
+            // Show the about message dialog
+            await DialogHost.Show(new Dialogs.MessageDialog { Message = "CSC Database\nVersion 1.0.0\n© 2019 Almog Hamdani.\nAll rights reserved." });
+        }
     }
 }

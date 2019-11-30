@@ -44,11 +44,23 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About" Click="AboutBtnClicked">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="About" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
             </Menu>
             <TextBlock Text="Employees" Style="{StaticResource MaterialDesignTitleTextBlock}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="8,0,0,0"/>
             <TextBlock Text="Employee Types" Style="{StaticResource MaterialDesignTitleTextBlock}" Grid.Column="3" Grid.Row="2" Margin="8,0,0,0" VerticalAlignment="Center"/>
-            <materialDesign:Card Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch">
-                <DataGrid x:Name="employeesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+            <materialDesign:Card Grid.Row="4" 
+                                 Grid.Column="1" 
+                                 VerticalAlignment="Stretch">
+                <DataGrid x:Name="employeesDataGrid" 
+                          AutoGenerateColumns="False" 
+                          IsReadOnly="True"
+                          IsHitTestVisible="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
                         <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
