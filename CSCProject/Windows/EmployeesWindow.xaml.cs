@@ -60,14 +60,37 @@ namespace CSCProject.Windows
             // Show the new employee dialog
             await DialogHost.Show(newEmployeeDialog, (object _, DialogClosingEventArgs args) =>
             {
-                // If not cancelled
-                if (args.Parameter.GetType() == typeof(bool) && (bool)args.Parameter)
+                // Check if the dialog closing is a message dialog
+                if (args.Session.Content.GetType() == typeof(Dialogs.MessageDialog))
                 {
-                    // Add the employee
-                    controller.AddEmployee(employee);
+                    // Cancel the close of the dialog
+                    args.Cancel();
 
-                    // Update the employees data
-                    Update();
+                    // Show the new employee dialog again
+                    args.Session.UpdateContent(newEmployeeDialog);
+                }
+                else
+                {
+                    // If not cancelled
+                    if (args.Parameter.GetType() == typeof(bool) && (bool)args.Parameter)
+                    {
+                        try
+                        {
+                            // Add the employee
+                            controller.AddEmployee(employee);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Cancel the close of the dialog
+                            args.Cancel();
+
+                            // Show the error
+                            args.Session.UpdateContent(new Dialogs.MessageDialog { Message = ex.Message });
+                        }
+
+                        // Update the employees data
+                        Update();
+                    }
                 }
             });
         }
@@ -99,14 +122,37 @@ namespace CSCProject.Windows
             // Show the new employee type dialog
             await DialogHost.Show(newEmployeeTypeDialog, (object _, DialogClosingEventArgs args) =>
             {
-                // If not cancelled
-                if (args.Parameter.GetType() == typeof(bool) && (bool)args.Parameter)
+                // Check if the dialog closing is a message dialog
+                if (args.Session.Content.GetType() == typeof(Dialogs.MessageDialog))
                 {
-                    // Add the employee type
-                    controller.AddEmployeeType(employeeType);
+                    // Cancel the close of the dialog
+                    args.Cancel();
 
-                    // Update the employees data
-                    Update();
+                    // Show the new employee dialog type again
+                    args.Session.UpdateContent(newEmployeeTypeDialog);
+                }
+                else
+                {
+                    // If not cancelled
+                    if (args.Parameter.GetType() == typeof(bool) && (bool)args.Parameter)
+                    {
+                        try
+                        {
+                            // Add the employee type
+                            controller.AddEmployeeType(employeeType);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Cancel the close of the dialog
+                            args.Cancel();
+
+                            // Show the error
+                            args.Session.UpdateContent(new Dialogs.MessageDialog { Message = ex.Message });
+                        }
+
+                        // Update the employees data
+                        Update();
+                    }
                 }
             });
         }
