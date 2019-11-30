@@ -29,9 +29,9 @@
             </Grid.RowDefinitions>
             <Menu Grid.ColumnSpan="3">
                 <MenuItem Header="_Employees">
-                    <MenuItem Header="_Add" Click="AddEmployeeBtnClicked">
+                    <MenuItem Header="_New Employee" Click="NewEmployeeBtnClicked">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="Add" />
+                            <materialDesign:PackIcon Kind="UserAdd" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>

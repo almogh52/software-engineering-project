@@ -38,7 +38,7 @@ namespace CSCProject.Windows
             employeesDataGrid.ItemsSource = controller.GetEmployees();
         }
 
-        private async void AddEmployeeBtnClicked(object sender, RoutedEventArgs e)
+        private async void NewEmployeeBtnClicked(object sender, RoutedEventArgs e)
         {
             Employee employee = new Employee
             {
