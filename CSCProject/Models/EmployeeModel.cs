@@ -47,6 +47,13 @@ namespace CSCProject.Models
             // Set the address of the employee
             employee.PostalCode = employee.Address.PostalCode;
 
+            // Check if the address already exists in the db
+            if (CheckIfAddressExists(employee.PostalCode))
+            {
+                // Remove address to prevent creation of new address
+                employee.Address = null;
+            }
+
             // Add the employee
             db.Employees.Add(employee);
 
@@ -86,6 +93,13 @@ namespace CSCProject.Models
 
             // Save changes to the database
             db.SaveChanges();
+        }
+
+        private static bool CheckIfAddressExists(int postalCode)
+        {
+            List<Address> addresses = (from a in db.Addresses where a.PostalCode == postalCode select a).ToList();
+
+            return addresses.Count() != 0;
         }
     }
 }

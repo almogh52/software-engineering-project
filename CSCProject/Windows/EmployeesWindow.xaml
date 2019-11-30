@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Employees" Height="450" Width="950">
+        Title="Employees" Height="450" Width="1020">
     <materialDesign:DialogHost Identifier="RootDialog">
         <Grid>
             <Grid.ColumnDefinitions>
