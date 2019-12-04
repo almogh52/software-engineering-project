@@ -28,7 +28,7 @@ namespace CSCProject.Dialogs
     /// </summary>
     public partial class NewEmployeeDialog : UserControl
     {
-        public ICommand CloseCommand { get; } = new Misc.RelayCommand(o => DialogHost.CloseDialogCommand.Execute(true, null), o => !Misc.Utils.IsAnyNullOrEmpty(o));
+        public ICommand CloseCommand { get; } = new Misc.RelayCommand(o => DialogHost.CloseDialogCommand.Execute(true, null), o => o != null && !Misc.Utils.IsAnyNullOrEmpty(o) && ((Employee)o).EmployeeTypeId != -1);
 
         public NewEmployeeDialog()
         {

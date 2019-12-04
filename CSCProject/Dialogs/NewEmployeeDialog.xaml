@@ -23,11 +23,12 @@
                  Margin="10 6 10 0"
                  Text="{Binding Employee.LastName}">
         </TextBox>
-        <TextBox materialDesign:HintAssist.Hint="Phone Number" 
-                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
-                 Margin="10 6 10 0"
-                 Text="{Binding Employee.Phone}">
-        </TextBox>
+        <DatePicker
+            materialDesign:HintAssist.Hint="Birth Date"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+            DisplayDateEnd="{x:Static system:DateTime.Now}"
+            Margin="10 6 10 0"
+            SelectedDate="{Binding Employee.BirthDate}"/>
         <ComboBox materialDesign:HintAssist.Hint="Gender"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="10 6 10 0"
@@ -36,6 +37,11 @@
             <project:Gender>Female</project:Gender>
             <project:Gender>Other</project:Gender>
         </ComboBox>
+        <TextBox materialDesign:HintAssist.Hint="Phone Number" 
+                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="10 6 10 0"
+                 Text="{Binding Employee.Phone}">
+        </TextBox>
         <TextBox materialDesign:HintAssist.Hint="Postal Code" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
@@ -54,7 +60,8 @@
         <ComboBox materialDesign:HintAssist.Hint="Employee Type"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="10 6 10 0"
-                  SelectedIndex="{Binding Employee.EmployeeTypeId}"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding Employee.EmployeeTypeId}"
                   ItemsSource="{Binding EmployeeTypes}"
                   DisplayMemberPath="Name"/>
         <StackPanel HorizontalAlignment="Center" 

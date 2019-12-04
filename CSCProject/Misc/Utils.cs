@@ -26,7 +26,15 @@ namespace CSCProject.Misc
                     {
                         return true;
                     }
-                } else
+                }
+                else if (pi.PropertyType == typeof(DateTime))
+                {
+                    if (((DateTime)value).Date == DateTime.Today.Date)
+                    {
+                        return true;
+                    }
+                }
+                else
                 {
                     if (IsAnyNullOrEmpty(value))
                     {
