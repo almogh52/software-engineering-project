@@ -13,10 +13,20 @@
         <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}"
                    Margin="6"
                    HorizontalAlignment="Center">New Employee Type</TextBlock>
-        <TextBox materialDesign:HintAssist.Hint="Type Name" 
+        <TextBox materialDesign:HintAssist.Hint="Name" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
                  Text="{Binding Name}">
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Salary" 
+                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="10 6 10 0"
+                 Text="{Binding Salary}">
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Description" 
+                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="10 6 10 0"
+                 Text="{Binding Description}">
         </TextBox>
         <StackPanel HorizontalAlignment="Center" 
                     Orientation="Horizontal" 

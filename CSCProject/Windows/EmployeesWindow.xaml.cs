@@ -45,6 +45,8 @@ namespace CSCProject.Windows
         {
             Employee employee = new Employee
             {
+                EmployeeTypeId = -1,
+                BirthDate = DateTime.Today,
                 Address = new Address()
             };
 
