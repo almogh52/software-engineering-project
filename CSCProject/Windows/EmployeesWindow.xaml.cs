@@ -166,8 +166,12 @@ namespace CSCProject.Windows
 
         private async void AboutBtnClicked(object sender, RoutedEventArgs e)
         {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = fvi.FileVersion;
+
             // Show the about message dialog
-            await DialogHost.Show(new Dialogs.MessageDialog { Message = "CSC Database\nVersion 1.0.0\n© 2019 Almog Hamdani.\nAll rights reserved." });
+            await DialogHost.Show(new Dialogs.MessageDialog { Message = $"CSC Database\nVersion {version}\n© 2019 Almog Hamdani.\nAll rights reserved." });
         }
     }
 }
