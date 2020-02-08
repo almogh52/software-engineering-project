@@ -21,14 +21,14 @@
 
 DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `address` (
   `postal_code` int(11) NOT NULL,
   `city` varchar(45) NOT NULL,
   `street` varchar(45) NOT NULL,
   PRIMARY KEY (`postal_code`),
   UNIQUE KEY `postal_code_UNIQUE` (`postal_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `address` (
 
 DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `description` text,
@@ -48,7 +48,7 @@ CREATE TABLE `customer` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `customer_postal_code_fk_idx` (`postal_code`),
   CONSTRAINT `customer_postal_code_fk` FOREIGN KEY (`postal_code`) REFERENCES `address` (`postal_code`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `customer` (
 
 DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(45) NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `employee` (
   KEY `employees_employee_type_id_fk_idx` (`employee_type_id`),
   CONSTRAINT `employee_employee_type_id_fk` FOREIGN KEY (`employee_type_id`) REFERENCES `employee_type` (`id`),
   CONSTRAINT `employee_postal_code_fk` FOREIGN KEY (`postal_code`) REFERENCES `address` (`postal_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `employee` (
 
 DROP TABLE IF EXISTS `employee_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `employee_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -93,7 +93,7 @@ CREATE TABLE `employee_type` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `employee_type` (
 
 DROP TABLE IF EXISTS `expense`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `expense` (
   `id` int(11) NOT NULL,
   `description` varchar(45) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE `expense` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `expesnse_employee_id_fk_idx` (`employee_id`),
   CONSTRAINT `expesnse_employee_id_fk` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `expense` (
 
 DROP TABLE IF EXISTS `inventory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `inventory` (
   `lot_id` varchar(20) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE `inventory` (
   CONSTRAINT `inventory_ lot_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`) ON DELETE RESTRICT,
   CONSTRAINT `inventory_item_id_fk` FOREIGN KEY (`item_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT,
   CONSTRAINT `inventory_storage_id_fk` FOREIGN KEY (`storage_id`) REFERENCES `warehouse` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,13 +143,13 @@ CREATE TABLE `inventory` (
 
 DROP TABLE IF EXISTS `lot`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `lot` (
   `id` varchar(20) NOT NULL,
   `type` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `lot` (
 
 DROP TABLE IF EXISTS `part`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `part` (
   `id` int(11) NOT NULL,
   `description` text NOT NULL,
@@ -167,7 +167,7 @@ CREATE TABLE `part` (
   `unit` bit(2) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +176,7 @@ CREATE TABLE `part` (
 
 DROP TABLE IF EXISTS `purchase_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `purchase_order` (
   `id` int(11) NOT NULL,
   `vendor_id` int(11) NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE `purchase_order` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `purchase_order_vendor_id_fk_idx` (`vendor_id`),
   CONSTRAINT `purchase_order_vendor_id_fk` FOREIGN KEY (`vendor_id`) REFERENCES `vendor` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +194,7 @@ CREATE TABLE `purchase_order` (
 
 DROP TABLE IF EXISTS `purchase_order_parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `purchase_order_parts` (
   `order_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
@@ -203,7 +203,7 @@ CREATE TABLE `purchase_order_parts` (
   KEY `purchase_order_parts_part_id_fk_idx` (`part_id`),
   CONSTRAINT `purchase_order_parts_order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `purchase_order` (`id`) ON DELETE RESTRICT,
   CONSTRAINT `purchase_order_parts_part_id_fk` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +212,7 @@ CREATE TABLE `purchase_order_parts` (
 
 DROP TABLE IF EXISTS `sale_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `sale_order` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -221,7 +221,7 @@ CREATE TABLE `sale_order` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `sale_order_customer_id_fk _idx` (`customer_id`),
   CONSTRAINT `sale_order_customer_id_fk ` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +230,7 @@ CREATE TABLE `sale_order` (
 
 DROP TABLE IF EXISTS `vendor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `vendor` (
   `id` int(11) NOT NULL,
   `description` text NOT NULL,
@@ -239,7 +239,7 @@ CREATE TABLE `vendor` (
   PRIMARY KEY (`id`),
   KEY `vendor_postal_code_fk_idx` (`postal_code`),
   CONSTRAINT `vendor_postal_code_fk` FOREIGN KEY (`postal_code`) REFERENCES `address` (`postal_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,13 +248,13 @@ CREATE TABLE `vendor` (
 
 DROP TABLE IF EXISTS `warehouse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `warehouse` (
   `id` int(11) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
