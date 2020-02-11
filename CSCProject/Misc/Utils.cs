@@ -44,5 +44,18 @@ namespace CSCProject.Misc
             }
             return false;
         }
+
+        public static Type FollowPropertyPath(Type type, string path)
+        {
+            Type currentType = type;
+
+            foreach (string propertyName in path.Split('.'))
+            {
+                PropertyInfo property = currentType.GetProperty(propertyName);
+                currentType = property.PropertyType;
+            }
+
+            return currentType;
+        }
     }
 }

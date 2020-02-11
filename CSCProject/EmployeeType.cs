@@ -24,6 +24,7 @@ namespace CSCProject
         public string Name { get; set; }
         public int Salary { get; set; }
         public string Description { get; set; }
+        public bool Deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }

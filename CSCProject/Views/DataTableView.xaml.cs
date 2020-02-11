@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CSCProject.Views
 {
     /// <summary>
-    /// Interaction logic for EmployeesView.xaml
+    /// Interaction logic for DataTableView.xaml
     /// </summary>
-    public partial class EmployeesView : UserControl
+    public partial class DataTableView : UserControl
     {
-        public EmployeesView()
+        public DataTableView()
         {
             InitializeComponent();
         }

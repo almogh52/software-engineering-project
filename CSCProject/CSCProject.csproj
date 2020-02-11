@@ -122,11 +122,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EmployeeTypesView.xaml">
+    <Page Include="Views\DataTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,6 +138,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DataHandlers\EmployeesDataHandler.cs" />
+    <Compile Include="DataHandlers\EmployeeTypesDataHandler.cs" />
     <Compile Include="dbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -175,16 +173,16 @@
     <Compile Include="Gender.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IDataHandler.cs" />
+    <Compile Include="Misc\Column.cs" />
     <Compile Include="Misc\RelayCommand.cs" />
     <Compile Include="Misc\Utils.cs" />
-    <Compile Include="ViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\DataTableViewModel.cs" />
     <Compile Include="ViewModels\EmployeeTypesViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\EmployeesView.xaml.cs">
-      <DependentUpon>EmployeesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmployeeTypesView.xaml.cs">
-      <DependentUpon>EmployeeTypesView.xaml</DependentUpon>
+    <Compile Include="ViewModels\EmployeesViewModel.cs" />
+    <Compile Include="Views\DataTableView.xaml.cs">
+      <DependentUpon>DataTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>

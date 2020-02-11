@@ -17,28 +17,29 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="first_name" Nullable="false" MaxLength="45" Type="varchar" />
-          <Property Name="last_name" Nullable="false" MaxLength="45" Type="varchar" />
-          <Property Name="gender" Nullable="false" Type="int" />
-          <Property Name="birth_date" Nullable="false" Type="date" />
-          <Property Name="phone" Nullable="false" MaxLength="20" Type="varchar" />
-          <Property Name="postal_code" Nullable="false" Type="int" />
-          <Property Name="employee_type_id" Nullable="false" Type="int" />
-          <Property Name="deleted" Nullable="false" Type="bit" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="gender" Type="int" Nullable="false" />
+          <Property Name="birth_date" Type="date" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="postal_code" Type="int" Nullable="false" />
+          <Property Name="employee_type_id" Type="int" Nullable="false" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="employee_type">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="name" Nullable="false" MaxLength="45" Type="varchar" />
-          <Property Name="salary" Nullable="false" Type="int" />
-          <Property Name="description" Nullable="false" MaxLength="500" Type="varchar" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="salary" Type="int" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="employees_employee_type_id_fk">
-          <End Type="Self.employee_type" Multiplicity="1" Role="employee_type" />
-          <End Type="Self.employee" Multiplicity="*" Role="employee" />
+        <Association Name="employee_employee_type_id_fk">
+          <End Role="employee_type" Type="Self.employee_type" Multiplicity="1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="employee_type">
               <PropertyRef Name="id" />
@@ -48,9 +49,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="employees_postal_code_fk">
-          <End Type="Self.address" Multiplicity="1" Role="address" />
-          <End Type="Self.employee" Multiplicity="*" Role="employee" />
+        <Association Name="employee_postal_code_fk">
+          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="address">
               <PropertyRef Name="postal_code" />
@@ -64,13 +65,13 @@
           <EntitySet Name="address" EntityType="Self.address" Schema="project" store:Type="Tables" />
           <EntitySet Name="employee" EntityType="Self.employee" Schema="project" store:Type="Tables" />
           <EntitySet Name="employee_type" EntityType="Self.employee_type" Schema="project" store:Type="Tables" />
-          <AssociationSet Name="employees_employee_type_id_fk" Association="Self.employees_employee_type_id_fk">
-            <End EntitySet="employee_type" Role="employee_type" />
-            <End EntitySet="employee" Role="employee" />
+          <AssociationSet Name="employee_employee_type_id_fk" Association="Self.employee_employee_type_id_fk">
+            <End Role="employee_type" EntitySet="employee_type" />
+            <End Role="employee" EntitySet="employee" />
           </AssociationSet>
-          <AssociationSet Name="employees_postal_code_fk" Association="Self.employees_postal_code_fk">
-            <End EntitySet="address" Role="address" />
-            <End EntitySet="employee" Role="employee" />
+          <AssociationSet Name="employee_postal_code_fk" Association="Self.employee_postal_code_fk">
+            <End Role="address" EntitySet="address" />
+            <End Role="employee" EntitySet="employee" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -89,14 +90,14 @@
         <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="dbModel.Address" />
           <EntitySet Name="Employees" EntityType="dbModel.Employee" />
-          <EntitySet Name="EmployeeTypes" EntityType="dbModel.EmployeeType" />
           <AssociationSet Name="employees_postal_code_fk" Association="dbModel.employees_postal_code_fk">
             <End EntitySet="Addresses" Role="Address" />
             <End EntitySet="Employees" Role="employee" />
           </AssociationSet>
-          <AssociationSet Name="employees_employee_type_id_fk" Association="dbModel.employees_employee_type_id_fk">
-            <End EntitySet="EmployeeTypes" Role="employee_type" />
-            <End EntitySet="Employees" Role="employee" />
+          <EntitySet Name="EmployeeTypes" EntityType="dbModel.EmployeeType" />
+          <AssociationSet Name="employee_employee_type_id_fk" Association="dbModel.employee_employee_type_id_fk">
+            <End Role="employee_type" EntitySet="EmployeeTypes" />
+            <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Employee">
@@ -113,17 +114,7 @@
           <Property Name="EmployeeTypeId" Nullable="false" Type="Int32" />
           <Property Name="Deleted" Nullable="false" Type="Boolean" />
           <NavigationProperty Name="Address" Relationship="dbModel.employees_postal_code_fk" FromRole="employee" ToRole="Address" />
-          <NavigationProperty Name="EmployeeType" Relationship="dbModel.employees_employee_type_id_fk" FromRole="employee" ToRole="employee_type" />
-        </EntityType>
-        <EntityType Name="EmployeeType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Name" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Salary" Nullable="false" Type="Int32" />
-          <Property Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
-          <NavigationProperty Name="Employees" Relationship="dbModel.employees_employee_type_id_fk" FromRole="employee_type" ToRole="employee" />
+          <NavigationProperty Name="EmployeeType" Relationship="dbModel.employee_employee_type_id_fk" FromRole="Employee" ToRole="employee_type" />
         </EntityType>
         <Association Name="employees_postal_code_fk">
           <End Type="dbModel.Address" Multiplicity="1" Role="Address" />
@@ -137,23 +128,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="employees_employee_type_id_fk">
-          <End Type="dbModel.EmployeeType" Multiplicity="1" Role="employee_type" />
-          <End Type="dbModel.Employee" Multiplicity="*" Role="employee" />
-          <ReferentialConstraint>
-            <Principal Role="employee_type">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="employee">
-              <PropertyRef Name="EmployeeTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EnumType Name="Gender">
           <Member Name="Male" />
           <Member Name="Female" />
           <Member Name="Other" />
         </EnumType>
+        <EntityType Name="EmployeeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="dbModel.employee_employee_type_id_fk" FromRole="employee_type" ToRole="Employee" />
+        </EntityType>
+        <Association Name="employee_employee_type_id_fk">
+          <End Type="dbModel.EmployeeType" Role="employee_type" Multiplicity="1" />
+          <End Type="dbModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee_type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -187,6 +189,7 @@
           <EntitySetMapping Name="EmployeeTypes">
             <EntityTypeMapping TypeName="dbModel.EmployeeType">
               <MappingFragment StoreEntitySet="employee_type">
+                <ScalarProperty Name="Deleted" ColumnName="deleted" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="Salary" ColumnName="salary" />
                 <ScalarProperty Name="Name" ColumnName="name" />

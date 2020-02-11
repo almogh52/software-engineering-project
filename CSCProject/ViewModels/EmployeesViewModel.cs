@@ -1,142 +1,50 @@
-﻿using Caliburn.Micro;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Data;
 
 namespace CSCProject.ViewModels
 {
-    class EmployeesViewModel : Screen, INotifyPropertyChanged
+    class EmployeesViewModel : DataTableViewModel<Employee, DataHandlers.EmployeesDataHandler, Dialogs.NewEmployeeDialog>
     {
-        private readonly dbEntities db = new dbEntities();
+        public override string AddButtonIcon { get; set; } = "UserAdd";
+        public override string RemoveButtonIcon { get; set; } = "UserRemove";
 
-        public List<Employee> Employees { get => db.Employees.Where(e => !e.Deleted).ToList(); }
-        
-        public void RemoveEmployee(Employee employee)
+        protected override List<Misc.Column> GetColumns()
         {
-            // Set the employee as deleted
-            employee.Deleted = true;
-
-            // Set the entity as changed
-            db.Entry(employee).State = System.Data.Entity.EntityState.Modified;
-
-            // Save the datavase
-            db.SaveChanges();
-
-            // Update the table
-            UpdateTable();
+            return new List<Misc.Column> {
+                new Misc.Column { Name = "First Name", PropertyBinding = new Binding("FirstName") },
+                new Misc.Column { Name = "Last Name", PropertyBinding = new Binding("LastName") },
+                new Misc.Column { Name = "Birth Date", PropertyBinding = new Binding("BirthDate") { StringFormat = "d" } },
+                new Misc.Column { Name = "Gender", PropertyBinding = new Binding("Gender") },
+                new Misc.Column { Name = "Phone Number", PropertyBinding = new Binding("Phone") },
+                new Misc.Column { Name = "Postal Code", PropertyBinding = new Binding("Address.PostalCode") },
+                new Misc.Column { Name = "City", PropertyBinding = new Binding("Address.City") },
+                new Misc.Column { Name = "Street", PropertyBinding = new Binding("Address.Street") },
+                new Misc.Column { Name = "Employee Type", PropertyBinding = new Binding("EmployeeType.Name") },
+                new Misc.Column { Name = "Deleted", PropertyBinding = new Binding("Deleted") }
+            };
         }
 
-        public async void ShowNewEmployeeDialog()
+        protected override void InitNewDataItemDialog(ref Dialogs.NewEmployeeDialog dialog, ref Employee dataItem)
         {
-            Employee employee = new Employee
+            dataItem = new Employee
             {
                 EmployeeTypeId = -1,
                 BirthDate = DateTime.Today,
                 Address = new Address()
             };
 
-            Dialogs.NewEmployeeDialog newEmployeeDialog = new Dialogs.NewEmployeeDialog
+            dialog = new Dialogs.NewEmployeeDialog
             {
                 DataContext = new Dialogs.NewEmployeeDialogContext
                 {
-                    Employee = employee,
-                    EmployeeTypes = db.EmployeeTypes.ToList()
+                    Employee = dataItem,
+                    EmployeeTypes = dataHandler.GetEntities().EmployeeTypes.ToList()
                 }
             };
-
-            // Show the new employee dialog
-            await DialogHost.Show(newEmployeeDialog, (object _, DialogClosingEventArgs args) =>
-            {
-                // Check if the dialog closing is a message dialog
-                if (args.Session.Content.GetType() == typeof(Dialogs.MessageDialog))
-                {
-                    // Cancel the close of the dialog
-                    args.Cancel();
-
-                    // Show the new employee dialog again
-                    args.Session.UpdateContent(newEmployeeDialog);
-                }
-                else
-                {
-                    // If not cancelled
-                    if (args.Parameter.GetType() == typeof(bool) && (bool)args.Parameter)
-                    {
-                        try
-                        {
-                            // Add the employee
-                            AddEmployee(employee);
-                        }
-                        catch (Exception ex)
-                        {
-                            // Cancel the close of the dialog
-                            args.Cancel();
-
-                            // Show the error
-                            args.Session.UpdateContent(new Dialogs.MessageDialog { Message = ex.Message });
-                        }
-
-                        // Update the employees data
-                        UpdateTable();
-                    }
-                }
-            });
-        }
-
-        private void AddEmployee(Employee employee)
-        {
-            Regex nameRegex = new Regex(@"^([a-zA-Z]+?)([-\s'][a-zA-Z]+)*?$");
-            Regex phoneRegex = new Regex(@"^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$");
-
-            // Check if the name of the employee is valid
-            if (!nameRegex.IsMatch(employee.FirstName) || !nameRegex.IsMatch(employee.LastName))
-            {
-                throw new ArgumentException("Invalid employee name");
-            }
-
-            // Check for valid phone number
-            if (!phoneRegex.IsMatch(employee.Phone))
-            {
-                throw new ArgumentException("Invalid phone number");
-            }
-
-            // Check for valid address
-            if (!nameRegex.IsMatch(employee.Address.City))
-            {
-                throw new ArgumentException("Invalid city name");
-            }
-
-            // Set the address of the employee
-            employee.PostalCode = employee.Address.PostalCode;
-
-            // Check if the address already exists in the db
-            if (CheckIfAddressExists(employee.PostalCode))
-            {
-                // Remove address to prevent creation of new address
-                employee.Address = null;
-            }
-
-            // Add the employee
-            db.Employees.Add(employee);
-
-            // Save changes to the database
-            db.SaveChanges();
-        }
-
-        private void UpdateTable()
-        {
-            // Notify table update
-            NotifyOfPropertyChange("Employees");
-        }
-
-        private bool CheckIfAddressExists(int postalCode)
-        {
-            return db.Addresses.Count(a => a.PostalCode == postalCode) != 0;
         }
     }
 }
