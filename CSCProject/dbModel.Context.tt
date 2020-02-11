@@ -43,12 +43,14 @@ namespace <#=code.EscapeNamespace(codeNamespace)#>
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Configuration;
 <#
 if (container.FunctionImports.Any())
 {
 #>
 using System.Data.Entity.Core.Objects;
 using System.Linq;
+using System.Configuration;
 <#
 }
 #>
@@ -56,7 +58,7 @@ using System.Linq;
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext
 {
     public <#=code.Escape(container)#>()
-        : base("name=<#=container.Name#>")
+        : base(ViewModels.ConnectionViewModel.ConnectionString)
     {
 <#
 if (!loader.IsLazyLoadingEnabled(container))

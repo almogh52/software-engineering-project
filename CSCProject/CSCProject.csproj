@@ -122,6 +122,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ConnectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DataTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,12 +179,17 @@
     </Compile>
     <Compile Include="Interfaces\IDataHandler.cs" />
     <Compile Include="Misc\Column.cs" />
+    <Compile Include="Misc\PasswordBoxHelper.cs" />
     <Compile Include="Misc\RelayCommand.cs" />
     <Compile Include="Misc\Utils.cs" />
+    <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ViewModels\DataTableViewModel.cs" />
     <Compile Include="ViewModels\EmployeeTypesViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
+    <Compile Include="Views\ConnectionView.xaml.cs">
+      <DependentUpon>ConnectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DataTableView.xaml.cs">
       <DependentUpon>DataTableView.xaml</DependentUpon>
     </Compile>
