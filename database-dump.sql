@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
---
--- Host: localhost    Database: project
--- ------------------------------------------------------
--- Server version	8.0.16
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -39,7 +33,7 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
 CREATE TABLE `customer` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text,
   `postal_code` int(11) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -90,6 +84,7 @@ CREATE TABLE `employee_type` (
   `name` varchar(45) NOT NULL,
   `salary` int(11) NOT NULL,
   `description` text,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
@@ -104,11 +99,12 @@ DROP TABLE IF EXISTS `expense`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
 CREATE TABLE `expense` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(45) NOT NULL,
   `price` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `employee_id` int(11) NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `expesnse_employee_id_fk_idx` (`employee_id`),
@@ -128,6 +124,7 @@ CREATE TABLE `inventory` (
   `item_id` int(11) NOT NULL,
   `storage_id` int(11) NOT NULL,
   `quantity` float NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`lot_id`,`item_id`),
   KEY `inventory_item_id_fk_idx` (`item_id`),
   KEY `inventory_storage_id_fk_idx` (`storage_id`),
@@ -147,6 +144,7 @@ DROP TABLE IF EXISTS `lot`;
 CREATE TABLE `lot` (
   `id` varchar(20) NOT NULL,
   `type` tinyint(4) NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -160,11 +158,12 @@ DROP TABLE IF EXISTS `part`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
 CREATE TABLE `part` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
   `type` bit(1) NOT NULL,
   `purchase_price` float NOT NULL,
   `unit` bit(2) NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -178,9 +177,10 @@ DROP TABLE IF EXISTS `purchase_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
 CREATE TABLE `purchase_order` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `vendor_id` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `purchase_order_vendor_id_fk_idx` (`vendor_id`),
@@ -189,20 +189,21 @@ CREATE TABLE `purchase_order` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `purchase_order_parts`
+-- Table structure for table `purchase_order_part`
 --
 
-DROP TABLE IF EXISTS `purchase_order_parts`;
+DROP TABLE IF EXISTS `purchase_order_part`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
-CREATE TABLE `purchase_order_parts` (
+CREATE TABLE `purchase_order_part` (
   `order_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
   `quantity` float NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`order_id`,`part_id`),
   KEY `purchase_order_parts_part_id_fk_idx` (`part_id`),
-  CONSTRAINT `purchase_order_parts_order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `purchase_order` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `purchase_order_parts_part_id_fk` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT
+  CONSTRAINT `purchase_order_part_order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `purchase_order` (`id`) ON DELETE RESTRICT,
+  CONSTRAINT `purchase_order_part_part_id_fk` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,9 +215,10 @@ DROP TABLE IF EXISTS `sale_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
 CREATE TABLE `sale_order` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `sale_order_customer_id_fk _idx` (`customer_id`),
@@ -232,11 +234,14 @@ DROP TABLE IF EXISTS `vendor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
 CREATE TABLE `vendor` (
-  `id` int(11) NOT NULL,
-  `description` text NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
   `postal_code` int(11) NOT NULL,
   `phone` varchar(20) NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `phone_UNIQUE` (`phone`),
   KEY `vendor_postal_code_fk_idx` (`postal_code`),
   CONSTRAINT `vendor_postal_code_fk` FOREIGN KEY (`postal_code`) REFERENCES `address` (`postal_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -250,8 +255,9 @@ DROP TABLE IF EXISTS `warehouse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
 CREATE TABLE `warehouse` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
