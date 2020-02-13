@@ -20,7 +20,8 @@ namespace CSCProject.ViewModels
         public Dictionary<string, Screen> ViewsList { get; set; } = new Dictionary<string, Screen>
         {
             { "Employees", new EmployeesViewModel() },
-            { "Employee Types", new EmployeeTypesViewModel() }
+            { "Employee Types", new EmployeeTypesViewModel() },
+            { "Vendors", new VendorsViewModel() }
         };
 
         public ShellViewModel()

@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="CSCProject.Dialogs.NewVendorDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSCProject.Dialogs"
+             xmlns:project="clr-namespace:CSCProject"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             MinWidth="250">
+    <StackPanel>
+        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}"
+                   Margin="6"
+                   HorizontalAlignment="Center">New Vendor</TextBlock>
+        <TextBox materialDesign:HintAssist.Hint="Name" 
+                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="10 6 10 0"
+                 Text="{Binding Name}">
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Phone Number" 
+                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="10 6 10 0"
+                 Text="{Binding Phone}">
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Postal Code" 
+                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="10 6 10 0"
+                 Text="{Binding Address.PostalCode}">
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="City" 
+                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="10 6 10 0"
+                 Text="{Binding Address.City}">
+        </TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Street" 
+                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="10 6 10 0"
+                 Text="{Binding Address.Street}">
+        </TextBox>
+        <StackPanel HorizontalAlignment="Center" 
+                    Orientation="Horizontal" 
+                    Margin="6">
+            <Button IsDefault="True"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NewVendorDialog}}, Path=CloseCommand}"
+                    CommandParameter="{Binding .}">
+                ADD
+            </Button>
+            <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>False</system:Boolean>
+                </Button.CommandParameter>
+                CANCEL
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
