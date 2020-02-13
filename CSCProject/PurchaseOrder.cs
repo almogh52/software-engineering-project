@@ -12,27 +12,21 @@ namespace CSCProject
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class PurchaseOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public PurchaseOrder()
         {
-            this.Expenses = new HashSet<Expense>();
+            this.PurchaseOrderParts = new HashSet<PurchaseOrderPart>();
         }
     
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public Gender Gender { get; set; }
-        public System.DateTime BirthDate { get; set; }
-        public string Phone { get; set; }
-        public int PostalCode { get; set; }
-        public int EmployeeTypeId { get; set; }
+        public int VendorId { get; set; }
+        public System.DateTime Date { get; set; }
         public bool Deleted { get; set; }
     
-        public virtual Address Address { get; set; }
-        public virtual EmployeeType EmployeeType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Expense> Expenses { get; set; }
+        public virtual ICollection<PurchaseOrderPart> PurchaseOrderParts { get; set; }
+        public virtual Vendor Vendor { get; set; }
     }
 }

@@ -12,27 +12,19 @@ namespace CSCProject
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Lot
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Lot()
         {
-            this.Expenses = new HashSet<Expense>();
+            this.Inventories = new HashSet<Inventory>();
         }
     
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public Gender Gender { get; set; }
-        public System.DateTime BirthDate { get; set; }
-        public string Phone { get; set; }
-        public int PostalCode { get; set; }
-        public int EmployeeTypeId { get; set; }
+        public string Id { get; set; }
+        public sbyte Type { get; set; }
         public bool Deleted { get; set; }
     
-        public virtual Address Address { get; set; }
-        public virtual EmployeeType EmployeeType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Expense> Expenses { get; set; }
+        public virtual ICollection<Inventory> Inventories { get; set; }
     }
 }
