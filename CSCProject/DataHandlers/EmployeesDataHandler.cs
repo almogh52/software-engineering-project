@@ -11,11 +11,11 @@ namespace CSCProject.DataHandlers
     {
         public override void AddDataItem(Employee dataItem)
         {
-            // Set the address of the employee
+            // Set the address of the vendor
             dataItem.PostalCode = dataItem.Address.PostalCode;
 
             // Check if the address already exists in the db
-            if (CheckIfAddressExists(dataItem.PostalCode))
+            if (Misc.Utils.CheckIfAddressExists(db, dataItem.PostalCode))
             {
                 // Remove address to prevent creation of new address
                 dataItem.Address = null;
@@ -27,31 +27,23 @@ namespace CSCProject.DataHandlers
 
         protected override void VerifyDataItem(Employee employee)
         {
-            Regex nameRegex = new Regex(@"^([a-zA-Z]+?)([-\s'][a-zA-Z]+)*?$");
-            Regex phoneRegex = new Regex(@"^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$");
-
             // Check if the name of the employee is valid
-            if (!nameRegex.IsMatch(employee.FirstName) || !nameRegex.IsMatch(employee.LastName))
+            if (!Misc.Utils.VerifyName(employee.FirstName) || !Misc.Utils.VerifyName(employee.LastName))
             {
                 throw new ArgumentException("Invalid employee name");
             }
 
             // Check for valid phone number
-            if (!phoneRegex.IsMatch(employee.Phone))
+            if (!Misc.Utils.VerifyPhone(employee.Phone))
             {
                 throw new ArgumentException("Invalid phone number");
             }
 
             // Check for valid address
-            if (!nameRegex.IsMatch(employee.Address.City))
+            if (!Misc.Utils.VerifyName(employee.Address.City))
             {
                 throw new ArgumentException("Invalid city name");
             }
-        }
-
-        private bool CheckIfAddressExists(int postalCode)
-        {
-            return db.Addresses.Count(a => a.PostalCode == postalCode) != 0;
         }
     }
 }

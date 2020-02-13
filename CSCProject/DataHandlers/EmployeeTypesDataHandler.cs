@@ -11,10 +11,8 @@ namespace CSCProject.DataHandlers
     {
         protected override void VerifyDataItem(EmployeeType dataItem)
         {
-            Regex nameRegex = new Regex(@"^([a-zA-Z]+?)([-\s'][a-zA-Z]+)*?$");
-
             // Check if the name of the employee type is valid
-            if (!nameRegex.IsMatch(dataItem.Name))
+            if (!Misc.Utils.VerifyName(dataItem.Name))
             {
                 throw new ArgumentException("Invalid employee type name");
             }
