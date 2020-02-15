@@ -9,7 +9,8 @@ namespace CSCProject.Misc
 {
     class Column
     {
-        public string Name;
+        public string Name { get; set; }
         public Binding PropertyBinding;
+        public bool AllowSearch;
     }
 }

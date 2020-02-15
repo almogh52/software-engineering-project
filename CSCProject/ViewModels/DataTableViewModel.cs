@@ -3,6 +3,7 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +17,35 @@ namespace CSCProject.ViewModels
     {
         protected Interfaces.IDataHandler<T> dataHandler = new U();
 
-        public List<T> Data { get => dataHandler.GetData(); }
+        public List<T> Data {
+            get {
+                List<T> OriginalData = ShowDeletedItems ? dataHandler.GetData() : dataHandler.GetData().FindAll(item => (bool)typeof(T).GetProperty("Deleted").GetValue(item) == false);
+
+                // If no search text or column, return original data
+                if (SearchText == null || SearchColumnIndex == -1 || SearchText.Length == 0)
+                {
+                    return OriginalData;
+                }
+                else
+                {
+                    Misc.Column searchColumn = SearchableColumns[SearchColumnIndex];
+                    return OriginalData.FindAll(item => Misc.Utils.GetPropertyValue(typeof(T), searchColumn.PropertyBinding.Path.Path, item).ToString().Contains(SearchText));
+                }
+            }
+        }
 
         public string DataItemName { get; } = typeof(T).Name;
+
+        public bool ShowDeletedItems { get; set; } = false;
+
+        public List<Misc.Column> SearchableColumns { get => GetColumns().FindAll(column => column.AllowSearch); }
+        public int SearchColumnIndex { get; set; } = -1;
+        public string SearchText { get; set; }
 
         public virtual string AddButtonIcon { get; set; } = "Add";
         public virtual string RemoveButtonIcon { get; set; } = "Remove";
 
-        public void InitDataGrid()
+        public void Init()
         {
             DataGrid dataGrid = (GetView() as Views.DataTableView).Data;
 
@@ -33,10 +55,12 @@ namespace CSCProject.ViewModels
                 // Check for checkbox column
                 if (Misc.Utils.FollowPropertyPath(typeof(T), column.PropertyBinding.Path.Path) == typeof(bool))
                 {
-                    dataGrid.Columns.Add(new DataGridCheckBoxColumn { Header = column.Name, Binding = column.PropertyBinding, ElementStyle = Application.Current.Resources["MaterialDesignDataGridCheckBoxColumnStyle"] as Style });
+                    // Insert before the deleted field
+                    dataGrid.Columns.Insert(dataGrid.Columns.Count - 1, new DataGridCheckBoxColumn { Header = column.Name, Binding = column.PropertyBinding, ElementStyle = Application.Current.Resources["MaterialDesignDataGridCheckBoxColumnStyle"] as Style });
                 } else
                 {
-                    dataGrid.Columns.Add(new DataGridTextColumn { Header = column.Name, Binding = column.PropertyBinding });
+                    // Insert before the deleted field
+                    dataGrid.Columns.Insert(dataGrid.Columns.Count - 1, new DataGridTextColumn { Header = column.Name, Binding = column.PropertyBinding });
                 }
             }
         }
@@ -109,6 +133,12 @@ namespace CSCProject.ViewModels
 
             // Update the table
             UpdateTable();
+        }
+
+        public void ClearSearch()
+        {
+            SearchText = null;
+            SearchColumnIndex = -1;
         }
 
         private void UpdateTable()

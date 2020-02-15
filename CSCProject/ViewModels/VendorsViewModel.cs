@@ -15,12 +15,11 @@ namespace CSCProject.ViewModels
         protected override List<Misc.Column> GetColumns()
         {
             return new List<Misc.Column> {
-                new Misc.Column { Name = "Name", PropertyBinding = new Binding("Name") },
-                new Misc.Column { Name = "Phone Number", PropertyBinding = new Binding("Phone") },
-                new Misc.Column { Name = "Postal Code", PropertyBinding = new Binding("Address.PostalCode") },
-                new Misc.Column { Name = "City", PropertyBinding = new Binding("Address.City") },
-                new Misc.Column { Name = "Street", PropertyBinding = new Binding("Address.Street") },
-                new Misc.Column { Name = "Deleted", PropertyBinding = new Binding("Deleted") }
+                new Misc.Column { Name = "Name", PropertyBinding = new Binding("Name"), AllowSearch = true },
+                new Misc.Column { Name = "Phone Number", PropertyBinding = new Binding("Phone"), AllowSearch = true },
+                new Misc.Column { Name = "Postal Code", PropertyBinding = new Binding("Address.PostalCode"), AllowSearch = true },
+                new Misc.Column { Name = "City", PropertyBinding = new Binding("Address.City"), AllowSearch = true },
+                new Misc.Column { Name = "Street", PropertyBinding = new Binding("Address.Street"), AllowSearch = true }
             };
         }
 
