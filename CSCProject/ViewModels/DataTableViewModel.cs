@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,7 +35,7 @@ namespace CSCProject.ViewModels
             }
         }
 
-        public string DataItemName { get; } = typeof(T).Name;
+        public string DataItemName { get; } = Regex.Replace(typeof(T).Name, "(\\B[A-Z])", " $1");
 
         public bool ShowDeletedItems { get; set; } = false;
 
