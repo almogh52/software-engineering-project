@@ -16,7 +16,7 @@ namespace CSCProject.ViewModels
     {
         private WindowManager windowManager = new WindowManager();
 
-        public static string ConnectionString { get; set; }
+        public static string ConnectionString { get; set; } = ((ConnectionStringsSection)ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).GetSection("connectionStrings")).ConnectionStrings["dbEntities"].ConnectionString;
 
         public string Host { get; set; }
         public string Username { get; set; }
@@ -27,13 +27,10 @@ namespace CSCProject.ViewModels
         public void ConnectToServer()
         {
             string connString = $"server={Host};user id={Username};password={Password};database=project";
-
-            MySqlConnection connection = null;
-
             try
             {
                 // Try to connect to the server
-                connection = new MySqlConnection(connString);
+                MySqlConnection connection = new MySqlConnection(connString);
                 connection.Open();
             } catch (Exception ex)
             {

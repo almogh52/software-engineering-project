@@ -21,7 +21,11 @@ namespace CSCProject {
         }
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e) {
+#if DEBUG
+            DisplayRootViewFor<ViewModels.ShellViewModel>();
+#else
             DisplayRootViewFor<ViewModels.ConnectionViewModel>();
+#endif
         }
     }
 }
