@@ -69,7 +69,8 @@
                   SelectedValuePath="Id"
                   SelectedValue="{Binding Employee.EmployeeTypeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding EmployeeTypes}"
-                  DisplayMemberPath="Name"/>
+                  DisplayMemberPath="Name"
+                  IsEditable="True"/>
         <StackPanel HorizontalAlignment="Center" 
                     Orientation="Horizontal" 
                     Margin="6">
