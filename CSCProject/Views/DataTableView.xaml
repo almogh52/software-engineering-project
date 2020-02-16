@@ -69,8 +69,7 @@
                 DisplayMemberPath="Name"
                 SelectedIndex="{Binding SearchColumnIndex, Mode=TwoWay}"
                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                Margin="5,0,5,0">
-            </ComboBox>
+                Margin="5,0,5,0" />
             <Button
                 x:Name="ClearSearch"
                 Grid.Column="2"
@@ -81,13 +80,18 @@
                 Margin="5,10,5,0">
                 CLEAR
             </Button>
-            <CheckBox
-                x:Name="ShowDeletedItems"
-                Grid.Column="4"
-                HorizontalAlignment="Center"
-                Margin="5,0,5,0">
-                <TextBlock Text="{Binding DataItemName, StringFormat=Show Deleted {0}s}"/>
-            </CheckBox>
+            <StackPanel Grid.Column="4" Margin="5,0,5,0">
+                <CheckBox
+                    x:Name="ShowDataItemId"
+                    HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding DataItemName, StringFormat=Show {0} ID}"/>
+                </CheckBox>
+                <CheckBox
+                    x:Name="ShowDeletedItems"
+                    HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding DataItemName, StringFormat=Show Deleted {0}s}"/>
+                </CheckBox>
+            </StackPanel>
         </Grid>
         <materialDesign:Card 
             Grid.Row="1" 
@@ -97,6 +101,10 @@
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Header="ID" 
+                        Binding="{Binding Id}"
+                        Visibility="{Binding Path=IsChecked, Source={x:Reference ShowDataItemId}, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}"/>
                     <DataGridCheckBoxColumn 
                         Header="Deleted" 
                         Binding="{Binding Deleted}"

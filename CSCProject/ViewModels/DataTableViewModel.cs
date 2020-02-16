@@ -37,6 +37,7 @@ namespace CSCProject.ViewModels
 
         public string DataItemName { get; } = Regex.Replace(typeof(T).Name, "(\\B[A-Z])", " $1");
 
+        public bool ShowDataItemId { get; set; } = false;
         public bool ShowDeletedItems { get; set; } = false;
 
         public List<Misc.Column> SearchableColumns { get => GetColumns().FindAll(column => column.AllowSearch); }
