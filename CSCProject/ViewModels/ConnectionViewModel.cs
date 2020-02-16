@@ -26,7 +26,9 @@ namespace CSCProject.ViewModels
 
         public void ConnectToServer()
         {
-            string connString = $"server={Host};user id={Username};password={Password};database=project";
+            string[] HostDetails = Host.Split(':');
+
+            string connString = $"server={HostDetails[0]};port={(HostDetails.Count() > 1 ? int.Parse(HostDetails[1]) : 3306)};user id={Username};password={Password};database=project";
             try
             {
                 // Try to connect to the server
@@ -50,12 +52,15 @@ namespace CSCProject.ViewModels
 
         private void SaveConnectionString()
         {
+            string[] HostDetails = Host.Split(':');
+
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             ConnectionStringsSection connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
             string connectionString = connectionStringsSection.ConnectionStrings["dbEntities"].ConnectionString;
 
             // Replace connection info
-            connectionString = connectionString.Replace("localhost", Host);
+            connectionString = connectionString.Replace("localhost", HostDetails[0]);
+            connectionString = connectionString.Replace("3306", HostDetails.Count() > 1 ? HostDetails[1] : "3306");
             connectionString = connectionString.Replace("server", Username);
             connectionString = connectionString.Replace("123456789", Password);
 
