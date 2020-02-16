@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace CSCProject.ViewModels
 {
-    class VendorsViewModel : DataTableViewModel<Vendor, DataHandlers.VendorsDataHandler, Dialogs.NewVendorDialog>
+    class VendorsViewModel : DataTableViewModel<Vendor, DataHandlers.VendorsDataHandler, Dialogs.VendorDialog>
     {
         public override string AddButtonIcon { get; set; } = "BankAdd";
         public override string RemoveButtonIcon { get; set; } = "BankRemove";
@@ -23,14 +23,9 @@ namespace CSCProject.ViewModels
             };
         }
 
-        protected override void InitNewDataItemDialog(ref Dialogs.NewVendorDialog dialog, ref Vendor dataItem)
+        protected override void InitDataItemDialog(ref Dialogs.VendorDialog dialog, ref Vendor dataItem)
         {
-            dataItem = new Vendor
-            {
-                Address = new Address()
-            };
-
-            dialog = new Dialogs.NewVendorDialog
+            dialog = new Dialogs.VendorDialog
             {
                 DataContext = dataItem
             };

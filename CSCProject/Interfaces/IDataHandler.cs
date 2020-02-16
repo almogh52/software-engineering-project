@@ -20,11 +20,8 @@ namespace CSCProject.Interfaces
             // Set the data item as deleted
             typeof(T).GetProperty("Deleted").SetValue(dataItem, true);
 
-            // Set the entity as changed
-            db.Entry(dataItem).State = System.Data.Entity.EntityState.Modified;
-
-            // Save the database
-            db.SaveChanges();
+            // Update the data item
+            UpdateDataItem(dataItem);
         }
 
         public virtual void AddDataItem(T dataItem)
@@ -36,6 +33,18 @@ namespace CSCProject.Interfaces
             db.Set<T>().Add(dataItem);
 
             // Save changes to the database
+            db.SaveChanges();
+        }
+
+        public virtual void UpdateDataItem(T dataItem)
+        {
+            // Verify the data item's content
+            VerifyDataItem(dataItem);
+
+            // Set the entity as changed
+            db.Entry(dataItem).State = System.Data.Entity.EntityState.Modified;
+
+            // Save the database
             db.SaveChanges();
         }
 

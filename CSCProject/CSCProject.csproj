@@ -114,8 +114,9 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataHandlers\VendorsDataHandler.cs" />
-    <Compile Include="Dialogs\NewVendorDialog.xaml.cs">
-      <DependentUpon>NewVendorDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\Dialog.cs" />
+    <Compile Include="Dialogs\VendorDialog.xaml.cs">
+      <DependentUpon>VendorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Expense.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
@@ -126,6 +127,7 @@
     <Compile Include="Lot.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Misc\BoolToStringConverter.cs" />
     <Compile Include="Part.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -149,15 +151,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\NewVendorDialog.xaml">
+    <Page Include="Dialogs\VendorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\NewEmployeeTypeDialog.xaml">
+    <Page Include="Dialogs\EmployeeTypeDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\NewEmployeeDialog.xaml">
+    <Page Include="Dialogs\EmployeeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,11 +203,11 @@
     <Compile Include="Dialogs\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\NewEmployeeTypeDialog.xaml.cs">
-      <DependentUpon>NewEmployeeTypeDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\EmployeeTypeDialog.xaml.cs">
+      <DependentUpon>EmployeeTypeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\NewEmployeeDialog.xaml.cs">
-      <DependentUpon>NewEmployeeDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\EmployeeDialog.xaml.cs">
+      <DependentUpon>EmployeeDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>dbModel.tt</DependentUpon>

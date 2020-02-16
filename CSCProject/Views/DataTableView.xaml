@@ -29,7 +29,7 @@
                 Style="{StaticResource MaterialDesignFloatingActionButton}"
                 Grid.Column="1" 
                 Grid.Row="1"
-                x:Name="ShowNewDataItemDialog">
+                cal:Message.Attach="ShowDataItemDialog(null)">
                 <Button.ToolTip>
                     <TextBlock Text="{Binding DataItemName, StringFormat=New {0}}"/>
                 </Button.ToolTip>
@@ -113,6 +113,14 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"
+                                  cal:Message.Attach="EditDataItem($this.Tag.SelectedItem)">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Edit" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
                         <MenuItem Header="Remove"
                                   Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"
                                   cal:Message.Attach="RemoveDataItem($this.Tag.SelectedItem)">

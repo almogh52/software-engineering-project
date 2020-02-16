@@ -1,18 +1,24 @@
-﻿<UserControl x:Class="CSCProject.Dialogs.NewEmployeeDialog"
+﻿<local:Dialog x:Class="CSCProject.Dialogs.EmployeeDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSCProject.Dialogs"
+             xmlns:misc="clr-namespace:CSCProject.Misc"
              xmlns:project="clr-namespace:CSCProject"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              MinWidth="250">
+    <local:Dialog.Resources>
+        <misc:BoolToStringConverter x:Key="DialogButtonStringConverter" FalseValue="Add" TrueValue="Update" />
+        <misc:BoolToStringConverter x:Key="DialogTitleStringConverter" FalseValue="New Employee" TrueValue="Edit Employee" />
+    </local:Dialog.Resources>
     <StackPanel>
         <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}"
                    Margin="6"
-                   HorizontalAlignment="Center">New Employee</TextBlock>
+                   HorizontalAlignment="Center" 
+                   Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:EmployeeDialog}}, Path=UpdateDialog, Converter={StaticResource DialogTitleStringConverter}}"/>
         <TextBox materialDesign:HintAssist.Hint="First Name" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
@@ -69,10 +75,9 @@
                     Margin="6">
             <Button IsDefault="True"
                     Style="{DynamicResource MaterialDesignFlatButton}"
-                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NewEmployeeDialog}}, Path=CloseCommand}"
-                    CommandParameter="{Binding Path=Employee}">
-                ADD
-            </Button>
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:EmployeeDialog}}, Path=CloseCommand}"
+                    CommandParameter="{Binding Path=Employee}" 
+                    Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:EmployeeDialog}}, Path=UpdateDialog, Converter={StaticResource DialogButtonStringConverter}}"/>
             <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                 <Button.CommandParameter>
@@ -82,4 +87,4 @@
             </Button>
         </StackPanel>
     </StackPanel>
-</UserControl>
+</local:Dialog>

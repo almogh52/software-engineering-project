@@ -17,22 +17,25 @@ using System.Windows.Shapes;
 
 namespace CSCProject.Dialogs
 {
-    public class NewEmployeeDialogContext
+    public class EmployeeDialogContext
     {
         public Employee Employee { get; set; }
         public List<EmployeeType> EmployeeTypes { get; set; }
     }
 
     /// <summary>
-    /// Interaction logic for NewEmployeeDialog.xaml
+    /// Interaction logic for EmployeeDialog.xaml
     /// </summary>
-    public partial class NewEmployeeDialog : UserControl
+    public partial class EmployeeDialog : Dialog
     {
-        public ICommand CloseCommand { get; } = new Misc.RelayCommand(o => DialogHost.CloseDialogCommand.Execute(true, null), o => o != null && !Misc.Utils.IsAnyNullOrEmpty(o) && ((Employee)o).EmployeeTypeId != -1);
-
-        public NewEmployeeDialog()
+        public EmployeeDialog()
         {
             InitializeComponent();
+        }
+
+        protected override bool VerifyObject(object o)
+        {
+            return ((Employee)o).EmployeeTypeId != -1;
         }
     }
 }

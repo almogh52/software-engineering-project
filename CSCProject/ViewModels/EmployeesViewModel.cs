@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace CSCProject.ViewModels
 {
-    class EmployeesViewModel : DataTableViewModel<Employee, DataHandlers.EmployeesDataHandler, Dialogs.NewEmployeeDialog>
+    class EmployeesViewModel : DataTableViewModel<Employee, DataHandlers.EmployeesDataHandler, Dialogs.EmployeeDialog>
     {
         public override string AddButtonIcon { get; set; } = "UserAdd";
         public override string RemoveButtonIcon { get; set; } = "UserRemove";
@@ -27,7 +27,7 @@ namespace CSCProject.ViewModels
             };
         }
 
-        protected override void InitNewDataItemDialog(ref Dialogs.NewEmployeeDialog dialog, ref Employee dataItem)
+        protected override void InitDataItem(ref Employee dataItem)
         {
             dataItem = new Employee
             {
@@ -35,10 +35,13 @@ namespace CSCProject.ViewModels
                 BirthDate = DateTime.Today,
                 Address = new Address()
             };
+        }
 
-            dialog = new Dialogs.NewEmployeeDialog
+        protected override void InitDataItemDialog(ref Dialogs.EmployeeDialog dialog, ref Employee dataItem)
+        {
+            dialog = new Dialogs.EmployeeDialog
             {
-                DataContext = new Dialogs.NewEmployeeDialogContext
+                DataContext = new Dialogs.EmployeeDialogContext
                 {
                     Employee = dataItem,
                     EmployeeTypes = dataHandler.GetEntities().EmployeeTypes.ToList()

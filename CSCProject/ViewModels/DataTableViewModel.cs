@@ -14,7 +14,7 @@ using System.Windows.Data;
 
 namespace CSCProject.ViewModels
 {
-    abstract class DataTableViewModel<T, U, V> : Screen, INotifyPropertyChanged where T : class, new() where U : Interfaces.IDataHandler<T>, new() where V : UserControl, new()
+    abstract class DataTableViewModel<T, U, V> : Screen, INotifyPropertyChanged where T : class, new() where U : Interfaces.IDataHandler<T>, new() where V : Dialogs.Dialog, new()
     {
         protected Interfaces.IDataHandler<T> dataHandler = new U();
 
@@ -69,7 +69,7 @@ namespace CSCProject.ViewModels
 
         public bool CanRemoveDataItem(T dataItem)
         {
-            // Check if the data item is deleted
+            // Check if the data item isn't deleted
             return dataItem != null && (bool)typeof(T).GetProperty("Deleted").GetValue(dataItem) == false;
         }
 
@@ -82,16 +82,37 @@ namespace CSCProject.ViewModels
             UpdateTable();
         }
 
-        public async void ShowNewDataItemDialog()
+        public bool CanEditDataItem(T dataItem)
         {
-            T dataItem = null;
-            V newDataItemDialog = null;
+            // Check if the data item isn't null
+            return dataItem != null;
+        }
+        
+        public void EditDataItem(T dataItem)
+        {
+            // Show the data item dialog of the item
+            ShowDataItemDialog(dataItem);
+        }
 
-            // Initialize the new data item dialog and the new item object
-            InitNewDataItemDialog(ref newDataItemDialog, ref dataItem);
+        public async void ShowDataItemDialog(T dataItem)
+        {
+            bool update = dataItem != null;
 
-            // Show the new data item dialog
-            await DialogHost.Show(newDataItemDialog, (object _, DialogClosingEventArgs args) =>
+            V dataItemDialog = null;
+
+            // If the dialog isn't for updating, init the data item
+            if (!update) {
+                InitDataItem(ref dataItem);
+            }
+
+            // Initialize the data item dialog and the new item object
+            InitDataItemDialog(ref dataItemDialog, ref dataItem);
+
+            // Set the dialog as update dialog if needed
+            dataItemDialog.UpdateDialog = update;
+
+            // Show the data item dialog
+            await DialogHost.Show(dataItemDialog, (object _, DialogClosingEventArgs args) =>
             {
                 // Check if the dialog closing is a message dialog
                 if (args.Session.Content.GetType() == typeof(Dialogs.MessageDialog))
@@ -99,8 +120,8 @@ namespace CSCProject.ViewModels
                     // Cancel the close of the dialog
                     args.Cancel();
 
-                    // Show the new data item dialog again
-                    args.Session.UpdateContent(newDataItemDialog);
+                    // Show the data item dialog again
+                    args.Session.UpdateContent(dataItemDialog);
                 }
                 else
                 {
@@ -109,8 +130,15 @@ namespace CSCProject.ViewModels
                     {
                         try
                         {
-                            // Add the data item
-                            AddDataItem(dataItem);
+                            if (update)
+                            {
+                                // Update the data item
+                                UpdateDataItem(dataItem);
+                            } else
+                            {
+                                // Add the data item
+                                AddDataItem(dataItem);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -128,7 +156,13 @@ namespace CSCProject.ViewModels
             });
         }
 
-        public void AddDataItem(T dataItem)
+        public void ClearSearch()
+        {
+            SearchText = null;
+            SearchColumnIndex = -1;
+        }
+
+        private void AddDataItem(T dataItem)
         {
             // Add the data item to the data set
             dataHandler.AddDataItem(dataItem);
@@ -137,10 +171,13 @@ namespace CSCProject.ViewModels
             UpdateTable();
         }
 
-        public void ClearSearch()
+        private void UpdateDataItem(T dataItem)
         {
-            SearchText = null;
-            SearchColumnIndex = -1;
+            // Update the data item
+            dataHandler.UpdateDataItem(dataItem);
+
+            // Update the table
+            UpdateTable();
         }
 
         private void UpdateTable()
@@ -148,7 +185,12 @@ namespace CSCProject.ViewModels
             NotifyOfPropertyChange("Data");
         }
 
-        protected abstract void InitNewDataItemDialog(ref V dialog, ref T dataItem);
+        protected virtual void InitDataItem(ref T dataItem)
+        {
+            dataItem = new T();
+        }
+
+        protected abstract void InitDataItemDialog(ref V dialog, ref T dataItem);
         protected abstract List<Misc.Column> GetColumns();
     }
 }

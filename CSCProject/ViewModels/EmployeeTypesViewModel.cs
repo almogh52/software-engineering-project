@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace CSCProject.ViewModels
 {
-    class EmployeeTypesViewModel : DataTableViewModel<EmployeeType, DataHandlers.EmployeeTypesDataHandler, Dialogs.NewEmployeeTypeDialog>
+    class EmployeeTypesViewModel : DataTableViewModel<EmployeeType, DataHandlers.EmployeeTypesDataHandler, Dialogs.EmployeeTypeDialog>
     {
         protected override List<Misc.Column> GetColumns()
         {
@@ -18,13 +18,10 @@ namespace CSCProject.ViewModels
             };
         }
 
-        protected override void InitNewDataItemDialog(ref Dialogs.NewEmployeeTypeDialog dialog, ref EmployeeType dataItem)
+        protected override void InitDataItemDialog(ref Dialogs.EmployeeTypeDialog dialog, ref EmployeeType dataItem)
         {
-            // Init employee type object
-            dataItem = new EmployeeType();
-
             // Init new employee type dialog object
-            dialog = new Dialogs.NewEmployeeTypeDialog
+            dialog = new Dialogs.EmployeeTypeDialog
             {
                 DataContext = dataItem
             };

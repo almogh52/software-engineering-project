@@ -18,13 +18,11 @@ using System.Windows.Shapes;
 namespace CSCProject.Dialogs
 {
     /// <summary>
-    /// Interaction logic for NewVendorDialog.xaml
+    /// Interaction logic for EmployeeDialog.xaml
     /// </summary>
-    public partial class NewVendorDialog : UserControl
+    public partial class EmployeeTypeDialog : Dialog
     {
-        public ICommand CloseCommand { get; } = new Misc.RelayCommand(o => DialogHost.CloseDialogCommand.Execute(true, null), o => !Misc.Utils.IsAnyNullOrEmpty(o));
-
-        public NewVendorDialog()
+        public EmployeeTypeDialog()
         {
             InitializeComponent();
         }
