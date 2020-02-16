@@ -18,8 +18,19 @@ namespace CSCProject.ViewModels
     {
         protected Interfaces.IDataHandler<T> dataHandler = new U();
 
-        public List<T> Data {
-            get {
+        public string DataItemName { get; } = Regex.Replace(typeof(T).Name, "(\\B[A-Z])", " $1");
+
+        public bool ShowDataItemId { get; set; } = false;
+        public bool ShowDeletedItems { get; set; } = false;
+
+        public List<Misc.Column> SearchableColumns { get => GetColumns().FindAll(column => column.AllowSearch); }
+        public int SearchColumnIndex { get; set; } = -1;
+        public string SearchText { get; set; }
+
+        public List<T> Data
+        {
+            get
+            {
                 List<T> OriginalData = ShowDeletedItems ? dataHandler.GetData() : dataHandler.GetData().FindAll(item => (bool)typeof(T).GetProperty("Deleted").GetValue(item) == false);
 
                 // If no search text or column, return original data
@@ -35,17 +46,10 @@ namespace CSCProject.ViewModels
             }
         }
 
-        public string DataItemName { get; } = Regex.Replace(typeof(T).Name, "(\\B[A-Z])", " $1");
-
-        public bool ShowDataItemId { get; set; } = false;
-        public bool ShowDeletedItems { get; set; } = false;
-
-        public List<Misc.Column> SearchableColumns { get => GetColumns().FindAll(column => column.AllowSearch); }
-        public int SearchColumnIndex { get; set; } = -1;
-        public string SearchText { get; set; }
-
         public virtual string AddButtonIcon { get; set; } = "Add";
         public virtual string RemoveButtonIcon { get; set; } = "Remove";
+
+
 
         public void Init()
         {
@@ -187,7 +191,7 @@ namespace CSCProject.ViewModels
 
         protected virtual void InitDataItem(ref T dataItem)
         {
-            dataItem = new T();
+            dataItem = Misc.Utils.Create<T>();
         }
 
         protected abstract void InitDataItemDialog(ref V dialog, ref T dataItem);

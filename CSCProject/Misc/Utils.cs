@@ -92,5 +92,34 @@ namespace CSCProject.Misc
 
             return phoneRegex.IsMatch(phone);
         }
+
+        public static T Create<T>()
+        {
+            var type = typeof(T);
+
+            return (T)Create(type);
+        }
+
+        public static object Create(Type type)
+        {
+            var obj = Activator.CreateInstance(type);
+
+            foreach (var property in type.GetProperties())
+            {
+                var propertyType = property.PropertyType;
+
+                if (propertyType.IsClass
+                    && string.IsNullOrEmpty(propertyType.Namespace)
+                    || (!propertyType.Namespace.Equals("System")
+                        && !propertyType.Namespace.StartsWith("System.")))
+                {
+                    var child = Create(propertyType);
+
+                    property.SetValue(obj, child);
+                }
+            }
+
+            return obj;
+        }
     }
 }

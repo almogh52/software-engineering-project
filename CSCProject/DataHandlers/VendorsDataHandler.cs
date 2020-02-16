@@ -11,7 +11,7 @@ namespace CSCProject.DataHandlers
     {
         public override void AddDataItem(Vendor dataItem)
         {
-            // Set the address of the employee
+            // Set the address of the vendor
             dataItem.PostalCode = dataItem.Address.PostalCode;
 
             // Check if the address already exists in the db
@@ -27,7 +27,7 @@ namespace CSCProject.DataHandlers
 
         protected override void VerifyDataItem(Vendor vendor)
         {
-            // Check if the name of the employee is valid
+            // Check if the name of the customer is valid
             if (!Misc.Utils.VerifyName(vendor.Name))
             {
                 throw new ArgumentException("Invalid vendor name");
