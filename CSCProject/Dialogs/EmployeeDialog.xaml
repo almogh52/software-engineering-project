@@ -22,23 +22,23 @@
         <TextBox materialDesign:HintAssist.Hint="First Name" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding Employee.FirstName}">
+                 Text="{Binding Employee.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <TextBox materialDesign:HintAssist.Hint="Last Name" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding Employee.LastName}">
+                 Text="{Binding Employee.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <DatePicker
             materialDesign:HintAssist.Hint="Birth Date"
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
             DisplayDateEnd="{x:Static system:DateTime.Now}"
             Margin="10 6 10 0"
-            SelectedDate="{Binding Employee.BirthDate}"/>
+            SelectedDate="{Binding Employee.BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox materialDesign:HintAssist.Hint="Gender"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="10 6 10 0"
-                  SelectedItem="{Binding Employee.Gender}">
+                  SelectedItem="{Binding Employee.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <project:Gender>Male</project:Gender>
             <project:Gender>Female</project:Gender>
             <project:Gender>Other</project:Gender>
@@ -46,28 +46,28 @@
         <TextBox materialDesign:HintAssist.Hint="Phone Number" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding Employee.Phone}">
+                 Text="{Binding Employee.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <TextBox materialDesign:HintAssist.Hint="Postal Code" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding Employee.Address.PostalCode}">
+                 Text="{Binding Employee.Address.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <TextBox materialDesign:HintAssist.Hint="City" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding Employee.Address.City}">
+                 Text="{Binding Employee.Address.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <TextBox materialDesign:HintAssist.Hint="Street" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding Employee.Address.Street}">
+                 Text="{Binding Employee.Address.Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <ComboBox materialDesign:HintAssist.Hint="Employee Type"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="10 6 10 0"
                   SelectedValuePath="Id"
-                  SelectedValue="{Binding Employee.EmployeeTypeId}"
+                  SelectedValue="{Binding Employee.EmployeeTypeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding EmployeeTypes}"
                   DisplayMemberPath="Name"/>
         <StackPanel HorizontalAlignment="Center" 
