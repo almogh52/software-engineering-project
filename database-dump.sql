@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS `customer`;
  SET character_set_client = utf8 ;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` text,
+  `name` text NOT NULL,
   `postal_code` int(11) NOT NULL,
   `phone` varchar(20) NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',

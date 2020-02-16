@@ -17,8 +17,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="description" Type="text" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
           <Property Name="postal_code" Type="int" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="price" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
@@ -81,7 +81,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="text" Nullable="false" />
           <Property Name="type" Type="bit" Nullable="false" />
           <Property Name="purchase_price" Type="float" Nullable="false" />
@@ -92,7 +92,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="vendor_id" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
@@ -111,7 +111,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="customer_id" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
@@ -120,7 +120,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="text" Nullable="false" />
           <Property Name="postal_code" Type="int" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
@@ -130,7 +130,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="text" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -355,8 +355,8 @@
           <Property Name="City" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Street" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="dbModel.employees_postal_code_fk" FromRole="Address" ToRole="employee" />
-          <NavigationProperty Name="Customers" Relationship="dbModel.customer_postal_code_fk" FromRole="Address" ToRole="customer" />
           <NavigationProperty Name="Vendors" Relationship="dbModel.vendor_postal_code_fk" FromRole="Address" ToRole="vendor" />
+          <NavigationProperty Name="Customers" Relationship="dbModel.customer_postal_code_fk" FromRole="Address" ToRole="customer" />
         </EntityType>
         <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="dbModel.Address" />
@@ -370,7 +370,6 @@
             <End Role="employee_type" EntitySet="EmployeeTypes" />
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
-          <EntitySet Name="Customers" EntityType="dbModel.Customer" />
           <EntitySet Name="Expenses" EntityType="dbModel.Expense" />
           <EntitySet Name="Inventories" EntityType="dbModel.Inventory" />
           <EntitySet Name="Lots" EntityType="dbModel.Lot" />
@@ -379,14 +378,6 @@
           <EntitySet Name="PurchaseOrderParts" EntityType="dbModel.PurchaseOrderPart" />
           <EntitySet Name="SaleOrders" EntityType="dbModel.SaleOrder" />
           <EntitySet Name="Warehouses" EntityType="dbModel.Warehouse" />
-          <AssociationSet Name="customer_postal_code_fk" Association="dbModel.customer_postal_code_fk">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="sale_order_customer_id_fk_" Association="dbModel.sale_order_customer_id_fk_">
-            <End Role="customer" EntitySet="Customers" />
-            <End Role="sale_order" EntitySet="SaleOrders" />
-          </AssociationSet>
           <AssociationSet Name="expesnse_employee_id_fk" Association="dbModel.expesnse_employee_id_fk">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="expense" EntitySet="Expenses" />
@@ -419,6 +410,15 @@
           <AssociationSet Name="purchase_order_vendor_id_fk" Association="dbModel.purchase_order_vendor_id_fk">
             <End Role="vendor" EntitySet="Vendors" />
             <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="dbModel.Customer" />
+          <AssociationSet Name="customer_postal_code_fk" Association="dbModel.customer_postal_code_fk">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="sale_order_customer_id_fk_" Association="dbModel.sale_order_customer_id_fk_">
+            <End Role="customer" EntitySet="Customers" />
+            <End Role="SaleOrder" EntitySet="SaleOrders" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Employee">
@@ -478,18 +478,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="PostalCode" Type="Int32" Nullable="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="dbModel.customer_postal_code_fk" FromRole="customer" ToRole="Address" />
-          <NavigationProperty Name="SaleOrders" Relationship="dbModel.sale_order_customer_id_fk_" FromRole="customer" ToRole="sale_order" />
-        </EntityType>
         <EntityType Name="Expense">
           <Key>
             <PropertyRef Name="Id" />
@@ -569,7 +557,7 @@
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="dbModel.sale_order_customer_id_fk_" FromRole="sale_order" ToRole="customer" />
+          <NavigationProperty Name="Customer" Relationship="dbModel.sale_order_customer_id_fk_" FromRole="SaleOrder" ToRole="customer" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -580,30 +568,6 @@
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_storage_id_fk" FromRole="warehouse" ToRole="inventory" />
         </EntityType>
-        <Association Name="customer_postal_code_fk">
-          <End Type="dbModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="dbModel.Customer" Role="customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="PostalCode" />
-            </Principal>
-            <Dependent Role="customer">
-              <PropertyRef Name="PostalCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="sale_order_customer_id_fk_">
-          <End Type="dbModel.Customer" Role="customer" Multiplicity="1" />
-          <End Type="dbModel.SaleOrder" Role="sale_order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="sale_order">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="expesnse_employee_id_fk">
           <End Type="dbModel.Employee" Role="Employee" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -714,6 +678,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="dbModel.customer_postal_code_fk" FromRole="customer" ToRole="Address" />
+          <NavigationProperty Name="SaleOrders" Relationship="dbModel.sale_order_customer_id_fk_" FromRole="customer" ToRole="SaleOrder" />
+        </EntityType>
+        <Association Name="customer_postal_code_fk">
+          <End Type="dbModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="dbModel.Customer" Role="customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="PostalCode" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="PostalCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sale_order_customer_id_fk_">
+          <End Type="dbModel.Customer" Role="customer" Multiplicity="1" />
+          <End Type="dbModel.SaleOrder" Role="SaleOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleOrder">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -751,17 +751,6 @@
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="Salary" ColumnName="salary" />
                 <ScalarProperty Name="Name" ColumnName="name" />
-                <ScalarProperty Name="Id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="dbModel.Customer">
-              <MappingFragment StoreEntitySet="customer">
-                <ScalarProperty Name="Deleted" ColumnName="deleted" />
-                <ScalarProperty Name="Phone" ColumnName="phone" />
-                <ScalarProperty Name="PostalCode" ColumnName="postal_code" />
-                <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="Id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -852,6 +841,17 @@
           <EntitySetMapping Name="Vendors">
             <EntityTypeMapping TypeName="dbModel.Vendor">
               <MappingFragment StoreEntitySet="vendor">
+                <ScalarProperty Name="Deleted" ColumnName="deleted" />
+                <ScalarProperty Name="Phone" ColumnName="phone" />
+                <ScalarProperty Name="PostalCode" ColumnName="postal_code" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="dbModel.Customer">
+              <MappingFragment StoreEntitySet="customer">
                 <ScalarProperty Name="Deleted" ColumnName="deleted" />
                 <ScalarProperty Name="Phone" ColumnName="phone" />
                 <ScalarProperty Name="PostalCode" ColumnName="postal_code" />

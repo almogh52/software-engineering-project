@@ -113,8 +113,12 @@
     <Compile Include="Customer.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataHandlers\CustomersDataHandler.cs" />
     <Compile Include="DataHandlers\VendorsDataHandler.cs" />
     <Compile Include="Dialogs\Dialog.cs" />
+    <Compile Include="Dialogs\CustomerDialog.xaml.cs">
+      <DependentUpon>CustomerDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\VendorDialog.xaml.cs">
       <DependentUpon>VendorDialog.xaml</DependentUpon>
     </Compile>
@@ -143,6 +147,7 @@
     <Compile Include="Vendor.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CustomersViewModel.cs" />
     <Compile Include="ViewModels\VendorsViewModel.cs" />
     <Compile Include="Warehouse.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
@@ -150,6 +155,10 @@
     <Page Include="Dialogs\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\CustomerDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialogs\VendorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
