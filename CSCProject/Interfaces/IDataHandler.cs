@@ -24,6 +24,15 @@ namespace CSCProject.Interfaces
             UpdateDataItem(dataItem);
         }
 
+        public virtual void RestoreDataItem(T dataItem)
+        {
+            // Set the data item as not deleted
+            typeof(T).GetProperty("Deleted").SetValue(dataItem, false);
+
+            // Update the data item
+            UpdateDataItem(dataItem);
+        }
+
         public virtual void AddDataItem(T dataItem)
         {
             // Verify the data item's content

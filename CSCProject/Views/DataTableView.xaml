@@ -6,9 +6,13 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:CSCProject.Views"
+             xmlns:misc="clr-namespace:CSCProject.Misc"
              mc:Ignorable="d"
              cal:Message.Attach="[Event Loaded] = [Action Init]"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <misc:BoolToStringConverter x:Key="DeleteStringConverter" FalseValue="Delete" TrueValue="Restore" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -121,9 +125,9 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
-                        <MenuItem Header="Remove"
+                        <MenuItem Header="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem.Deleted, Converter={StaticResource DeleteStringConverter}, FallbackValue=Delete}"
                                   Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"
-                                  cal:Message.Attach="RemoveDataItem($this.Tag.SelectedItem)">
+                                  cal:Message.Attach="ChangeDataItemDeleteStatus($this.Tag.SelectedItem)">
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="{Binding RemoveButtonIcon}" />
                             </MenuItem.Icon>

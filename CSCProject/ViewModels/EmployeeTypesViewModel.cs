@@ -17,14 +17,5 @@ namespace CSCProject.ViewModels
                 new Misc.Column { Name = "Description", PropertyBinding = new Binding("Description"), AllowSearch = true }
             };
         }
-
-        protected override void InitDataItemDialog(ref Dialogs.EmployeeTypeDialog dialog, ref EmployeeType dataItem)
-        {
-            // Init new employee type dialog object
-            dialog = new Dialogs.EmployeeTypeDialog
-            {
-                DataContext = dataItem
-            };
-        }
     }
 }

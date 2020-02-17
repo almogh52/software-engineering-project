@@ -22,13 +22,5 @@ namespace CSCProject.ViewModels
                 new Misc.Column { Name = "Street", PropertyBinding = new Binding("Address.Street"), AllowSearch = true }
             };
         }
-
-        protected override void InitDataItemDialog(ref Dialogs.CustomerDialog dialog, ref Customer dataItem)
-        {
-            dialog = new Dialogs.CustomerDialog
-            {
-                DataContext = dataItem
-            };
-        }
     }
 }

@@ -18,13 +18,5 @@ namespace CSCProject.ViewModels
                 new Misc.Column { Name = "Description", PropertyBinding = new Binding("Description"), AllowSearch = true }
             };
         }
-
-        protected override void InitDataItemDialog(ref Dialogs.WarehouseDialog dialog, ref Warehouse dataItem)
-        {
-            dialog = new Dialogs.WarehouseDialog
-            {
-                DataContext = dataItem
-            };
-        }
     }
 }

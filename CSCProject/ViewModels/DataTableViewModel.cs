@@ -71,16 +71,24 @@ namespace CSCProject.ViewModels
             }
         }
 
-        public bool CanRemoveDataItem(T dataItem)
+        public bool CanChangeDataItemDeleteStatus(T dataItem)
         {
-            // Check if the data item isn't deleted
-            return dataItem != null && (bool)typeof(T).GetProperty("Deleted").GetValue(dataItem) == false;
+            // Check if the data item isn't null
+            return dataItem != null;
         }
 
-        public void RemoveDataItem(T dataItem)
+        public void ChangeDataItemDeleteStatus(T dataItem)
         {
-            // Remove the data item from the data set
-            dataHandler.RemoveDataItem(dataItem);
+            // If the item isn't deleted yet
+            if ((bool)typeof(T).GetProperty("Deleted").GetValue(dataItem) == false)
+            {
+                // Remove the data item from the data set
+                dataHandler.RemoveDataItem(dataItem);
+            } else
+            {
+                // Restore the data item to the data set
+                dataHandler.RestoreDataItem(dataItem);
+            }
 
             // Update the table
             UpdateTable();
@@ -194,7 +202,14 @@ namespace CSCProject.ViewModels
             dataItem = Misc.Utils.Create<T>();
         }
 
-        protected abstract void InitDataItemDialog(ref V dialog, ref T dataItem);
+        protected virtual void InitDataItemDialog(ref V dialog, ref T dataItem)
+        {
+            dialog = new V
+            {
+                DataContext = dataItem
+            };
+        }
+
         protected abstract List<Misc.Column> GetColumns();
     }
 }
