@@ -115,6 +115,10 @@
     </Compile>
     <Compile Include="DataHandlers\CustomersDataHandler.cs" />
     <Compile Include="DataHandlers\VendorsDataHandler.cs" />
+    <Compile Include="DataHandlers\WarehousesDataHandler.cs" />
+    <Compile Include="Dialogs\WarehouseDialog.xaml.cs">
+      <DependentUpon>WarehouseDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Dialog.cs" />
     <Compile Include="Dialogs\CustomerDialog.xaml.cs">
       <DependentUpon>CustomerDialog.xaml</DependentUpon>
@@ -147,11 +151,16 @@
     <Compile Include="Vendor.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\WarehousesViewModel.cs" />
     <Compile Include="ViewModels\CustomersViewModel.cs" />
     <Compile Include="ViewModels\VendorsViewModel.cs" />
     <Compile Include="Warehouse.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Dialogs\WarehouseDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
