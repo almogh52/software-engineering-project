@@ -21,7 +21,7 @@ namespace CSCProject.ViewModels
                 PlotModel model = new PlotModel();
                 dynamic pieSeries = new PieSeries { InsideLabelPosition = 0.7, OutsideLabelFormat = "{0}₪ - {2:0.#}%" };
 
-                List<Expense> expenses = dataHandler.GetData();
+                List<Expense> expenses = dataHandler.GetData().FindAll(expense => !expense.Deleted);
                 Dictionary<Employee, int> employeesExpenses = new Dictionary<Employee, int>();
 
                 // For each expense, add it to the employee's total expense
