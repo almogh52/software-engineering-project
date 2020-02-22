@@ -17,6 +17,8 @@ namespace CSCProject.ViewModels
     {
         public bool ViewsDrawerOpen { get; set; } = false;
 
+        public string CurrentViewName { get; set; } = "";
+
         public Dictionary<string, Screen> ViewsList { get; set; } = new Dictionary<string, Screen>
         {
             { "Employees", new EmployeesViewModel() },
@@ -36,6 +38,9 @@ namespace CSCProject.ViewModels
 
         public void TransitionToView(string ViewName, Screen ViewScreen)
         {
+            // Set the current view name
+            CurrentViewName = ViewName;
+
             // Set the new display name of the app
             DisplayName = $"Core Scientific Creations - {ViewName}";
 

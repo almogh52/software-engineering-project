@@ -67,7 +67,8 @@
                         <TextBlock 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center" 
-                            FontSize="25">Core Scientific Creations</TextBlock>
+                            FontSize="25" 
+                            Text="{Binding CurrentViewName, StringFormat=Core Scientific Creations - {0}}" />
                     </DockPanel>
                 </materialDesign:Card>
                 <ContentControl x:Name="ActiveItem" HorizontalAlignment="Stretch" />
