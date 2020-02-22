@@ -30,10 +30,7 @@ namespace CSCProject.Misc
                 }
                 else if (pi.PropertyType == typeof(DateTime))
                 {
-                    if (((DateTime)value).Date == DateTime.Today.Date)
-                    {
-                        return true;
-                    }
+                    return false;
                 }
                 else
                 {

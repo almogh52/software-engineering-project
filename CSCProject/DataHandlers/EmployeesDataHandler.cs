@@ -46,6 +46,12 @@ namespace CSCProject.DataHandlers
             {
                 throw new ArgumentException("Invalid city name");
             }
+
+            // Check for valid birthdate
+            if (DateTime.Today.AddYears(-6) < dataItem.BirthDate)
+            {
+                throw new ArgumentException("Invalid birth date");
+            }
         }
     }
 }

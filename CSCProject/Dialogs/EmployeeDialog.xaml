@@ -32,7 +32,7 @@
         <DatePicker
             materialDesign:HintAssist.Hint="Birth Date"
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-            DisplayDateEnd="{x:Static system:DateTime.Now}"
+            DisplayDateEnd="{x:Static misc:DateTimeHelper.Yesterday}"
             Margin="10 6 10 0"
             SelectedDate="{Binding Employee.BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox materialDesign:HintAssist.Hint="Gender"

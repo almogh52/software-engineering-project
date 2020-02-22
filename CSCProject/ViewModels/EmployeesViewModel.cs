@@ -32,7 +32,7 @@ namespace CSCProject.ViewModels
             dataItem = new Employee
             {
                 EmployeeTypeId = -1,
-                BirthDate = DateTime.Today,
+                BirthDate = Misc.DateTimeHelper.Yesterday,
                 Address = new Address()
             };
         }
