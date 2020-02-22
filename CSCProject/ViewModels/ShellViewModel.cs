@@ -23,7 +23,8 @@ namespace CSCProject.ViewModels
             { "Employee Types", new EmployeeTypesViewModel() },
             { "Vendors", new VendorsViewModel() },
             { "Customers", new CustomersViewModel() },
-            { "Warehouses", new WarehousesViewModel() }
+            { "Warehouses", new WarehousesViewModel() },
+            { "Expenses", new ExpensesViewModel() }
         };
 
         public ShellViewModel()
