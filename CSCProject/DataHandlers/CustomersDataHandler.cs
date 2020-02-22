@@ -24,22 +24,24 @@ namespace CSCProject.DataHandlers
             base.AddDataItem(dataItem);
         }
 
-        protected override void VerifyDataItem(Customer vendor)
+        protected override void VerifyDataItem(Customer dataItem)
         {
+            Address address = dataItem.Address == null ? db.Addresses.Find(dataItem.PostalCode) : dataItem.Address;
+
             // Check if the name of the customer is valid
-            if (!Misc.Utils.VerifyName(vendor.Name))
+            if (!Misc.Utils.VerifyName(dataItem.Name))
             {
                 throw new ArgumentException("Invalid vendor name");
             }
 
             // Check for valid phone number
-            if (!Misc.Utils.VerifyPhone(vendor.Phone))
+            if (!Misc.Utils.VerifyPhone(dataItem.Phone))
             {
                 throw new ArgumentException("Invalid phone number");
             }
 
             // Check for valid address
-            if (!Misc.Utils.VerifyName(vendor.Address.City))
+            if (!Misc.Utils.VerifyName(address.City))
             {
                 throw new ArgumentException("Invalid city name");
             }
