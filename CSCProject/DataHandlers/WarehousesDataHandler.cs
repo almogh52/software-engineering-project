@@ -8,7 +8,7 @@ namespace CSCProject.DataHandlers
 {
     class WarehousesDataHandler : Interfaces.IDataHandler<Warehouse>
     {
-        protected override void VerifyDataItem(Warehouse vendor)
+        protected override void VerifyDataItem(Warehouse warehouse)
         {
         }
     }
