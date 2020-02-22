@@ -19,7 +19,7 @@ namespace CSCProject.ViewModels
                 DataHandlers.ExpensesDataHandler dataHandler = new DataHandlers.ExpensesDataHandler();
 
                 PlotModel model = new PlotModel();
-                dynamic pieSeries = new PieSeries { InsideLabelPosition = 0.7, OutsideLabelFormat = "{0}₪ - {2:0.#}%" };
+                dynamic pieSeries = new PieSeries { InsideLabelPosition = 0.7, OutsideLabelFormat = "{0}₪ - {2:0.#}%", Font = "Roboto" };
 
                 List<Expense> expenses = dataHandler.GetData().FindAll(expense => !expense.Deleted);
                 Dictionary<Employee, int> employeesExpenses = new Dictionary<Employee, int>();
