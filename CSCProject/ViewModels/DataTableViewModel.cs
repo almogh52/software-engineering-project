@@ -49,8 +49,6 @@ namespace CSCProject.ViewModels
         public virtual string AddButtonIcon { get; set; } = "Add";
         public virtual string RemoveButtonIcon { get; set; } = "Remove";
 
-
-
         public void Init()
         {
             DataGrid dataGrid = (GetView() as Views.DataTableView).Data;
