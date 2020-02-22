@@ -44,7 +44,7 @@ namespace CSCProject.ViewModels
                 DataContext = new Dialogs.EmployeeDialogContext
                 {
                     Employee = dataItem,
-                    EmployeeTypes = dataHandler.GetEntities().EmployeeTypes.ToList()
+                    EmployeeTypes = dataHandler.GetEntities().EmployeeTypes.ToList().FindAll(type => !type.Deleted)
                 }
             };
         }

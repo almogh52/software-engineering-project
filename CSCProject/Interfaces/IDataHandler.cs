@@ -59,6 +59,8 @@ namespace CSCProject.Interfaces
 
         public dbEntities GetEntities()
         {
+            // Reload entities
+            db = new dbEntities();
             return db;
         }
 

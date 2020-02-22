@@ -40,7 +40,7 @@ namespace CSCProject.ViewModels
                 DataContext = new Dialogs.ExpenseDialogContext
                 {
                     Expense = dataItem,
-                    Employees = dataHandler.GetEntities().Employees.ToList()
+                    Employees = dataHandler.GetEntities().Employees.ToList().FindAll(employee => !employee.Deleted)
                 }
             };
         }
