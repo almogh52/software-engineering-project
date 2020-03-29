@@ -509,7 +509,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="SByte" Nullable="false" />
+          <Property Name="Type" Type="dbModel.LotType" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Inventories" Relationship="dbModel.inventory__lot_id_fk" FromRole="lot" ToRole="inventory" />
         </EntityType>
@@ -714,6 +714,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EnumType Name="LotType" UnderlyingType="SByte">
+          <Member Name="RawMaterial" />
+          <Member Name="FinishedGood" />
+        </EnumType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

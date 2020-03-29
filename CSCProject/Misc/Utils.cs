@@ -90,6 +90,13 @@ namespace CSCProject.Misc
             return phoneRegex.IsMatch(phone);
         }
 
+        public static bool VerifyLotId(string id)
+        {
+            Regex lotIdRegex = new Regex(@"^[a-zA-Z0-9]*$");
+
+            return lotIdRegex.IsMatch(id) && id.Length < 20;
+        }
+
         public static T Create<T>()
         {
             var type = typeof(T);

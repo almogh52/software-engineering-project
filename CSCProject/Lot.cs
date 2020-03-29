@@ -21,7 +21,7 @@ namespace CSCProject
         }
     
         public string Id { get; set; }
-        public sbyte Type { get; set; }
+        public LotType Type { get; set; }
         public bool Deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -27,6 +27,7 @@ namespace CSCProject.ViewModels
             { "Customers", new CustomersViewModel() },
             { "Warehouses", new WarehousesViewModel() },
             { "Expenses", new ExpensesViewModel() },
+            { "Lots", new LotsViewModel() },
             { "Expenses Distribution", new ExpensesDistributionViewModel() }
         };
 
