@@ -65,7 +65,7 @@
           </Key>
           <Property Name="lot_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="item_id" Type="int" Nullable="false" />
-          <Property Name="storage_id" Type="int" Nullable="false" />
+          <Property Name="warehouse_id" Type="int" Nullable="false" />
           <Property Name="quantity" Type="float" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -184,18 +184,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="inventory_ lot_id_fk">
-          <End Role="lot" Type="Self.lot" Multiplicity="1" />
-          <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lot">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="inventory">
-              <PropertyRef Name="lot_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="inventory_item_id_fk">
           <End Role="part" Type="Self.part" Multiplicity="1" />
           <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
@@ -208,7 +196,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="inventory_storage_id_fk">
+        <Association Name="inventory_lot_id_fk">
+          <End Role="lot" Type="Self.lot" Multiplicity="1" />
+          <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lot">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="lot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inventory_warehouse_id_fk">
           <End Role="warehouse" Type="Self.warehouse" Multiplicity="1" />
           <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,7 +216,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="inventory">
-              <PropertyRef Name="storage_id" />
+              <PropertyRef Name="warehouse_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -310,15 +310,15 @@
             <End Role="employee" EntitySet="employee" />
             <End Role="expense" EntitySet="expense" />
           </AssociationSet>
-          <AssociationSet Name="inventory_ lot_id_fk" Association="Self.inventory_ lot_id_fk">
-            <End Role="lot" EntitySet="lot" />
-            <End Role="inventory" EntitySet="inventory" />
-          </AssociationSet>
           <AssociationSet Name="inventory_item_id_fk" Association="Self.inventory_item_id_fk">
             <End Role="part" EntitySet="part" />
             <End Role="inventory" EntitySet="inventory" />
           </AssociationSet>
-          <AssociationSet Name="inventory_storage_id_fk" Association="Self.inventory_storage_id_fk">
+          <AssociationSet Name="inventory_lot_id_fk" Association="Self.inventory_lot_id_fk">
+            <End Role="lot" EntitySet="lot" />
+            <End Role="inventory" EntitySet="inventory" />
+          </AssociationSet>
+          <AssociationSet Name="inventory_warehouse_id_fk" Association="Self.inventory_warehouse_id_fk">
             <End Role="warehouse" EntitySet="warehouse" />
             <End Role="inventory" EntitySet="inventory" />
           </AssociationSet>
@@ -371,7 +371,6 @@
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
           <EntitySet Name="Expenses" EntityType="dbModel.Expense" />
-          <EntitySet Name="Inventories" EntityType="dbModel.Inventory" />
           <EntitySet Name="Lots" EntityType="dbModel.Lot" />
           <EntitySet Name="Parts" EntityType="dbModel.Part" />
           <EntitySet Name="PurchaseOrders" EntityType="dbModel.PurchaseOrder" />
@@ -381,18 +380,6 @@
           <AssociationSet Name="expesnse_employee_id_fk" Association="dbModel.expesnse_employee_id_fk">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="expense" EntitySet="Expenses" />
-          </AssociationSet>
-          <AssociationSet Name="inventory__lot_id_fk" Association="dbModel.inventory__lot_id_fk">
-            <End Role="lot" EntitySet="Lots" />
-            <End Role="inventory" EntitySet="Inventories" />
-          </AssociationSet>
-          <AssociationSet Name="inventory_item_id_fk" Association="dbModel.inventory_item_id_fk">
-            <End Role="part" EntitySet="Parts" />
-            <End Role="inventory" EntitySet="Inventories" />
-          </AssociationSet>
-          <AssociationSet Name="inventory_storage_id_fk" Association="dbModel.inventory_storage_id_fk">
-            <End Role="warehouse" EntitySet="Warehouses" />
-            <End Role="inventory" EntitySet="Inventories" />
           </AssociationSet>
           <AssociationSet Name="purchase_order_part_part_id_fk" Association="dbModel.purchase_order_part_part_id_fk">
             <End Role="part" EntitySet="Parts" />
@@ -419,6 +406,19 @@
           <AssociationSet Name="sale_order_customer_id_fk_" Association="dbModel.sale_order_customer_id_fk_">
             <End Role="customer" EntitySet="Customers" />
             <End Role="SaleOrder" EntitySet="SaleOrders" />
+          </AssociationSet>
+          <EntitySet Name="Inventories" EntityType="dbModel.Inventory" />
+          <AssociationSet Name="inventory_item_id_fk" Association="dbModel.inventory_item_id_fk">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="inventory_lot_id_fk" Association="dbModel.inventory_lot_id_fk">
+            <End Role="Lot" EntitySet="Lots" />
+            <End Role="inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="inventory_warehouse_id_fk" Association="dbModel.inventory_warehouse_id_fk">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="inventory" EntitySet="Inventories" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Employee">
@@ -490,20 +490,6 @@
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="dbModel.expesnse_employee_id_fk" FromRole="expense" ToRole="Employee" />
         </EntityType>
-        <EntityType Name="Inventory">
-          <Key>
-            <PropertyRef Name="LotId" />
-            <PropertyRef Name="ItemId" />
-          </Key>
-          <Property Name="LotId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ItemId" Type="Int32" Nullable="false" />
-          <Property Name="StorageId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Single" Nullable="false" />
-          <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Lot" Relationship="dbModel.inventory__lot_id_fk" FromRole="inventory" ToRole="lot" />
-          <NavigationProperty Name="Part" Relationship="dbModel.inventory_item_id_fk" FromRole="inventory" ToRole="part" />
-          <NavigationProperty Name="Warehouse" Relationship="dbModel.inventory_storage_id_fk" FromRole="inventory" ToRole="warehouse" />
-        </EntityType>
         <EntityType Name="Lot">
           <Key>
             <PropertyRef Name="Id" />
@@ -511,7 +497,7 @@
           <Property Name="Id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="dbModel.LotType" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Inventories" Relationship="dbModel.inventory__lot_id_fk" FromRole="lot" ToRole="inventory" />
+          <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_lot_id_fk" FromRole="Lot" ToRole="inventory" />
         </EntityType>
         <EntityType Name="Part">
           <Key>
@@ -523,8 +509,8 @@
           <Property Name="PurchasePrice" Type="Single" Nullable="false" />
           <Property Name="Unit" Type="Boolean" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_item_id_fk" FromRole="part" ToRole="inventory" />
           <NavigationProperty Name="PurchaseOrderParts" Relationship="dbModel.purchase_order_part_part_id_fk" FromRole="part" ToRole="purchase_order_part" />
+          <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_item_id_fk" FromRole="Part" ToRole="inventory" />
         </EntityType>
         <EntityType Name="PurchaseOrder">
           <Key>
@@ -566,7 +552,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_storage_id_fk" FromRole="warehouse" ToRole="inventory" />
+          <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_warehouse_id_fk" FromRole="Warehouse" ToRole="inventory" />
         </EntityType>
         <Association Name="expesnse_employee_id_fk">
           <End Type="dbModel.Employee" Role="Employee" Multiplicity="1">
@@ -579,42 +565,6 @@
             </Principal>
             <Dependent Role="expense">
               <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="inventory__lot_id_fk">
-          <End Type="dbModel.Lot" Role="lot" Multiplicity="1" />
-          <End Type="dbModel.Inventory" Role="inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lot">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="inventory">
-              <PropertyRef Name="LotId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="inventory_item_id_fk">
-          <End Type="dbModel.Part" Role="part" Multiplicity="1" />
-          <End Type="dbModel.Inventory" Role="inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="part">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="inventory">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="inventory_storage_id_fk">
-          <End Type="dbModel.Warehouse" Role="warehouse" Multiplicity="1" />
-          <End Type="dbModel.Inventory" Role="inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="warehouse">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="inventory">
-              <PropertyRef Name="StorageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -718,6 +668,56 @@
           <Member Name="RawMaterial" />
           <Member Name="FinishedGood" />
         </EnumType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="LotId" />
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="LotId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Single" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="dbModel.inventory_item_id_fk" FromRole="inventory" ToRole="Part" />
+          <NavigationProperty Name="Lot" Relationship="dbModel.inventory_lot_id_fk" FromRole="inventory" ToRole="Lot" />
+          <NavigationProperty Name="Warehouse" Relationship="dbModel.inventory_warehouse_id_fk" FromRole="inventory" ToRole="Warehouse" />
+        </EntityType>
+        <Association Name="inventory_item_id_fk">
+          <End Type="dbModel.Part" Role="Part" Multiplicity="1" />
+          <End Type="dbModel.Inventory" Role="inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inventory_lot_id_fk">
+          <End Type="dbModel.Lot" Role="Lot" Multiplicity="1" />
+          <End Type="dbModel.Inventory" Role="inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="LotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inventory_warehouse_id_fk">
+          <End Type="dbModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="dbModel.Inventory" Role="inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -768,17 +768,6 @@
                 <ScalarProperty Name="Price" ColumnName="price" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="Id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Inventories">
-            <EntityTypeMapping TypeName="dbModel.Inventory">
-              <MappingFragment StoreEntitySet="inventory">
-                <ScalarProperty Name="Deleted" ColumnName="deleted" />
-                <ScalarProperty Name="Quantity" ColumnName="quantity" />
-                <ScalarProperty Name="StorageId" ColumnName="storage_id" />
-                <ScalarProperty Name="ItemId" ColumnName="item_id" />
-                <ScalarProperty Name="LotId" ColumnName="lot_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -861,6 +850,17 @@
                 <ScalarProperty Name="PostalCode" ColumnName="postal_code" />
                 <ScalarProperty Name="Name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="dbModel.Inventory">
+              <MappingFragment StoreEntitySet="inventory">
+                <ScalarProperty Name="Deleted" ColumnName="deleted" />
+                <ScalarProperty Name="Quantity" ColumnName="quantity" />
+                <ScalarProperty Name="WarehouseId" ColumnName="warehouse_id" />
+                <ScalarProperty Name="ItemId" ColumnName="item_id" />
+                <ScalarProperty Name="LotId" ColumnName="lot_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

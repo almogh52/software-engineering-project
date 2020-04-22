@@ -122,15 +122,15 @@ DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE `inventory` (
   `lot_id` varchar(20) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `storage_id` int(11) NOT NULL,
+  `warehouse_id` int(11) NOT NULL,
   `quantity` float NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`lot_id`,`item_id`),
   KEY `inventory_item_id_fk_idx` (`item_id`),
-  KEY `inventory_storage_id_fk_idx` (`storage_id`),
-  CONSTRAINT `inventory_ lot_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`) ON DELETE RESTRICT,
+  KEY `inventory_warehouse_id_fk_idx` (`warehouse_id`),
+  CONSTRAINT `inventory_lot_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`) ON DELETE RESTRICT,
   CONSTRAINT `inventory_item_id_fk` FOREIGN KEY (`item_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `inventory_storage_id_fk` FOREIGN KEY (`storage_id`) REFERENCES `warehouse` (`id`) ON DELETE RESTRICT
+  CONSTRAINT `inventory_warehouse_id_fk` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouse` (`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
