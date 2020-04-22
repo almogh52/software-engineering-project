@@ -10,16 +10,11 @@
 namespace CSCProject
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class PurchaseOrderPart
+    public enum PartUnit : sbyte
     {
-        public int OrderId { get; set; }
-        public int PartId { get; set; }
-        public float Quantity { get; set; }
-        public bool Deleted { get; set; }
-    
-        public virtual PurchaseOrder PurchaseOrder { get; set; }
-        public virtual Part part { get; set; }
+        Eaches = 0,
+        SquardMeter = 1,
+        Litter = 2
     }
 }

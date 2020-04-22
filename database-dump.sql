@@ -160,9 +160,9 @@ DROP TABLE IF EXISTS `part`;
 CREATE TABLE `part` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
-  `type` bit(1) NOT NULL,
+  `type` tinyint(4) NOT NULL,
   `purchase_price` float NOT NULL,
-  `unit` bit(2) NOT NULL,
+  `unit` tinyint(4) NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)

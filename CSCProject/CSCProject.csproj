@@ -123,9 +123,13 @@
     </Compile>
     <Compile Include="DataHandlers\CustomersDataHandler.cs" />
     <Compile Include="DataHandlers\ExpensesDataHandler.cs" />
+    <Compile Include="DataHandlers\PartDataHandler.cs" />
     <Compile Include="DataHandlers\LotDataHandler.cs" />
     <Compile Include="DataHandlers\VendorsDataHandler.cs" />
     <Compile Include="DataHandlers\WarehousesDataHandler.cs" />
+    <Compile Include="Dialogs\PartDialog.xaml.cs">
+      <DependentUpon>PartDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\LotDialog.xaml.cs">
       <DependentUpon>LotDialog.xaml</DependentUpon>
     </Compile>
@@ -156,8 +160,12 @@
     </Compile>
     <Compile Include="Misc\BoolToStringConverter.cs" />
     <Compile Include="Misc\DateTimeHelper.cs" />
+    <Compile Include="Misc\PartUnitEnumToStringConverter.cs" />
     <Compile Include="Misc\LotTypeEnumToStringConverter.cs" />
     <Compile Include="Part.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PartUnit.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PurchaseOrder.cs">
@@ -172,6 +180,7 @@
     <Compile Include="Vendor.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\PartsViewModel.cs" />
     <Compile Include="ViewModels\LotsViewModel.cs" />
     <Compile Include="ViewModels\ExpensesDistributionViewModel.cs" />
     <Compile Include="ViewModels\ExpensesViewModel.cs" />
@@ -184,6 +193,10 @@
     <Compile Include="Warehouse.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Dialogs\PartDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\LotDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

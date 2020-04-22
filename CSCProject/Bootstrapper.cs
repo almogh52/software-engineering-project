@@ -22,6 +22,7 @@ namespace CSCProject {
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.WarehousesViewModel", "CSCProject.Views.DataTableView");
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.ExpensesViewModel", "CSCProject.Views.DataTableView");
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.LotsViewModel", "CSCProject.Views.DataTableView");
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.PartsViewModel", "CSCProject.Views.DataTableView");
         }
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e) {
