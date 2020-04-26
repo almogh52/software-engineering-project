@@ -23,6 +23,8 @@ namespace CSCProject {
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.ExpensesViewModel", "CSCProject.Views.DataTableView");
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.LotsViewModel", "CSCProject.Views.DataTableView");
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.PartsViewModel", "CSCProject.Views.DataTableView");
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.PurchaseOrdersViewModel", "CSCProject.Views.DataTableView");
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.SaleOrdersViewModel", "CSCProject.Views.DataTableView");
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.InventoryViewModel", "CSCProject.Views.DataTableView");
         }
 

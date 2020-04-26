@@ -1,0 +1,47 @@
+﻿<local:Dialog x:Class="CSCProject.Dialogs.PurchaseOrderDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSCProject.Dialogs"
+             xmlns:misc="clr-namespace:CSCProject.Misc"
+             xmlns:project="clr-namespace:CSCProject"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             MinWidth="250">
+    <local:Dialog.Resources>
+        <misc:BoolToStringConverter x:Key="DialogButtonStringConverter" FalseValue="Add" TrueValue="Update" />
+        <misc:BoolToStringConverter x:Key="DialogTitleStringConverter" FalseValue="New Purchase Order" TrueValue="Edit Purchase Order" />
+    </local:Dialog.Resources>
+    <StackPanel>
+        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}"
+                   Margin="6"
+                   HorizontalAlignment="Center"
+                   Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PurchaseOrderDialog}}, Path=UpdateDialog, Converter={StaticResource DialogTitleStringConverter}}"/>
+        <ComboBox materialDesign:HintAssist.Hint="Vendor"
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  Margin="10 6 10 0"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding PurchaseOrder.VendorId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Vendors}"
+                  DisplayMemberPath="Name"
+                  IsEditable="True"/>
+        <StackPanel HorizontalAlignment="Center" 
+                    Orientation="Horizontal" 
+                    Margin="6">
+            <Button IsDefault="True"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PurchaseOrderDialog}}, Path=CloseCommand}"
+                    CommandParameter="{Binding Path=PurchaseOrder}" 
+                    Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PurchaseOrderDialog}}, Path=UpdateDialog, Converter={StaticResource DialogButtonStringConverter}}"/>
+            <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>False</system:Boolean>
+                </Button.CommandParameter>
+                CANCEL
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</local:Dialog>
