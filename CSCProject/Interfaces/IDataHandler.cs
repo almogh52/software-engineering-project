@@ -8,7 +8,7 @@ namespace CSCProject.Interfaces
 {
     abstract class IDataHandler<T> where T : class
     {
-        protected dbEntities db = new dbEntities();
+        static protected dbEntities db = new dbEntities();
 
         public virtual List<T> GetData()
         {
