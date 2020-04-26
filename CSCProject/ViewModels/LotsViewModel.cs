@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace CSCProject.ViewModels
 {
-    class LotsViewModel : DataTableViewModel<Lot, DataHandlers.LotDataHandler, Dialogs.LotDialog>
+    class LotsViewModel : DataTableViewModel<Lot, DataHandlers.LotsDataHandler, Dialogs.LotDialog>
     {
         public override bool ShowDataItemId { get; set; } = true;
 

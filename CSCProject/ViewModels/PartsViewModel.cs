@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace CSCProject.ViewModels
 {
-    class PartsViewModel : DataTableViewModel<Part, DataHandlers.PartDataHandler, Dialogs.PartDialog>
+    class PartsViewModel : DataTableViewModel<Part, DataHandlers.PartsDataHandler, Dialogs.PartDialog>
     {
         protected override List<Misc.Column> GetColumns()
         {

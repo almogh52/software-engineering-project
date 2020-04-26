@@ -123,8 +123,8 @@
     </Compile>
     <Compile Include="DataHandlers\CustomersDataHandler.cs" />
     <Compile Include="DataHandlers\ExpensesDataHandler.cs" />
-    <Compile Include="DataHandlers\PartDataHandler.cs" />
-    <Compile Include="DataHandlers\LotDataHandler.cs" />
+    <Compile Include="DataHandlers\PartsDataHandler.cs" />
+    <Compile Include="DataHandlers\LotsDataHandler.cs" />
     <Compile Include="DataHandlers\VendorsDataHandler.cs" />
     <Compile Include="DataHandlers\WarehousesDataHandler.cs" />
     <Compile Include="Dialogs\PartDialog.xaml.cs">

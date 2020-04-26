@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSCProject.DataHandlers
 {
-    class LotDataHandler : Interfaces.IDataHandler<Lot>
+    class LotsDataHandler : Interfaces.IDataHandler<Lot>
     {
         protected override void VerifyDataItem(Lot dataItem)
         {
