@@ -20,6 +20,6 @@ namespace CSCProject
         public bool Deleted { get; set; }
     
         public virtual PurchaseOrder PurchaseOrder { get; set; }
-        public virtual Part part { get; set; }
+        public virtual Part Part { get; set; }
     }
 }

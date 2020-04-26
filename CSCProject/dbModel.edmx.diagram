@@ -24,12 +24,12 @@
         <EntityTypeShape EntityType="dbModel.Customer" Width="1.5" PointX="3" PointY="9.375" />
         <AssociationConnector Association="dbModel.customer_postal_code_fk" />
         <AssociationConnector Association="dbModel.sale_order_customer_id_fk_" />
+        <EntityTypeShape EntityType="dbModel.Part" Width="1.5" PointX="5.375" PointY="4" />
+        <AssociationConnector Association="dbModel.purchase_order_part_part_id_fk" />
         <EntityTypeShape EntityType="dbModel.Inventory" Width="1.5" PointX="10.625" PointY="4" />
         <AssociationConnector Association="dbModel.inventory_lot_id_fk" />
+        <AssociationConnector Association="dbModel.inventory_part_id_fk" />
         <AssociationConnector Association="dbModel.inventory_warehouse_id_fk" />
-        <EntityTypeShape EntityType="dbModel.Part" Width="1.5" PointX="5.375" PointY="4" />
-        <AssociationConnector Association="dbModel.inventory_item_id_fk" />
-        <AssociationConnector Association="dbModel.purchase_order_part_part_id_fk" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
