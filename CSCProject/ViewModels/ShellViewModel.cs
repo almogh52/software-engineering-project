@@ -29,6 +29,7 @@ namespace CSCProject.ViewModels
             { "Expenses", new ExpensesViewModel() },
             { "Lots", new LotsViewModel() },
             { "Parts", new PartsViewModel() },
+            { "Inventory", new InventoryViewModel() },
             { "Expenses Distribution", new ExpensesDistributionViewModel() }
         };
 

@@ -125,7 +125,7 @@ CREATE TABLE `inventory` (
   `warehouse_id` int(11) NOT NULL,
   `quantity` float NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`lot_id`,`part_id`),
+  PRIMARY KEY (`lot_id`,`part_id`,`warehouse_id`),
   KEY `inventory_item_id_fk_idx` (`part_id`),
   KEY `inventory_warehouse_id_fk_idx` (`warehouse_id`),
   CONSTRAINT `inventory_lot_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`) ON DELETE RESTRICT,

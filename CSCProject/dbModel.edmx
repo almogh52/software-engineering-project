@@ -62,6 +62,7 @@
           <Key>
             <PropertyRef Name="lot_id" />
             <PropertyRef Name="part_id" />
+            <PropertyRef Name="warehouse_id" />
           </Key>
           <Property Name="lot_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="part_id" Type="int" Nullable="false" />
@@ -677,6 +678,7 @@
           <Key>
             <PropertyRef Name="LotId" />
             <PropertyRef Name="PartId" />
+            <PropertyRef Name="WarehouseId" />
           </Key>
           <Property Name="LotId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PartId" Type="Int32" Nullable="false" />
