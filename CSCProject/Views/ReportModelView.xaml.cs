@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CSCProject.Views
 {
     /// <summary>
-    /// Interaction logic for ExpensesDistributionView.xaml
+    /// Interaction logic for ReportModelView.xaml
     /// </summary>
-    public partial class ExpensesDistributionView : UserControl
+    public partial class ReportModelView : UserControl
     {
-        public ExpensesDistributionView()
+        public ReportModelView()
         {
             InitializeComponent();
         }

@@ -34,7 +34,8 @@ namespace CSCProject.ViewModels
             { "Purchase Order Parts", new PurchaseOrderPartsViewModel() },
             { "Sale Orders", new SaleOrdersViewModel() },
             { "Sale Order Parts", new SaleOrderPartsViewModel() },
-            { "Expenses Distribution", new ExpensesDistributionViewModel() }
+            { "Expenses Distribution", new ExpensesDistributionViewModel() },
+            { "Sold Goods", new SoldGoodsViewModel() }
         };
 
         public ShellViewModel()
