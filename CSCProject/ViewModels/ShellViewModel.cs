@@ -31,6 +31,7 @@ namespace CSCProject.ViewModels
             { "Parts", new PartsViewModel() },
             { "Inventory", new InventoryViewModel() },
             { "Purchase Orders", new PurchaseOrdersViewModel() },
+            { "Purchase Order Parts", new PurchaseOrderPartsViewModel() },
             { "Sale Orders", new SaleOrdersViewModel() },
             { "Expenses Distribution", new ExpensesDistributionViewModel() }
         };
