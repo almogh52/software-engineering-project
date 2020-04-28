@@ -46,16 +46,11 @@ namespace CSCProject.Interfaces
             }
             catch
             {
-                throw ArgumentException("Data item already exists in table!");
+                throw new ArgumentException("Data item already exists in table!");
             }
 
             // Save changes to the database
             db.SaveChanges();
-        }
-
-        private Exception ArgumentException(string v)
-        {
-            throw new NotImplementedException();
         }
 
         public virtual void UpdateDataItem(T dataItem)
@@ -70,11 +65,11 @@ namespace CSCProject.Interfaces
             }
             catch
             {
-                throw ArgumentException("Data item already exists in table!");
+                throw new ArgumentException("Data item already exists in table!");
             }
 
-    // Save the database
-    db.SaveChanges();
+            // Save the database
+            db.SaveChanges();
         }
 
         public dbEntities GetEntities()
