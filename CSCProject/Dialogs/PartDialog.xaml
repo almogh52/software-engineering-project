@@ -15,6 +15,7 @@
         <misc:BoolToStringConverter x:Key="DialogTitleStringConverter" FalseValue="New Part" TrueValue="Edit Part" />
         <misc:LotTypeEnumToStringConverter x:Key="lotTypeEnumConverter" />
         <misc:PartUnitEnumToStringConverter x:Key="partUnitEnumConverter" />
+        <misc:FloatConverter x:Key="floatConverter" />
     </local:Dialog.Resources>
     <StackPanel>
         <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}"
@@ -41,7 +42,7 @@
         <TextBox materialDesign:HintAssist.Hint="Price" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource floatConverter}}"/>
         <ComboBox materialDesign:HintAssist.Hint="Unit"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="10 6 10 0"

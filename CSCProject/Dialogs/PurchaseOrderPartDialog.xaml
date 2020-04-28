@@ -13,6 +13,7 @@
     <local:Dialog.Resources>
         <misc:BoolToStringConverter x:Key="DialogButtonStringConverter" FalseValue="Add" TrueValue="Update" />
         <misc:BoolToStringConverter x:Key="DialogTitleStringConverter" FalseValue="New Purchase Order Part" TrueValue="Edit Purchase Order Part" />
+        <misc:FloatConverter x:Key="floatConverter" />
     </local:Dialog.Resources>
     <StackPanel>
         <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}"
@@ -46,7 +47,7 @@
         <TextBox materialDesign:HintAssist.Hint="Quantity" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding PurchaseOrderPart.Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding PurchaseOrderPart.Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource floatConverter}}" />
         <StackPanel HorizontalAlignment="Center" 
                     Orientation="Horizontal" 
                     Margin="6">
