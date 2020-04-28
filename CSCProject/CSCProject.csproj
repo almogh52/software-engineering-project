@@ -122,6 +122,7 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataHandlers\CustomersDataHandler.cs" />
+    <Compile Include="DataHandlers\SaleOrderPartsDataHandler.cs" />
     <Compile Include="DataHandlers\PurchaseOrderPartsDataHandler.cs" />
     <Compile Include="DataHandlers\SaleOrdersDataHandler.cs" />
     <Compile Include="DataHandlers\PurchaseOrdersDataHandler.cs" />
@@ -131,6 +132,9 @@
     <Compile Include="DataHandlers\LotsDataHandler.cs" />
     <Compile Include="DataHandlers\VendorsDataHandler.cs" />
     <Compile Include="DataHandlers\WarehousesDataHandler.cs" />
+    <Compile Include="Dialogs\SaleOrderPartDialog.xaml.cs">
+      <DependentUpon>SaleOrderPartDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\PurchaseOrderPartDialog.xaml.cs">
       <DependentUpon>PurchaseOrderPartDialog.xaml</DependentUpon>
     </Compile>
@@ -193,9 +197,13 @@
     <Compile Include="SaleOrder.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SaleOrderPart.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Vendor.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\SaleOrderPartsViewModel.cs" />
     <Compile Include="ViewModels\PurchaseOrderPartsViewModel.cs" />
     <Compile Include="ViewModels\SaleOrdersViewModel.cs" />
     <Compile Include="ViewModels\PurchaseOrdersViewModel.cs" />
@@ -213,6 +221,10 @@
     <Compile Include="Warehouse.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Dialogs\SaleOrderPartDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\PurchaseOrderPartDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

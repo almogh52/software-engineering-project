@@ -17,7 +17,7 @@ namespace CSCProject
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PurchaseOrder()
         {
-            this.PurchaseOrderParts = new HashSet<PurchaseOrderPart>();
+            this.Parts = new HashSet<PurchaseOrderPart>();
         }
     
         public int Id { get; set; }
@@ -26,7 +26,7 @@ namespace CSCProject
         public bool Deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrderPart> PurchaseOrderParts { get; set; }
+        public virtual ICollection<PurchaseOrderPart> Parts { get; set; }
         public virtual Vendor Vendor { get; set; }
     }
 }

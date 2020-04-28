@@ -30,6 +30,9 @@
         <AssociationConnector Association="dbModel.inventory_lot_id_fk" />
         <AssociationConnector Association="dbModel.inventory_part_id_fk" />
         <AssociationConnector Association="dbModel.inventory_warehouse_id_fk" />
+        <EntityTypeShape EntityType="dbModel.SaleOrderPart" Width="1.5" PointX="7.625" PointY="10.5" />
+        <AssociationConnector Association="dbModel.sale_order_part_part_id_fk" />
+        <AssociationConnector Association="dbModel.sale_order_part_order_id_fk" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

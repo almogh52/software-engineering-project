@@ -208,6 +208,25 @@ CREATE TABLE `purchase_order_part` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `sale_order_part`
+--
+
+DROP TABLE IF EXISTS `sale_order_part`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8 ;
+CREATE TABLE `sale_order_part` (
+  `order_id` int(11) NOT NULL,
+  `part_id` int(11) NOT NULL,
+  `quantity` float NOT NULL,
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`order_id`,`part_id`),
+  KEY `sale_order_parts_part_id_fk_idx` (`part_id`),
+  CONSTRAINT `sale_order_part_order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `sale_order` (`id`) ON DELETE RESTRICT,
+  CONSTRAINT `sale_order_part_part_id_fk` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `sale_order`
 --
 
