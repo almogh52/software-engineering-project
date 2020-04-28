@@ -3,6 +3,8 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -159,6 +161,13 @@ namespace CSCProject.ViewModels
                             // Show the error
                             args.Session.UpdateContent(new Dialogs.MessageDialog { Message = ex.Message });
                         }
+
+                        // Update the data table
+                        UpdateTable();
+                    } else
+                    {
+                        // Refresh the entity in case it changed
+                        ((IObjectContextAdapter)dataHandler.GetEntities()).ObjectContext.RefreshAsync(RefreshMode.StoreWins, dataItem);
 
                         // Update the data table
                         UpdateTable();
