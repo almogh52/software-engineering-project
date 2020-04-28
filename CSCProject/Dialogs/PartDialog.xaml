@@ -38,10 +38,10 @@
             <project:LotType>RawMaterial</project:LotType>
             <project:LotType>FinishedGood</project:LotType>
         </ComboBox>
-        <TextBox materialDesign:HintAssist.Hint="Purchase Price" 
+        <TextBox materialDesign:HintAssist.Hint="Price" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"
-                 Text="{Binding PurchasePrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox materialDesign:HintAssist.Hint="Unit"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   Margin="10 6 10 0"

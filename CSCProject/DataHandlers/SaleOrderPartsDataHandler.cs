@@ -31,7 +31,7 @@ namespace CSCProject.DataHandlers
             Lot lot = db.Lots.ToList().FindAll(l => l.Id == dataItem.LotId).FirstOrDefault();
 
             // Check for valid quantity
-            if (dataItem.Quantity < 1)
+            if (dataItem.Quantity <= 0)
             {
                 throw new ArgumentException("Invalid quantity");
             }

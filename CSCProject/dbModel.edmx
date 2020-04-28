@@ -85,7 +85,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="text" Nullable="false" />
           <Property Name="type" Type="tinyint" Nullable="false" />
-          <Property Name="purchase_price" Type="float" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
           <Property Name="unit" Type="tinyint" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -731,12 +731,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="dbModel.LotType" Nullable="false" />
-          <Property Name="PurchasePrice" Type="Single" Nullable="false" />
           <Property Name="Unit" Type="dbModel.PartUnit" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_part_id_fk" FromRole="Part" ToRole="inventory" />
           <NavigationProperty Name="PurchaseOrderParts" Relationship="dbModel.purchase_order_part_part_id_fk" FromRole="Part" ToRole="purchase_order_part" />
           <NavigationProperty Name="SaleOrderParts" Relationship="dbModel.sale_order_part_part_id_fk" FromRole="Part" ToRole="sale_order_part" />
+          <Property Name="Price" Type="Single" Nullable="false" />
           </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -1007,9 +1007,9 @@
           <EntitySetMapping Name="Parts">
             <EntityTypeMapping TypeName="dbModel.Part">
               <MappingFragment StoreEntitySet="part">
+                <ScalarProperty Name="Price" ColumnName="price" />
                 <ScalarProperty Name="Deleted" ColumnName="deleted" />
                 <ScalarProperty Name="Unit" ColumnName="unit" />
-                <ScalarProperty Name="PurchasePrice" ColumnName="purchase_price" />
                 <ScalarProperty Name="Type" ColumnName="type" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="Id" ColumnName="id" />

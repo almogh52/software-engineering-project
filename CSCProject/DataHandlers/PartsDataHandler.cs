@@ -10,10 +10,10 @@ namespace CSCProject.DataHandlers
     {
         protected override void VerifyDataItem(Part dataItem)
         {
-            // Check if the purchase price of the data item is invalid
-            if (dataItem.PurchasePrice < 0 || (dataItem.Type == LotType.RawMaterial && dataItem.PurchasePrice == 0) || (dataItem.Type == LotType.FinishedGood && dataItem.PurchasePrice > 0))
+            // Check if the price of the data item is invalid
+            if (dataItem.Price <= 0)
             {
-                throw new ArgumentException("Invalid purchase price");
+                throw new ArgumentException("Invalid price");
             }
         }
     }

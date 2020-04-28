@@ -25,9 +25,9 @@ namespace CSCProject
         public int Id { get; set; }
         public string Description { get; set; }
         public LotType Type { get; set; }
-        public float PurchasePrice { get; set; }
         public PartUnit Unit { get; set; }
         public bool Deleted { get; set; }
+        public float Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory> Inventories { get; set; }

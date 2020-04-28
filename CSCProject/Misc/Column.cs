@@ -10,7 +10,7 @@ namespace CSCProject.Misc
     class Column
     {
         public string Name { get; set; }
-        public Binding PropertyBinding;
+        public BindingBase PropertyBinding;
         public bool AllowSearch;
     }
 }

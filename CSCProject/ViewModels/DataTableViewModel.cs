@@ -44,7 +44,7 @@ namespace CSCProject.ViewModels
                 else
                 {
                     Misc.Column searchColumn = SearchableColumns[SearchColumnIndex];
-                    return OriginalData.FindAll(item => Misc.Utils.GetPropertyValue(typeof(T), searchColumn.PropertyBinding.Path.Path, item).ToString().Contains(SearchText));
+                    return OriginalData.FindAll(item => Misc.Utils.GetPropertyValue(typeof(T), searchColumn.PropertyBinding is Binding ? ((Binding)searchColumn.PropertyBinding).Path.Path : ((Binding)((MultiBinding)searchColumn.PropertyBinding).Bindings[0]).Path.Path, item).ToString().Contains(SearchText));
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace CSCProject.ViewModels
             foreach (var column in GetColumns())
             {
                 // Check for checkbox column
-                if (Misc.Utils.FollowPropertyPath(typeof(T), column.PropertyBinding.Path.Path) == typeof(bool))
+                if (column.PropertyBinding is Binding && Misc.Utils.FollowPropertyPath(typeof(T), ((Binding)column.PropertyBinding).Path.Path) == typeof(bool))
                 {
                     // Insert before the deleted field
                     dataGrid.Columns.Insert(dataGrid.Columns.Count - 1, new DataGridCheckBoxColumn { Header = column.Name, Binding = column.PropertyBinding, ElementStyle = Application.Current.Resources["MaterialDesignDataGridCheckBoxColumnStyle"] as Style });
