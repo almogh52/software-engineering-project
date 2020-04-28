@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,8 +51,8 @@ namespace CSCProject.Interfaces
             // Verify the data item's content
             VerifyDataItem(dataItem);
 
-            // Set the entity as changed
-            db.Entry(dataItem).State = System.Data.Entity.EntityState.Modified;
+            // Update the entity
+            db.Set<T>().AddOrUpdate(dataItem);
 
             // Save the database
             db.SaveChanges();
