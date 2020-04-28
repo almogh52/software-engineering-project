@@ -87,7 +87,8 @@
             <StackPanel Grid.Column="4" Margin="5,0,5,0">
                 <CheckBox
                     x:Name="ShowDataItemId"
-                    HorizontalAlignment="Left">
+                    HorizontalAlignment="Left"
+                    IsEnabled="{Binding HasId}">
                     <TextBlock Text="{Binding DataItemName, StringFormat=Show {0} ID}"/>
                 </CheckBox>
                 <CheckBox

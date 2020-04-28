@@ -9,6 +9,8 @@ namespace CSCProject.ViewModels
 {
     class InventoryViewModel : DataTableViewModel<Inventory, DataHandlers.InventoryDataHandler, Dialogs.InventoryDialog>
     {
+        public override bool HasId { get; set; } = false;
+
         protected override List<Misc.Column> GetColumns()
         {
             return new List<Misc.Column> {

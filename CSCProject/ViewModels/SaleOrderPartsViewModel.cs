@@ -9,6 +9,8 @@ namespace CSCProject.ViewModels
 {
     class SaleOrderPartsViewModel : DataTableViewModel<SaleOrderPart, DataHandlers.SaleOrderPartsDataHandler, Dialogs.SaleOrderPartDialog>
     {
+        public override bool HasId { get; set; } = false;
+
         protected override List<Misc.Column> GetColumns()
         {
             return new List<Misc.Column> {

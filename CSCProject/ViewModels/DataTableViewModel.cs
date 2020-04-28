@@ -20,6 +20,7 @@ namespace CSCProject.ViewModels
 
         public string DataItemName { get; } = Regex.Replace(typeof(T).Name, "(\\B[A-Z])", " $1");
 
+        public virtual bool HasId { get; set; } = true;
         public virtual bool ShowDataItemId { get; set; } = false;
         public bool ShowDeletedItems { get; set; } = false;
 
