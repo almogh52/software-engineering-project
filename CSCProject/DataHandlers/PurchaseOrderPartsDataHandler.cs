@@ -26,10 +26,17 @@ namespace CSCProject.DataHandlers
 
         protected override void VerifyDataItem(PurchaseOrderPart dataItem)
         {
+            Part part = db.Parts.ToList().FindAll(p => p.Id == dataItem.PartId).FirstOrDefault();
+
             // Check for valid quantity
             if (dataItem.Quantity < 1)
             {
                 throw new ArgumentException("Invalid quantity");
+            }
+
+            // Verify that the part is a raw material
+            if (part.Type != LotType.RawMaterial) { 
+                throw new ArgumentException("Part must be raw material");
             }
         }
     }

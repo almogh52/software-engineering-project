@@ -26,10 +26,19 @@ namespace CSCProject.DataHandlers
 
         protected override void VerifyDataItem(Inventory dataItem)
         {
+            Lot lot = db.Lots.ToList().FindAll(l => l.Id == dataItem.LotId).FirstOrDefault();
+            Part part = db.Parts.ToList().FindAll(p => p.Id == dataItem.PartId).FirstOrDefault();
+
             // Check for valid quantity
             if (dataItem.Quantity < 1)
             {
                 throw new ArgumentException("Invalid quantity");
+            }
+
+            // Check if the the lot type is different from the part type
+            if (lot.Type != part.Type)
+            {
+                throw new ArgumentException("Lot and Part type mismatch");
             }
         }
     }
