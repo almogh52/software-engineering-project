@@ -40,10 +40,22 @@ namespace CSCProject.Interfaces
             VerifyDataItem(dataItem);
 
             // Add the data item
-            db.Set<T>().Add(dataItem);
+            try
+            {
+                db.Set<T>().Add(dataItem);
+            }
+            catch
+            {
+                throw ArgumentException("Data item already exists in table!");
+            }
 
             // Save changes to the database
             db.SaveChanges();
+        }
+
+        private Exception ArgumentException(string v)
+        {
+            throw new NotImplementedException();
         }
 
         public virtual void UpdateDataItem(T dataItem)
@@ -52,10 +64,17 @@ namespace CSCProject.Interfaces
             VerifyDataItem(dataItem);
 
             // Update the entity
-            db.Set<T>().AddOrUpdate(dataItem);
+            try 
+            {
+                db.Set<T>().AddOrUpdate(dataItem);
+            }
+            catch
+            {
+                throw ArgumentException("Data item already exists in table!");
+            }
 
-            // Save the database
-            db.SaveChanges();
+    // Save the database
+    db.SaveChanges();
         }
 
         public dbEntities GetEntities()
