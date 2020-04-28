@@ -16,10 +16,12 @@ namespace CSCProject
     {
         public int OrderId { get; set; }
         public int PartId { get; set; }
+        public string LotId { get; set; }
         public float Quantity { get; set; }
         public bool Deleted { get; set; }
     
-        public virtual PurchaseOrder PurchaseOrder { get; set; }
+        public virtual Lot Lot { get; set; }
         public virtual Part Part { get; set; }
+        public virtual PurchaseOrder Order { get; set; }
     }
 }

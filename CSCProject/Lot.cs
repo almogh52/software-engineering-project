@@ -18,6 +18,8 @@ namespace CSCProject
         public Lot()
         {
             this.Inventories = new HashSet<Inventory>();
+            this.PurchaseOrderParts = new HashSet<PurchaseOrderPart>();
+            this.SaleOrderParts = new HashSet<SaleOrderPart>();
         }
     
         public string Id { get; set; }
@@ -26,5 +28,9 @@ namespace CSCProject
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory> Inventories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseOrderPart> PurchaseOrderParts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SaleOrderPart> SaleOrderParts { get; set; }
     }
 }

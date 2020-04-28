@@ -102,9 +102,11 @@
           <Key>
             <PropertyRef Name="order_id" />
             <PropertyRef Name="part_id" />
+            <PropertyRef Name="lot_id" />
           </Key>
           <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="part_id" Type="int" Nullable="false" />
+          <Property Name="lot_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="quantity" Type="float" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -121,9 +123,11 @@
           <Key>
             <PropertyRef Name="order_id" />
             <PropertyRef Name="part_id" />
+            <PropertyRef Name="lot_id" />
           </Key>
           <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="part_id" Type="int" Nullable="false" />
+          <Property Name="lot_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="quantity" Type="float" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -231,6 +235,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="purchase_order_lot_lot_id_fk">
+          <End Role="lot" Type="Self.lot" Multiplicity="1" />
+          <End Role="purchase_order_part" Type="Self.purchase_order_part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lot">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="purchase_order_part">
+              <PropertyRef Name="lot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="purchase_order_part_order_id_fk">
           <End Role="purchase_order" Type="Self.purchase_order" Multiplicity="1" />
           <End Role="purchase_order_part" Type="Self.purchase_order_part" Multiplicity="*" />
@@ -276,6 +292,18 @@
             </Principal>
             <Dependent Role="sale_order">
               <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sale_order_lot_lot_id_fk">
+          <End Role="lot" Type="Self.lot" Multiplicity="1" />
+          <End Role="sale_order_part" Type="Self.sale_order_part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lot">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sale_order_part">
+              <PropertyRef Name="lot_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,6 +386,10 @@
             <End Role="warehouse" EntitySet="warehouse" />
             <End Role="inventory" EntitySet="inventory" />
           </AssociationSet>
+          <AssociationSet Name="purchase_order_lot_lot_id_fk" Association="Self.purchase_order_lot_lot_id_fk">
+            <End Role="lot" EntitySet="lot" />
+            <End Role="purchase_order_part" EntitySet="purchase_order_part" />
+          </AssociationSet>
           <AssociationSet Name="purchase_order_part_order_id_fk" Association="Self.purchase_order_part_order_id_fk">
             <End Role="purchase_order" EntitySet="purchase_order" />
             <End Role="purchase_order_part" EntitySet="purchase_order_part" />
@@ -373,6 +405,10 @@
           <AssociationSet Name="sale_order_customer_id_fk " Association="Self.sale_order_customer_id_fk ">
             <End Role="customer" EntitySet="customer" />
             <End Role="sale_order" EntitySet="sale_order" />
+          </AssociationSet>
+          <AssociationSet Name="sale_order_lot_lot_id_fk" Association="Self.sale_order_lot_lot_id_fk">
+            <End Role="lot" EntitySet="lot" />
+            <End Role="sale_order_part" EntitySet="sale_order_part" />
           </AssociationSet>
           <AssociationSet Name="sale_order_part_order_id_fk" Association="Self.sale_order_part_order_id_fk">
             <End Role="sale_order" EntitySet="sale_order" />
@@ -417,16 +453,11 @@
           <EntitySet Name="Expenses" EntityType="dbModel.Expense" />
           <EntitySet Name="Lots" EntityType="dbModel.Lot" />
           <EntitySet Name="PurchaseOrders" EntityType="dbModel.PurchaseOrder" />
-          <EntitySet Name="PurchaseOrderParts" EntityType="dbModel.PurchaseOrderPart" />
           <EntitySet Name="SaleOrders" EntityType="dbModel.SaleOrder" />
           <EntitySet Name="Warehouses" EntityType="dbModel.Warehouse" />
           <AssociationSet Name="expesnse_employee_id_fk" Association="dbModel.expesnse_employee_id_fk">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="expense" EntitySet="Expenses" />
-          </AssociationSet>
-          <AssociationSet Name="purchase_order_part_order_id_fk" Association="dbModel.purchase_order_part_order_id_fk">
-            <End Role="purchase_order" EntitySet="PurchaseOrders" />
-            <End Role="purchase_order_part" EntitySet="PurchaseOrderParts" />
           </AssociationSet>
           <EntitySet Name="Vendors" EntityType="dbModel.Vendor" />
           <AssociationSet Name="vendor_postal_code_fk" Association="dbModel.vendor_postal_code_fk">
@@ -447,10 +478,6 @@
             <End Role="SaleOrder" EntitySet="SaleOrders" />
           </AssociationSet>
           <EntitySet Name="Parts" EntityType="dbModel.Part" />
-          <AssociationSet Name="purchase_order_part_part_id_fk" Association="dbModel.purchase_order_part_part_id_fk">
-            <End Role="part" EntitySet="Parts" />
-            <End Role="PurchaseOrderPart" EntitySet="PurchaseOrderParts" />
-          </AssociationSet>
           <EntitySet Name="Inventories" EntityType="dbModel.Inventory" />
           <AssociationSet Name="inventory_lot_id_fk" Association="dbModel.inventory_lot_id_fk">
             <End Role="Lot" EntitySet="Lots" />
@@ -464,10 +491,27 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="inventory" EntitySet="Inventories" />
           </AssociationSet>
+          <EntitySet Name="PurchaseOrderParts" EntityType="dbModel.PurchaseOrderPart" />
           <EntitySet Name="SaleOrderParts" EntityType="dbModel.SaleOrderPart" />
+          <AssociationSet Name="purchase_order_lot_lot_id_fk" Association="dbModel.purchase_order_lot_lot_id_fk">
+            <End Role="Lot" EntitySet="Lots" />
+            <End Role="purchase_order_part" EntitySet="PurchaseOrderParts" />
+          </AssociationSet>
+          <AssociationSet Name="sale_order_lot_lot_id_fk" Association="dbModel.sale_order_lot_lot_id_fk">
+            <End Role="Lot" EntitySet="Lots" />
+            <End Role="sale_order_part" EntitySet="SaleOrderParts" />
+          </AssociationSet>
+          <AssociationSet Name="purchase_order_part_part_id_fk" Association="dbModel.purchase_order_part_part_id_fk">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="purchase_order_part" EntitySet="PurchaseOrderParts" />
+          </AssociationSet>
           <AssociationSet Name="sale_order_part_part_id_fk" Association="dbModel.sale_order_part_part_id_fk">
             <End Role="Part" EntitySet="Parts" />
             <End Role="sale_order_part" EntitySet="SaleOrderParts" />
+          </AssociationSet>
+          <AssociationSet Name="purchase_order_part_order_id_fk" Association="dbModel.purchase_order_part_order_id_fk">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+            <End Role="purchase_order_part" EntitySet="PurchaseOrderParts" />
           </AssociationSet>
           <AssociationSet Name="sale_order_part_order_id_fk" Association="dbModel.sale_order_part_order_id_fk">
             <End Role="SaleOrder" EntitySet="SaleOrders" />
@@ -551,6 +595,8 @@
           <Property Name="Type" Type="dbModel.LotType" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_lot_id_fk" FromRole="Lot" ToRole="inventory" />
+          <NavigationProperty Name="PurchaseOrderParts" Relationship="dbModel.purchase_order_lot_lot_id_fk" FromRole="Lot" ToRole="purchase_order_part" />
+          <NavigationProperty Name="SaleOrderParts" Relationship="dbModel.sale_order_lot_lot_id_fk" FromRole="Lot" ToRole="sale_order_part" />
         </EntityType>
         <EntityType Name="PurchaseOrder">
           <Key>
@@ -560,20 +606,8 @@
           <Property Name="VendorId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Parts" Relationship="dbModel.purchase_order_part_order_id_fk" FromRole="purchase_order" ToRole="purchase_order_part" />
           <NavigationProperty Name="Vendor" Relationship="dbModel.purchase_order_vendor_id_fk" FromRole="PurchaseOrder" ToRole="vendor" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderPart">
-          <Key>
-            <PropertyRef Name="OrderId" />
-            <PropertyRef Name="PartId" />
-          </Key>
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="PartId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Single" Nullable="false" />
-          <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="PurchaseOrder" Relationship="dbModel.purchase_order_part_order_id_fk" FromRole="purchase_order_part" ToRole="purchase_order" />
-          <NavigationProperty Name="Part" Relationship="dbModel.purchase_order_part_part_id_fk" FromRole="PurchaseOrderPart" ToRole="part" />
+          <NavigationProperty Name="Parts" Relationship="dbModel.purchase_order_part_order_id_fk" FromRole="PurchaseOrder" ToRole="purchase_order_part" />
         </EntityType>
         <EntityType Name="SaleOrder">
           <Key>
@@ -606,18 +640,6 @@
             </Principal>
             <Dependent Role="expense">
               <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="purchase_order_part_order_id_fk">
-          <End Type="dbModel.PurchaseOrder" Role="purchase_order" Multiplicity="1" />
-          <End Type="dbModel.PurchaseOrderPart" Role="purchase_order_part" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="purchase_order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="purchase_order_part">
-              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -712,22 +734,10 @@
           <Property Name="PurchasePrice" Type="Single" Nullable="false" />
           <Property Name="Unit" Type="dbModel.PartUnit" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="PurchaseOrderParts" Relationship="dbModel.purchase_order_part_part_id_fk" FromRole="part" ToRole="PurchaseOrderPart" />
           <NavigationProperty Name="Inventories" Relationship="dbModel.inventory_part_id_fk" FromRole="Part" ToRole="inventory" />
+          <NavigationProperty Name="PurchaseOrderParts" Relationship="dbModel.purchase_order_part_part_id_fk" FromRole="Part" ToRole="purchase_order_part" />
           <NavigationProperty Name="SaleOrderParts" Relationship="dbModel.sale_order_part_part_id_fk" FromRole="Part" ToRole="sale_order_part" />
-        </EntityType>
-        <Association Name="purchase_order_part_part_id_fk">
-          <End Type="dbModel.Part" Role="part" Multiplicity="1" />
-          <End Type="dbModel.PurchaseOrderPart" Role="PurchaseOrderPart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="part">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderPart">
-              <PropertyRef Name="PartId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          </EntityType>
         <EntityType Name="Inventory">
           <Key>
             <PropertyRef Name="LotId" />
@@ -779,18 +789,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PurchaseOrderPart">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="PartId" />
+            <PropertyRef Name="LotId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="PartId" Type="Int32" Nullable="false" />
+          <Property Name="LotId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Single" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Lot" Relationship="dbModel.purchase_order_lot_lot_id_fk" FromRole="purchase_order_part" ToRole="Lot" />
+          <NavigationProperty Name="Part" Relationship="dbModel.purchase_order_part_part_id_fk" FromRole="purchase_order_part" ToRole="Part" />
+          <NavigationProperty Name="Order" Relationship="dbModel.purchase_order_part_order_id_fk" FromRole="purchase_order_part" ToRole="PurchaseOrder" />
+        </EntityType>
         <EntityType Name="SaleOrderPart">
           <Key>
             <PropertyRef Name="OrderId" />
             <PropertyRef Name="PartId" />
+            <PropertyRef Name="LotId" />
           </Key>
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="PartId" Type="Int32" Nullable="false" />
+          <Property Name="LotId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Single" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Lot" Relationship="dbModel.sale_order_lot_lot_id_fk" FromRole="sale_order_part" ToRole="Lot" />
           <NavigationProperty Name="Part" Relationship="dbModel.sale_order_part_part_id_fk" FromRole="sale_order_part" ToRole="Part" />
-          <NavigationProperty Name="SaleOrder" Relationship="dbModel.sale_order_part_order_id_fk" FromRole="sale_order_part" ToRole="SaleOrder" />
+          <NavigationProperty Name="Order" Relationship="dbModel.sale_order_part_order_id_fk" FromRole="sale_order_part" ToRole="SaleOrder" />
         </EntityType>
+        <Association Name="purchase_order_lot_lot_id_fk">
+          <End Type="dbModel.Lot" Role="Lot" Multiplicity="1" />
+          <End Type="dbModel.PurchaseOrderPart" Role="purchase_order_part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_order_part">
+              <PropertyRef Name="LotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sale_order_lot_lot_id_fk">
+          <End Type="dbModel.Lot" Role="Lot" Multiplicity="1" />
+          <End Type="dbModel.SaleOrderPart" Role="sale_order_part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="sale_order_part">
+              <PropertyRef Name="LotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchase_order_part_part_id_fk">
+          <End Type="dbModel.Part" Role="Part" Multiplicity="1" />
+          <End Type="dbModel.PurchaseOrderPart" Role="purchase_order_part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_order_part">
+              <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="sale_order_part_part_id_fk">
           <End Type="dbModel.Part" Role="Part" Multiplicity="1" />
           <End Type="dbModel.SaleOrderPart" Role="sale_order_part" Multiplicity="*" />
@@ -800,6 +864,18 @@
             </Principal>
             <Dependent Role="sale_order_part">
               <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchase_order_part_order_id_fk">
+          <End Type="dbModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="1" />
+          <End Type="dbModel.PurchaseOrderPart" Role="purchase_order_part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_order_part">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -887,16 +963,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderParts">
-            <EntityTypeMapping TypeName="dbModel.PurchaseOrderPart">
-              <MappingFragment StoreEntitySet="purchase_order_part">
-                <ScalarProperty Name="Deleted" ColumnName="deleted" />
-                <ScalarProperty Name="Quantity" ColumnName="quantity" />
-                <ScalarProperty Name="PartId" ColumnName="part_id" />
-                <ScalarProperty Name="OrderId" ColumnName="order_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SaleOrders">
             <EntityTypeMapping TypeName="dbModel.SaleOrder">
               <MappingFragment StoreEntitySet="sale_order">
@@ -961,11 +1027,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderParts">
+            <EntityTypeMapping TypeName="dbModel.PurchaseOrderPart">
+              <MappingFragment StoreEntitySet="purchase_order_part">
+                <ScalarProperty Name="Deleted" ColumnName="deleted" />
+                <ScalarProperty Name="Quantity" ColumnName="quantity" />
+                <ScalarProperty Name="LotId" ColumnName="lot_id" />
+                <ScalarProperty Name="PartId" ColumnName="part_id" />
+                <ScalarProperty Name="OrderId" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SaleOrderParts">
             <EntityTypeMapping TypeName="dbModel.SaleOrderPart">
               <MappingFragment StoreEntitySet="sale_order_part">
                 <ScalarProperty Name="Deleted" ColumnName="deleted" />
                 <ScalarProperty Name="Quantity" ColumnName="quantity" />
+                <ScalarProperty Name="LotId" ColumnName="lot_id" />
                 <ScalarProperty Name="PartId" ColumnName="part_id" />
                 <ScalarProperty Name="OrderId" ColumnName="order_id" />
               </MappingFragment>

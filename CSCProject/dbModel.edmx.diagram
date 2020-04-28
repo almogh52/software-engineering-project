@@ -13,11 +13,9 @@
         <EntityTypeShape EntityType="dbModel.Expense" Width="1.5" PointX="5.25" PointY="0.75" />
         <EntityTypeShape EntityType="dbModel.Lot" Width="1.5" PointX="8.375" PointY="7.625" />
         <EntityTypeShape EntityType="dbModel.PurchaseOrder" Width="1.5" PointX="5.375" PointY="9.125" />
-        <EntityTypeShape EntityType="dbModel.PurchaseOrderPart" Width="1.5" PointX="7.625" PointY="4.125" />
         <EntityTypeShape EntityType="dbModel.SaleOrder" Width="1.5" PointX="5.25" PointY="13" />
         <EntityTypeShape EntityType="dbModel.Warehouse" Width="1.5" PointX="8.375" PointY="1.125" />
         <AssociationConnector Association="dbModel.expesnse_employee_id_fk" />
-        <AssociationConnector Association="dbModel.purchase_order_part_order_id_fk" />
         <EntityTypeShape EntityType="dbModel.Vendor" Width="1.5" PointX="3" PointY="5.375" />
         <AssociationConnector Association="dbModel.vendor_postal_code_fk" />
         <AssociationConnector Association="dbModel.purchase_order_vendor_id_fk" />
@@ -25,13 +23,17 @@
         <AssociationConnector Association="dbModel.customer_postal_code_fk" />
         <AssociationConnector Association="dbModel.sale_order_customer_id_fk_" />
         <EntityTypeShape EntityType="dbModel.Part" Width="1.5" PointX="5.375" PointY="4" />
-        <AssociationConnector Association="dbModel.purchase_order_part_part_id_fk" />
         <EntityTypeShape EntityType="dbModel.Inventory" Width="1.5" PointX="10.625" PointY="4" />
         <AssociationConnector Association="dbModel.inventory_lot_id_fk" />
         <AssociationConnector Association="dbModel.inventory_part_id_fk" />
         <AssociationConnector Association="dbModel.inventory_warehouse_id_fk" />
-        <EntityTypeShape EntityType="dbModel.SaleOrderPart" Width="1.5" PointX="7.625" PointY="10.5" />
+        <EntityTypeShape EntityType="dbModel.PurchaseOrderPart" Width="1.5" PointX="8" PointY="4.25" />
+        <EntityTypeShape EntityType="dbModel.SaleOrderPart" Width="1.5" PointX="8.375" PointY="10.875" />
+        <AssociationConnector Association="dbModel.purchase_order_lot_lot_id_fk" />
+        <AssociationConnector Association="dbModel.sale_order_lot_lot_id_fk" />
+        <AssociationConnector Association="dbModel.purchase_order_part_part_id_fk" />
         <AssociationConnector Association="dbModel.sale_order_part_part_id_fk" />
+        <AssociationConnector Association="dbModel.purchase_order_part_order_id_fk" />
         <AssociationConnector Association="dbModel.sale_order_part_order_id_fk" />
         </Diagram>
     </edmx:Diagrams>

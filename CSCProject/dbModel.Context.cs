@@ -32,13 +32,13 @@ namespace CSCProject
         public virtual DbSet<Expense> Expenses { get; set; }
         public virtual DbSet<Lot> Lots { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
-        public virtual DbSet<PurchaseOrderPart> PurchaseOrderParts { get; set; }
         public virtual DbSet<SaleOrder> SaleOrders { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<PurchaseOrderPart> PurchaseOrderParts { get; set; }
         public virtual DbSet<SaleOrderPart> SaleOrderParts { get; set; }
     }
 }

@@ -198,12 +198,14 @@ DROP TABLE IF EXISTS `purchase_order_part`;
 CREATE TABLE `purchase_order_part` (
   `order_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
+  `lot_id` varchar(20) NOT NULL,
   `quantity` float NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`order_id`,`part_id`),
+  PRIMARY KEY (`order_id`,`part_id`,`lot_id`),
   KEY `purchase_order_parts_part_id_fk_idx` (`part_id`),
   CONSTRAINT `purchase_order_part_order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `purchase_order` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `purchase_order_part_part_id_fk` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT
+  CONSTRAINT `purchase_order_part_part_id_fk` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT,
+  CONSTRAINT `purchase_order_lot_lot_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -217,12 +219,14 @@ DROP TABLE IF EXISTS `sale_order_part`;
 CREATE TABLE `sale_order_part` (
   `order_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
+  `lot_id` varchar(20) NOT NULL,
   `quantity` float NOT NULL,
   `deleted` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`order_id`,`part_id`),
+  PRIMARY KEY (`order_id`,`part_id`,`lot_id`),
   KEY `sale_order_parts_part_id_fk_idx` (`part_id`),
   CONSTRAINT `sale_order_part_order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `sale_order` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `sale_order_part_part_id_fk` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT
+  CONSTRAINT `sale_order_part_part_id_fk` FOREIGN KEY (`part_id`) REFERENCES `part` (`id`) ON DELETE RESTRICT,
+  CONSTRAINT `sale_order_lot_lot_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

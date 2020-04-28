@@ -17,6 +17,7 @@ namespace CSCProject.ViewModels
                 new Misc.Column { Name = "Order Id", PropertyBinding = new Binding("OrderId"), AllowSearch = true },
                 new Misc.Column { Name = "Part Id", PropertyBinding = new Binding("PartId"), AllowSearch = true },
                 new Misc.Column { Name = "Part Description", PropertyBinding = new Binding("Part.Description"), AllowSearch = true },
+                new Misc.Column { Name = "Lot Id", PropertyBinding = new Binding("LotId"), AllowSearch = true },
                 new Misc.Column { Name = "Quantity", PropertyBinding = new Binding("Quantity"), AllowSearch = true }
             };
         }
@@ -25,6 +26,7 @@ namespace CSCProject.ViewModels
         {
             dataItem = new SaleOrderPart
             {
+                LotId = "",
                 OrderId = -1,
                 PartId = -1
             };
@@ -38,7 +40,8 @@ namespace CSCProject.ViewModels
                 {
                     SaleOrderPart = dataItem,
                     Orders = dataHandler.GetEntities().SaleOrders.ToList().FindAll(type => !type.Deleted),
-                    Parts = dataHandler.GetEntities().Parts.ToList().FindAll(type => !type.Deleted)
+                    Parts = dataHandler.GetEntities().Parts.ToList().FindAll(type => !type.Deleted),
+                    Lots = dataHandler.GetEntities().Lots.ToList().FindAll(type => !type.Deleted)
                 }
             };
         }

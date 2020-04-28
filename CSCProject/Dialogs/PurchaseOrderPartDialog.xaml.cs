@@ -22,6 +22,7 @@ namespace CSCProject.Dialogs
         public PurchaseOrderPart PurchaseOrderPart { get; set; }
         public List<PurchaseOrder> Orders { get; set; }
         public List<Part> Parts { get; set; }
+        public List<Lot> Lots { get; set; }
     }
 
     /// <summary>
@@ -36,7 +37,7 @@ namespace CSCProject.Dialogs
 
         protected override bool VerifyObject(object o)
         {
-            return ((PurchaseOrderPart)o).OrderId != -1 && ((PurchaseOrderPart)o).PartId != -1;
+            return ((PurchaseOrderPart)o).LotId.Count() > 0 && ((PurchaseOrderPart)o).OrderId != -1 && ((PurchaseOrderPart)o).PartId != -1;
         }
     }
 }

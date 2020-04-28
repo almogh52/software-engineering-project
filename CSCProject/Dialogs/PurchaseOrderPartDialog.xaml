@@ -35,6 +35,14 @@
                   ItemsSource="{Binding Parts}"
                   DisplayMemberPath="Description"
                   IsEditable="True"/>
+        <ComboBox materialDesign:HintAssist.Hint="Lot"
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  Margin="10 6 10 0"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding PurchaseOrderPart.LotId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Lots}"
+                  DisplayMemberPath="Id"
+                  IsEditable="True"/>
         <TextBox materialDesign:HintAssist.Hint="Quantity" 
                  Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
                  Margin="10 6 10 0"

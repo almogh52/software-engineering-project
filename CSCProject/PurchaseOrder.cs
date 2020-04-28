@@ -25,8 +25,8 @@ namespace CSCProject
         public System.DateTime Date { get; set; }
         public bool Deleted { get; set; }
     
+        public virtual Vendor Vendor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrderPart> Parts { get; set; }
-        public virtual Vendor Vendor { get; set; }
     }
 }
