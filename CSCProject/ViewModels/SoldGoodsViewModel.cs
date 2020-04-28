@@ -21,7 +21,7 @@ namespace CSCProject.ViewModels
 
                 PlotModel model = new PlotModel();
 
-                List<SaleOrderPart> saleOrderParts = dataHandler.GetData().FindAll(expense => !expense.Deleted);
+                List<SaleOrderPart> saleOrderParts = dataHandler.GetData().FindAll(part => !part.Deleted);
                 List<BarItem> barItems = new List<BarItem>();
                 Dictionary<Part, float> soldGoods = new Dictionary<Part, float>();
 

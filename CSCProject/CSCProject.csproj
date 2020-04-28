@@ -204,6 +204,8 @@
     <Compile Include="Vendor.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\MonthlyPurchaseOrdersViewModel.cs" />
+    <Compile Include="ViewModels\MonthlySaleOrdersViewModel.cs" />
     <Compile Include="ViewModels\SaleOrderPartsViewModel.cs" />
     <Compile Include="ViewModels\PurchaseOrderPartsViewModel.cs" />
     <Compile Include="ViewModels\SaleOrdersViewModel.cs" />
