@@ -27,6 +27,11 @@
                   ItemsSource="{Binding Vendors}"
                   DisplayMemberPath="Name"
                   IsEditable="True"/>
+        <DatePicker
+            materialDesign:HintAssist.Hint="Order Date"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+            Margin="10 6 10 0"
+            SelectedDate="{Binding PurchaseOrder.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <StackPanel HorizontalAlignment="Center" 
                     Orientation="Horizontal" 
                     Margin="6">

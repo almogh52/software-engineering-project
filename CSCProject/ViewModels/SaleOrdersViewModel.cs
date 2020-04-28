@@ -24,7 +24,8 @@ namespace CSCProject.ViewModels
         {
             dataItem = new SaleOrder
             {
-                CustomerId = -1
+                CustomerId = -1,
+                Date = DateTime.Now
             };
         }
 
