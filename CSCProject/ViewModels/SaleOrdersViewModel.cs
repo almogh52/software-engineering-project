@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,8 @@ namespace CSCProject.ViewModels
             return new List<Misc.Column> {
                 new Misc.Column { Name = "Customer Id", PropertyBinding = new Binding("CustomerId"), AllowSearch = true },
                 new Misc.Column { Name = "Customer Name", PropertyBinding = new Binding("Customer.Name"), AllowSearch = true },
-                new Misc.Column { Name = "Order Date", PropertyBinding = new Binding("Date"), AllowSearch = true }
+                new Misc.Column { Name = "Order Date", PropertyBinding = new Binding("Date"), AllowSearch = true },
+                new Misc.Column { Name = "Total Price", PropertyBinding = new Binding("Price") { StringFormat = "{0}₪" }, AllowSearch = true }
             };
         }
 

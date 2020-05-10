@@ -11,7 +11,8 @@ namespace CSCProject
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class PurchaseOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,10 @@ namespace CSCProject
         public int VendorId { get; set; }
         public System.DateTime Date { get; set; }
         public bool Deleted { get; set; }
-    
+
+        [NotMapped]
+        public float Price { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrderPart> Parts { get; set; }
         public virtual Vendor Vendor { get; set; }

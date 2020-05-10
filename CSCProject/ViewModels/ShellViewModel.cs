@@ -73,7 +73,7 @@ namespace CSCProject.ViewModels
 
         public void Exit()
         {
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
         }
     }
 }

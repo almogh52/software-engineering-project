@@ -16,7 +16,8 @@ namespace CSCProject.ViewModels
             return new List<Misc.Column> {
                 new Misc.Column { Name = "Vendor Id", PropertyBinding = new Binding("VendorId"), AllowSearch = true },
                 new Misc.Column { Name = "Vendor Name", PropertyBinding = new Binding("Vendor.Name"), AllowSearch = true },
-                new Misc.Column { Name = "Order Date", PropertyBinding = new Binding("Date"), AllowSearch = true }
+                new Misc.Column { Name = "Order Date", PropertyBinding = new Binding("Date"), AllowSearch = true },
+                new Misc.Column { Name = "Total Price", PropertyBinding = new Binding("Price") { StringFormat = "{0}₪" }, AllowSearch = true }
             };
         }
 
