@@ -16,6 +16,11 @@ using System.Windows.Data;
 
 namespace CSCProject.ViewModels
 {
+    public class DataItemSelectedEventArgs<T> : EventArgs
+    {
+        public T DataItem { get; set; }
+    }
+
     abstract class DataTableViewModel<T, U, V> : Screen, INotifyPropertyChanged where T : class, new() where U : Interfaces.IDataHandler<T>, new() where V : Dialogs.Dialog, new()
     {
         protected Interfaces.IDataHandler<T> dataHandler = new U();
@@ -29,6 +34,8 @@ namespace CSCProject.ViewModels
         public List<Misc.Column> SearchableColumns { get => GetColumns().FindAll(column => column.AllowSearch); }
         public int SearchColumnIndex { get; set; } = -1;
         public string SearchText { get; set; }
+
+        public event EventHandler<DataItemSelectedEventArgs<T>> ItemSelected;
 
         public List<T> Data
         {
@@ -180,6 +187,15 @@ namespace CSCProject.ViewModels
         {
             SearchText = null;
             SearchColumnIndex = -1;
+        }
+
+        public void DataSelectionChanged()
+        {
+            EventHandler<DataItemSelectedEventArgs<T>> handler = ItemSelected;
+            handler?.Invoke(this, new DataItemSelectedEventArgs<T>
+            {
+                DataItem = (T)(GetView() as Views.DataTableView).Data.SelectedItem
+            });
         }
 
         private void AddDataItem(T dataItem)

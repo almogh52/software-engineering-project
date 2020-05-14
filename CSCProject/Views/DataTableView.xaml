@@ -104,7 +104,8 @@
             Margin="10">
             <DataGrid x:Name="Data" 
                       AutoGenerateColumns="False"
-                      IsReadOnly="True">
+                      IsReadOnly="True"
+                      cal:Message.Attach="DataSelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Header="ID" 

@@ -204,8 +204,10 @@
     <Compile Include="Vendor.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DualDataTableViewModel.cs" />
     <Compile Include="ViewModels\MonthlyPurchaseOrdersViewModel.cs" />
     <Compile Include="ViewModels\MonthlySaleOrdersViewModel.cs" />
+    <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\SaleOrderPartsViewModel.cs" />
     <Compile Include="ViewModels\PurchaseOrderPartsViewModel.cs" />
     <Compile Include="ViewModels\SaleOrdersViewModel.cs" />
@@ -219,6 +221,9 @@
     <Compile Include="ViewModels\WarehousesViewModel.cs" />
     <Compile Include="ViewModels\CustomersViewModel.cs" />
     <Compile Include="ViewModels\VendorsViewModel.cs" />
+    <Compile Include="Views\DualDataTableView.xaml.cs">
+      <DependentUpon>DualDataTableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReportModelView.xaml.cs">
       <DependentUpon>ReportModelView.xaml</DependentUpon>
     </Compile>
@@ -286,6 +291,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DataTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DualDataTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
