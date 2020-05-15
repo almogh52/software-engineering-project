@@ -19,12 +19,21 @@ namespace CSCProject.ViewModels
             base.OnViewLoaded(view);
 
             FirstViewModel.ItemSelected += FirstViewModel_ItemSelected;
+
+            // Update first view model on second view model update
+            SecondViewModel.DataUpdated += delegate { FirstViewModel.NotifyOfPropertyChange("Data"); };
         }
 
         private void FirstViewModel_ItemSelected(object sender, DataItemSelectedEventArgs<T1> e)
         {
-            SecondViewModel.SearchColumnIndex = 0; // This should be the order id column
-            SecondViewModel.SearchText = e.DataItem.GetType().GetProperty("Id").GetValue(e.DataItem).ToString();
+            if (e.DataItem != null)
+            {
+                SecondViewModel.SearchColumnIndex = 0; // This should be the order id column
+                SecondViewModel.SearchText = e.DataItem.GetType().GetProperty("Id").GetValue(e.DataItem).ToString();
+            } else
+            {
+                SecondViewModel.ClearSearch();
+            }
         }
     }
 

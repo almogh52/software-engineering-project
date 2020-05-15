@@ -17,8 +17,39 @@ namespace CSCProject.DataHandlers
             return base.GetData().Select(o => CalcPrice(o)).ToList();
         }
 
-        protected override void VerifyDataItem(SaleOrder dataItem)
+        public void ShipOrder(SaleOrder order)
         {
+            InventoryDataHandler inventoryDataHandler = new InventoryDataHandler();
+
+            List<Inventory> inventory = inventoryDataHandler.GetData();
+
+            foreach (var part in order.Parts)
+            {
+                if (!part.Deleted)
+                {
+                    Inventory partInventory = inventory.Find(i => i.PartId == part.PartId && i.LotId == part.LotId);
+
+                    // If the part is missing or insufficient in the inventory
+                    if (partInventory == null || partInventory.Quantity < part.Quantity)
+                    {
+                        throw new ArgumentException($"Insufficient goods\nMissing '{(partInventory == null ? part.Quantity : part.Quantity - partInventory.Quantity)} {part.Part.Unit}' of Part '{part.Part.Description}'");
+                    }
+
+                    if (partInventory.Quantity == part.Quantity)
+                    {
+                        inventoryDataHandler.RemoveDataItem(partInventory);
+                    }
+                    else
+                    {
+                        partInventory.Quantity -= part.Quantity;
+                        inventoryDataHandler.UpdateDataItem(partInventory);
+                    }
+                }
+            }
+
+            // Set the order as shipped
+            order.Shipped = true;
+            UpdateDataItem(order);
         }
 
         private static SaleOrder CalcPrice(SaleOrder order)
@@ -40,6 +71,10 @@ namespace CSCProject.DataHandlers
             order.Price = price;
 
             return order;
+        }
+
+        protected override void VerifyDataItem(SaleOrder dataItem)
+        {
         }
     }
 }

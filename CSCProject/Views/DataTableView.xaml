@@ -8,10 +8,10 @@
              xmlns:local="clr-namespace:CSCProject.Views"
              xmlns:misc="clr-namespace:CSCProject.Misc"
              mc:Ignorable="d"
-             cal:Message.Attach="[Event Loaded] = [Action Init]"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <misc:BoolToStringConverter x:Key="DeleteStringConverter" FalseValue="Delete" TrueValue="Restore" />
+        <misc:BoolToVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -132,6 +132,16 @@
                                   cal:Message.Attach="ChangeDataItemDeleteStatus($this.Tag.SelectedItem)">
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="{Binding RemoveButtonIcon}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Visibility="{Binding HasDataContextMenuExtraButton, Converter={StaticResource VisibilityConverter}}" />
+                        <MenuItem Header="{Binding DataContextMenuExtraButtonText}"
+                                  Visibility="{Binding HasDataContextMenuExtraButton, Converter={StaticResource VisibilityConverter}}"
+                                  Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"
+                                  IsEnabled="{Binding DataContextMenuExtraButtonEnabled}"
+                                  cal:Message.Attach="DataExtraButtonClicked($this.Tag.SelectedItem)">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="{Binding DataContextMenuExtraButtonIcon}" />
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>

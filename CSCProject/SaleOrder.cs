@@ -24,11 +24,12 @@ namespace CSCProject
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public System.DateTime Date { get; set; }
+        public bool Shipped { get; set; }
         public bool Deleted { get; set; }
 
         [NotMapped]
         public float Price { get; set; }
-    
+
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SaleOrderPart> Parts { get; set; }

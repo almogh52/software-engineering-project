@@ -17,7 +17,7 @@ namespace CSCProject
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Vendor()
         {
-            this.PurchaseOrders = new HashSet<PurchaseOrder>();
+            this.purchase_order = new HashSet<PurchaseOrder>();
         }
     
         public int Id { get; set; }
@@ -28,6 +28,6 @@ namespace CSCProject
     
         public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual ICollection<PurchaseOrder> purchase_order { get; set; }
     }
 }

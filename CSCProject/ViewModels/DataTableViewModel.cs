@@ -36,6 +36,7 @@ namespace CSCProject.ViewModels
         public string SearchText { get; set; }
 
         public event EventHandler<DataItemSelectedEventArgs<T>> ItemSelected;
+        public event EventHandler DataUpdated;
 
         public List<T> Data
         {
@@ -59,9 +60,16 @@ namespace CSCProject.ViewModels
         public virtual string AddButtonIcon { get; set; } = "Add";
         public virtual string RemoveButtonIcon { get; set; } = "Remove";
 
-        public void Init()
+        public virtual bool HasDataContextMenuExtraButton { get; } = false;
+        public virtual string DataContextMenuExtraButtonText { get; }
+        public virtual string DataContextMenuExtraButtonIcon { get; }
+        public virtual bool DataContextMenuExtraButtonEnabled { get; } = true;
+
+        protected override void OnViewReady(object view)
         {
-            DataGrid dataGrid = (GetView() as Views.DataTableView).Data;
+            base.OnViewReady(view);
+
+            DataGrid dataGrid = (view as Views.DataTableView).Data;
 
             // Add each column to the data grid
             foreach (var column in GetColumns())
@@ -71,7 +79,8 @@ namespace CSCProject.ViewModels
                 {
                     // Insert before the deleted field
                     dataGrid.Columns.Insert(dataGrid.Columns.Count - 1, new DataGridCheckBoxColumn { Header = column.Name, Binding = column.PropertyBinding, ElementStyle = Application.Current.Resources["MaterialDesignDataGridCheckBoxColumnStyle"] as Style });
-                } else
+                }
+                else
                 {
                     // Insert before the deleted field
                     dataGrid.Columns.Insert(dataGrid.Columns.Count - 1, new DataGridTextColumn { Header = column.Name, Binding = column.PropertyBinding });
@@ -196,6 +205,11 @@ namespace CSCProject.ViewModels
             {
                 DataItem = (T)(GetView() as Views.DataTableView).Data.SelectedItem
             });
+            NotifyOfPropertyChange("DataContextMenuExtraButtonEnabled");
+        }
+
+        public virtual void DataExtraButtonClicked(T dataItem)
+        {
         }
 
         private void AddDataItem(T dataItem)
@@ -216,9 +230,10 @@ namespace CSCProject.ViewModels
             UpdateTable();
         }
 
-        private void UpdateTable()
+        protected void UpdateTable()
         {
             NotifyOfPropertyChange("Data");
+            DataUpdated?.Invoke(this, null);
         }
 
         protected virtual void InitDataItem(ref T dataItem)

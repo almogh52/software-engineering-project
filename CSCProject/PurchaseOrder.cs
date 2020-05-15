@@ -25,6 +25,7 @@ namespace CSCProject
         public int VendorId { get; set; }
         public System.DateTime Date { get; set; }
         public bool Deleted { get; set; }
+        public bool Received { get; set; }
 
         [NotMapped]
         public float Price { get; set; }

@@ -29,12 +29,12 @@
         <AssociationConnector Association="dbModel.sale_order_lot_lot_id_fk" />
         <AssociationConnector Association="dbModel.purchase_order_part_part_id_fk" />
         <AssociationConnector Association="dbModel.sale_order_part_part_id_fk" />
-        <EntityTypeShape EntityType="dbModel.SaleOrder" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="dbModel.PurchaseOrder" Width="1.5" PointX="5.25" PointY="8.375" />
+        <EntityTypeShape EntityType="dbModel.SaleOrder" Width="1.5" PointX="5.25" PointY="12.375" />
         <AssociationConnector Association="dbModel.sale_order_customer_id_fk_" />
-        <AssociationConnector Association="dbModel.sale_order_part_order_id_fk" />
-        <EntityTypeShape EntityType="dbModel.PurchaseOrder" Width="1.5" PointX="5.25" PointY="8.5" />
         <AssociationConnector Association="dbModel.purchase_order_part_order_id_fk" />
         <AssociationConnector Association="dbModel.purchase_order_vendor_id_fk" />
+        <AssociationConnector Association="dbModel.sale_order_part_order_id_fk" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

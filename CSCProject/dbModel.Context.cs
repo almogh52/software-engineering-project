@@ -38,7 +38,7 @@ namespace CSCProject
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<PurchaseOrderPart> PurchaseOrderParts { get; set; }
         public virtual DbSet<SaleOrderPart> SaleOrderParts { get; set; }
-        public virtual DbSet<SaleOrder> SaleOrders { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual DbSet<SaleOrder> SaleOrders { get; set; }
     }
 }

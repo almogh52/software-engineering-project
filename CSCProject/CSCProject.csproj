@@ -132,6 +132,9 @@
     <Compile Include="DataHandlers\LotsDataHandler.cs" />
     <Compile Include="DataHandlers\VendorsDataHandler.cs" />
     <Compile Include="DataHandlers\WarehousesDataHandler.cs" />
+    <Compile Include="Dialogs\SelectWarehouseDialog.xaml.cs">
+      <DependentUpon>SelectWarehouseDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\SaleOrderPartDialog.xaml.cs">
       <DependentUpon>SaleOrderPartDialog.xaml</DependentUpon>
     </Compile>
@@ -179,6 +182,7 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Misc\BoolToStringConverter.cs" />
+    <Compile Include="Misc\BoolToVisibilityConverter.cs" />
     <Compile Include="Misc\DateTimeHelper.cs" />
     <Compile Include="Misc\FloatConverter.cs" />
     <Compile Include="Misc\PartUnitEnumToStringConverter.cs" />
@@ -230,6 +234,10 @@
     <Compile Include="Warehouse.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Page Include="Dialogs\SelectWarehouseDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialogs\SaleOrderPartDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

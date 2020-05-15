@@ -96,6 +96,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="vendor_id" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="received" Type="bit" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="purchase_order_part">
@@ -117,6 +118,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="customer_id" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="shipped" Type="bit" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sale_order_part">
@@ -499,16 +501,12 @@
             <End Role="Part" EntitySet="Parts" />
             <End Role="sale_order_part" EntitySet="SaleOrderParts" />
           </AssociationSet>
+          <EntitySet Name="PurchaseOrders" EntityType="dbModel.PurchaseOrder" />
           <EntitySet Name="SaleOrders" EntityType="dbModel.SaleOrder" />
           <AssociationSet Name="sale_order_customer_id_fk_" Association="dbModel.sale_order_customer_id_fk_">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="sale_order" EntitySet="SaleOrders" />
           </AssociationSet>
-          <AssociationSet Name="sale_order_part_order_id_fk" Association="dbModel.sale_order_part_order_id_fk">
-            <End Role="sale_order" EntitySet="SaleOrders" />
-            <End Role="SaleOrderPart" EntitySet="SaleOrderParts" />
-          </AssociationSet>
-          <EntitySet Name="PurchaseOrders" EntityType="dbModel.PurchaseOrder" />
           <AssociationSet Name="purchase_order_part_order_id_fk" Association="dbModel.purchase_order_part_order_id_fk">
             <End Role="purchase_order" EntitySet="PurchaseOrders" />
             <End Role="PurchaseOrderPart" EntitySet="PurchaseOrderParts" />
@@ -516,6 +514,10 @@
           <AssociationSet Name="purchase_order_vendor_id_fk" Association="dbModel.purchase_order_vendor_id_fk">
             <End Role="Vendor" EntitySet="Vendors" />
             <End Role="purchase_order" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="sale_order_part_order_id_fk" Association="dbModel.sale_order_part_order_id_fk">
+            <End Role="sale_order" EntitySet="SaleOrders" />
+            <End Role="SaleOrderPart" EntitySet="SaleOrderParts" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Employee">
@@ -631,7 +633,7 @@
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="dbModel.vendor_postal_code_fk" FromRole="vendor" ToRole="Address" />
-          <NavigationProperty Name="PurchaseOrders" Relationship="dbModel.purchase_order_vendor_id_fk" FromRole="Vendor" ToRole="purchase_order" />
+          <NavigationProperty Name="purchase_order" Relationship="dbModel.purchase_order_vendor_id_fk" FromRole="Vendor" ToRole="purchase_order" />
         </EntityType>
         <Association Name="vendor_postal_code_fk">
           <End Type="dbModel.Address" Role="Address" Multiplicity="1" />
@@ -821,6 +823,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Parts" Relationship="dbModel.purchase_order_part_order_id_fk" FromRole="purchase_order" ToRole="PurchaseOrderPart" />
+          <NavigationProperty Name="Vendor" Relationship="dbModel.purchase_order_vendor_id_fk" FromRole="purchase_order" ToRole="Vendor" />
+          <Property Name="Received" Type="Boolean" Nullable="false" />
+        </EntityType>
         <EntityType Name="SaleOrder">
           <Key>
             <PropertyRef Name="Id" />
@@ -828,6 +842,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Shipped" Type="Boolean" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="dbModel.sale_order_customer_id_fk_" FromRole="sale_order" ToRole="Customer" />
           <NavigationProperty Name="Parts" Relationship="dbModel.sale_order_part_order_id_fk" FromRole="sale_order" ToRole="SaleOrderPart" />
@@ -844,29 +859,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="sale_order_part_order_id_fk">
-          <End Type="dbModel.SaleOrder" Role="sale_order" Multiplicity="1" />
-          <End Type="dbModel.SaleOrderPart" Role="SaleOrderPart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sale_order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SaleOrderPart">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PurchaseOrder">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VendorId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" />
-          <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Parts" Relationship="dbModel.purchase_order_part_order_id_fk" FromRole="purchase_order" ToRole="PurchaseOrderPart" />
-          <NavigationProperty Name="Vendor" Relationship="dbModel.purchase_order_vendor_id_fk" FromRole="purchase_order" ToRole="Vendor" />
-        </EntityType>
         <Association Name="purchase_order_part_order_id_fk">
           <End Type="dbModel.PurchaseOrder" Role="purchase_order" Multiplicity="1" />
           <End Type="dbModel.PurchaseOrderPart" Role="PurchaseOrderPart" Multiplicity="*" />
@@ -888,6 +880,18 @@
             </Principal>
             <Dependent Role="purchase_order">
               <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sale_order_part_order_id_fk">
+          <End Type="dbModel.SaleOrder" Role="sale_order" Multiplicity="1" />
+          <End Type="dbModel.SaleOrderPart" Role="SaleOrderPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sale_order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SaleOrderPart">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1029,22 +1033,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SaleOrders">
-            <EntityTypeMapping TypeName="dbModel.SaleOrder">
-              <MappingFragment StoreEntitySet="sale_order">
+          <EntitySetMapping Name="PurchaseOrders">
+            <EntityTypeMapping TypeName="dbModel.PurchaseOrder">
+              <MappingFragment StoreEntitySet="purchase_order">
+                <ScalarProperty Name="Received" ColumnName="received" />
                 <ScalarProperty Name="Deleted" ColumnName="deleted" />
                 <ScalarProperty Name="Date" ColumnName="date" />
-                <ScalarProperty Name="CustomerId" ColumnName="customer_id" />
+                <ScalarProperty Name="VendorId" ColumnName="vendor_id" />
                 <ScalarProperty Name="Id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrders">
-            <EntityTypeMapping TypeName="dbModel.PurchaseOrder">
-              <MappingFragment StoreEntitySet="purchase_order">
+          <EntitySetMapping Name="SaleOrders">
+            <EntityTypeMapping TypeName="dbModel.SaleOrder">
+              <MappingFragment StoreEntitySet="sale_order">
                 <ScalarProperty Name="Deleted" ColumnName="deleted" />
+                <ScalarProperty Name="Shipped" ColumnName="shipped" />
                 <ScalarProperty Name="Date" ColumnName="date" />
-                <ScalarProperty Name="VendorId" ColumnName="vendor_id" />
+                <ScalarProperty Name="CustomerId" ColumnName="customer_id" />
                 <ScalarProperty Name="Id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

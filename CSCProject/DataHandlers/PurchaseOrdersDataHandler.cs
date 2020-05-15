@@ -16,8 +16,26 @@ namespace CSCProject.DataHandlers
             return base.GetData().Select(o => CalcPrice(o)).ToList();
         }
 
-        protected override void VerifyDataItem(PurchaseOrder dataItem)
+        public void RecieveOrder(PurchaseOrder order, int warehouseId)
         {
+            InventoryDataHandler inventoryDataHandler = new InventoryDataHandler();
+
+            if (db.Warehouses.Find(warehouseId) == null)
+            {
+                throw new ArgumentException("Warehouse not found");
+            }
+
+            foreach (var part in order.Parts)
+            {
+                if (!part.Deleted)
+                {
+                    inventoryDataHandler.AddDataItem(new Inventory { LotId = part.LotId, PartId = part.PartId, Quantity = part.Quantity, WarehouseId = warehouseId });
+                }
+            }
+
+            // Set the order as recieved
+            order.Received = true;
+            UpdateDataItem(order);
         }
 
         private static PurchaseOrder CalcPrice(PurchaseOrder order)
@@ -39,6 +57,10 @@ namespace CSCProject.DataHandlers
             order.Price = price;
 
             return order;
+        }
+
+        protected override void VerifyDataItem(PurchaseOrder dataItem)
+        {
         }
     }
 }

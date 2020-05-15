@@ -19,7 +19,7 @@ namespace CSCProject.ViewModels
                 new Misc.Column { Name = "Part Description", PropertyBinding = new Binding("Part.Description"), AllowSearch = true },
                 new Misc.Column { Name = "Warehouse Id", PropertyBinding = new Binding("WarehouseId"), AllowSearch = true },
                 new Misc.Column { Name = "Warehouse Description", PropertyBinding = new Binding("Warehouse.Description"), AllowSearch = true },
-                new Misc.Column { Name = "Quantity", PropertyBinding = new Binding("Quantity"), AllowSearch = true }
+                new Misc.Column { Name = "Quantity", PropertyBinding = new MultiBinding() { Bindings = { new Binding("Quantity"), new Binding("Part.Unit") }, StringFormat="{0} {1}" }, AllowSearch = true }
             };
         }
 

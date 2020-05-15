@@ -39,9 +39,9 @@ namespace CSCProject.ViewModels
                 DataContext = new Dialogs.SaleOrderPartDialogContext
                 {
                     SaleOrderPart = dataItem,
-                    Orders = dataHandler.GetEntities().SaleOrders.ToList().FindAll(type => !type.Deleted),
-                    Parts = dataHandler.GetEntities().Parts.ToList().FindAll(type => !type.Deleted),
-                    Lots = dataHandler.GetEntities().Lots.ToList().FindAll(type => !type.Deleted)
+                    Orders = dataHandler.GetEntities().SaleOrders.ToList().FindAll(order => !order.Deleted),
+                    Parts = dataHandler.GetEntities().Parts.ToList().FindAll(part => !part.Deleted && part.Type == LotType.FinishedGood),
+                    Lots = dataHandler.GetEntities().Lots.ToList().FindAll(lot => !lot.Deleted && lot.Type == LotType.FinishedGood)
                 }
             };
         }
