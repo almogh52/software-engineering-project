@@ -633,7 +633,7 @@
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Address" Relationship="dbModel.vendor_postal_code_fk" FromRole="vendor" ToRole="Address" />
-          <NavigationProperty Name="purchase_order" Relationship="dbModel.purchase_order_vendor_id_fk" FromRole="Vendor" ToRole="purchase_order" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="dbModel.purchase_order_vendor_id_fk" FromRole="Vendor" ToRole="purchase_order" />
         </EntityType>
         <Association Name="vendor_postal_code_fk">
           <End Type="dbModel.Address" Role="Address" Multiplicity="1" />
