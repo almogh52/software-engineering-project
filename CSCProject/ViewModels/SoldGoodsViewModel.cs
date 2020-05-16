@@ -41,7 +41,7 @@ namespace CSCProject.ViewModels
                 // For each sold good, add it to the items source
                 foreach (var soldGood in soldGoods)
                 {
-                    barItems.Add(new BarItem { Value = soldGood.Value });
+                    barItems.Add(new BarItem { Value = soldGood.Value, Color = OxyColor.FromRgb(244, 67, 54) });
                 }
 
                 // Add the bar series to the model1

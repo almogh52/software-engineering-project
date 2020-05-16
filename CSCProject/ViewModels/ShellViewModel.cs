@@ -21,6 +21,7 @@ namespace CSCProject.ViewModels
 
         public Dictionary<string, Screen> ViewsList { get; set; } = new Dictionary<string, Screen>
         {
+            { "Home", new HomeViewModel() },
             { "Employees", new EmployeesViewModel() },
             { "Employee Types", new EmployeeTypesViewModel() },
             { "Vendors", new VendorsViewModel() },
@@ -40,8 +41,8 @@ namespace CSCProject.ViewModels
 
         public ShellViewModel()
         {
-            // Transition to the initial view (Employees view)
-            TransitionToView("Employees", ViewsList["Employees"]);
+            // Transition to the initial view (Home view)
+            TransitionToView("Home", ViewsList["Home"]);
         }
 
         public void TransitionToView(string ViewName, Screen ViewScreen)

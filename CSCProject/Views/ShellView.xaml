@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Height="600" Width="1000">
+        MinHeight="900" MinWidth="1600" Height="900" Width="1600">
     <materialDesign:DialogHost>
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ViewsDrawerOpen}">
             <materialDesign:DrawerHost.LeftDrawerContent>
