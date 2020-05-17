@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <models:ExpensesDistributionViewModel x:Key="ExpensesDistributionViewModel" />
         <models:SoldGoodsViewModel x:Key="SoldGoodsViewModel" />
-        <models:MonthlyPurchaseOrdersViewModel x:Key="MonthlyPurchaseOrdersViewModel" />
+        <models:MonthlyBalanceViewModel x:Key="MonthlyBalanceViewModel" />
         <models:MonthlySaleOrdersViewModel x:Key="MonthlySaleOrdersViewModel" />
     </UserControl.Resources>
     <Grid>
@@ -24,12 +24,12 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,12,0,0">Expenses Distribution</TextBlock>
+        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,12,0,0">Employee Expenses Distribution</TextBlock>
         <local:ReportModelView Margin="0,40,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" cal:View.Model="{StaticResource ExpensesDistributionViewModel}" />
         <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,12,0,0" Grid.Column="1">Sold Goods</TextBlock>
         <local:ReportModelView Margin="0,40,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" cal:View.Model="{StaticResource SoldGoodsViewModel}" Grid.Column="1" />
-        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,12,0,0" Grid.Row="1">Monthly Purchase Orders</TextBlock>
-        <local:ReportModelView Margin="0,40,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" cal:View.Model="{StaticResource MonthlyPurchaseOrdersViewModel}" Grid.Row="1" />
+        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,12,0,0" Grid.Row="1">Monthly Balance</TextBlock>
+        <local:ReportModelView Margin="0,40,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" cal:View.Model="{StaticResource MonthlyBalanceViewModel}" Grid.Row="1" />
         <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,12,0,0" Grid.Row="1" Grid.Column="1">Monthly Sale Orders</TextBlock>
         <local:ReportModelView Margin="0,40,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" cal:View.Model="{StaticResource MonthlySaleOrdersViewModel}" Grid.Row="1" Grid.Column="1" />
     </Grid>
