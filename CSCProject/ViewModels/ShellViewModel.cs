@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using CSCProject.Views;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -19,34 +20,54 @@ namespace CSCProject.ViewModels
 
         public string CurrentViewName { get; set; } = "";
 
-        public Dictionary<string, Screen> ViewsList { get; set; } = new Dictionary<string, Screen>
+        public List<TreeViewItem> TreeViewItems { get; set; } = new List<TreeViewItem>
         {
-            { "Home", new HomeViewModel() },
-            { "Employees", new EmployeesViewModel() },
-            { "Employee Types", new EmployeeTypesViewModel() },
-            { "Vendors", new VendorsViewModel() },
-            { "Customers", new CustomersViewModel() },
-            { "Warehouses", new WarehousesViewModel() },
-            { "Expenses", new ExpensesViewModel() },
-            { "Lots", new LotsViewModel() },
-            { "Parts", new PartsViewModel() },
-            { "Inventory", new InventoryViewModel() },
-            { "Purchase Orders", new PurchaseOrdersCombinedViewModel() },
-            { "Sale Orders", new SaleOrdersCombinedViewModel() },
-            { "Expenses Distribution", new ExpensesDistributionViewModel() },
-            { "Sold Goods", new SoldGoodsViewModel() },
-            { "Monthly Sale Orders", new MonthlySaleOrdersViewModel() },
-            { "Monthly Purchase Orders", new MonthlyPurchaseOrdersViewModel() }
+            new TreeViewItem { Header = "Home", Tag = new HomeViewModel() },
+            new TreeViewItem { Header = "Employee Management", ItemsSource = new List<TreeViewItem> { 
+                    new TreeViewItem { Header = "Employees", Tag = new EmployeesViewModel() },
+                    new TreeViewItem { Header = "Employee Types", Tag = new EmployeeTypesViewModel() }
+                } 
+            },
+            new TreeViewItem { Header = "Customer Management", ItemsSource = new List<TreeViewItem> {
+                    new TreeViewItem { Header = "Customers", Tag = new CustomersViewModel() },
+                    new TreeViewItem { Header = "Sale Orders", Tag = new SaleOrdersCombinedViewModel() }
+                }
+            },
+            new TreeViewItem { Header = "Vendor Management", ItemsSource = new List<TreeViewItem> {
+                    new TreeViewItem { Header = "Vendors", Tag = new VendorsViewModel() },
+                    new TreeViewItem { Header = "Purchase Orders", Tag = new PurchaseOrdersCombinedViewModel() }
+                }
+            },
+            new TreeViewItem { Header = "Factory Management", ItemsSource = new List<TreeViewItem> {
+                    new TreeViewItem { Header = "Warehouses", Tag = new WarehousesViewModel() },
+                    new TreeViewItem { Header = "Lots", Tag = new LotsViewModel() },
+                    new TreeViewItem { Header = "Parts", Tag = new PartsViewModel() },
+                    new TreeViewItem { Header = "Inventory", Tag = new InventoryViewModel() }
+                }
+            },
+            new TreeViewItem { Header = "Reports", ItemsSource = new List<TreeViewItem> {
+                    new TreeViewItem { Header = "Employee Expenses Distribution", Tag = new ExpensesDistributionViewModel() },
+                    new TreeViewItem { Header = "Sold Goods", Tag = new SoldGoodsViewModel() },
+                    new TreeViewItem { Header = "Monthly Sale Orders", Tag = new MonthlySaleOrdersViewModel() },
+                    new TreeViewItem { Header = "Monthly Purchase Orders", Tag = new MonthlyPurchaseOrdersViewModel() },
+                    new TreeViewItem { Header = "Monthly Balance", Tag = new MonthlyBalanceViewModel() }
+                }
+            },
         };
 
         public ShellViewModel()
         {
             // Transition to the initial view (Home view)
-            TransitionToView("Home", ViewsList["Home"]);
+            TransitionToView("Home", (Screen)TreeViewItems[0].Tag);
         }
 
         public void TransitionToView(string ViewName, Screen ViewScreen)
         {
+            if (ViewScreen == null)
+            {
+                return;
+            }
+
             // Set the current view name
             CurrentViewName = ViewName;
 
