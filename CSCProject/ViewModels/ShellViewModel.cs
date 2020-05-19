@@ -25,7 +25,8 @@ namespace CSCProject.ViewModels
             new TreeViewItem { Header = "Home", Tag = new HomeViewModel() },
             new TreeViewItem { Header = "Employee Management", ItemsSource = new List<TreeViewItem> { 
                     new TreeViewItem { Header = "Employees", Tag = new EmployeesViewModel() },
-                    new TreeViewItem { Header = "Employee Types", Tag = new EmployeeTypesViewModel() }
+                    new TreeViewItem { Header = "Employee Types", Tag = new EmployeeTypesViewModel() },
+                    new TreeViewItem { Header = "Employee Expenses", Tag = new ExpensesViewModel() }
                 } 
             },
             new TreeViewItem { Header = "Customer Management", ItemsSource = new List<TreeViewItem> {

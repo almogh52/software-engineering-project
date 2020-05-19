@@ -11,7 +11,7 @@ namespace CSCProject.DataHandlers
     {
         protected override void VerifyDataItem(Expense dataItem)
         {
-            // Check fi the price of the expense is a valid price
+            // Check if the price of the expense is a valid price
             if (dataItem.Price <= 0)
             {
                 throw new ArgumentException("Invalid expense price");
