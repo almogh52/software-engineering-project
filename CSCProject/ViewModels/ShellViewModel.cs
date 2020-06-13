@@ -18,6 +18,9 @@ namespace CSCProject.ViewModels
     {
         public bool ViewsDrawerOpen { get; set; } = false;
 
+        private bool _darkMode = false;
+        public bool DarkMode { get { return _darkMode; }  set { _darkMode = value; ModifyTheme(theme => theme.SetBaseTheme(value ? Theme.Dark : Theme.Light)); } }
+
         public string CurrentViewName { get; set; } = "";
 
         public List<TreeViewItem> TreeViewItems { get; set; } = new List<TreeViewItem>
@@ -90,6 +93,16 @@ namespace CSCProject.ViewModels
 
             // Show the about message dialog
             await DialogHost.Show(new Dialogs.MessageDialog { Message = $"CSC Database\nVersion {version}\n© 2020 Almog Hamdani.\nAll rights reserved." });
+        }
+
+        private void ModifyTheme(Action<ITheme> modificationAction)
+        {
+            PaletteHelper paletteHelper = new PaletteHelper();
+            ITheme theme = paletteHelper.GetTheme();
+
+            modificationAction?.Invoke(theme);
+
+            paletteHelper.SetTheme(theme);
         }
 
         public void Exit()

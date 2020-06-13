@@ -59,6 +59,16 @@
                                 <Button Content="Exit" cal:Message.Attach="Exit" />
                             </StackPanel>
                         </materialDesign:PopupBox>
+                        <ToggleButton
+                            x:Name="DarkModeToggleButton"
+                            Margin="16"
+                            IsChecked="{Binding DarkMode, Mode=TwoWay}"
+                            DockPanel.Dock="Right">
+                            <materialDesign:PackIcon
+                                Kind="ThemeLightDark"
+                                Height="21"
+                                Width="21" />
+                        </ToggleButton>
                         <TextBlock 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center" 
