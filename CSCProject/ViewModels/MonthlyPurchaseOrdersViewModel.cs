@@ -13,6 +13,9 @@ namespace CSCProject.ViewModels
 {
     class MonthlyPurchaseOrdersViewModel : Screen, INotifyPropertyChanged
     {
+        public DateTime StartDate { get; set; } = new DateTime(DateTime.Now.Year, 1, 1);
+        public DateTime EndDate { get; set; } = DateTime.Now;
+
         public PlotModel Model
         {
             get
@@ -28,7 +31,7 @@ namespace CSCProject.ViewModels
                 // For each purchase order, check if it's in the last year
                 foreach (PurchaseOrder purchaseOrder in purchaseOrders)
                 {
-                    if (purchaseOrder.Date.Year == DateTime.Today.Year)
+                    if (purchaseOrder.Date.Date >= StartDate.Date && purchaseOrder.Date.Date <= EndDate.Date)
                     {
                         monthlyOrders[purchaseOrder.Date.Month - 1]++;
                     }
@@ -73,4 +76,6 @@ namespace CSCProject.ViewModels
             }
         }
     }
+
+    class ExtendedMonthlyPurchaseOrdersViewModel : MonthlyPurchaseOrdersViewModel { }
 }

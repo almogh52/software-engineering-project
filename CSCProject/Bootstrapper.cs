@@ -34,7 +34,12 @@ namespace CSCProject {
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.SoldGoodsViewModel", "CSCProject.Views.ReportModelView");
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.MonthlySaleOrdersViewModel", "CSCProject.Views.ReportModelView");
             ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.MonthlyPurchaseOrdersViewModel", "CSCProject.Views.ReportModelView");
-            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.MonthlyBalanceViewModel", "CSCProject.Views.ReportModelView");
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.MonthlyBalanceViewModel", "CSCProject.Views.ReportModelView");            
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.ExtendedExpensesDistributionViewModel", "CSCProject.Views.ExtendedReportModelView");
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.ExtendedSoldGoodsViewModel", "CSCProject.Views.ExtendedReportModelView");
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.ExtendedMonthlySaleOrdersViewModel", "CSCProject.Views.ExtendedReportModelView");
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.ExtendedMonthlyPurchaseOrdersViewModel", "CSCProject.Views.ExtendedReportModelView");
+            ViewLocator.NameTransformer.AddRule("CSCProject.ViewModels.ExtendedMonthlyBalanceViewModel", "CSCProject.Views.ExtendedReportModelView");
         }
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e) {

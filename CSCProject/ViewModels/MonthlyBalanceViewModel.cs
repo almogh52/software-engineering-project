@@ -13,6 +13,9 @@ namespace CSCProject.ViewModels
 {
     class MonthlyBalanceViewModel : Screen, INotifyPropertyChanged
     {
+        public DateTime StartDate { get; set; } = new DateTime(DateTime.Now.Year, 1, 1);
+        public DateTime EndDate { get; set; } = DateTime.Now;
+
         public PlotModel Model
         {
             get
@@ -33,7 +36,7 @@ namespace CSCProject.ViewModels
                 // For each purchase order, check if it's in the last year
                 foreach (PurchaseOrder purchaseOrder in purchaseOrders)
                 {
-                    if (purchaseOrder.Date.Year == DateTime.Today.Year)
+                    if (purchaseOrder.Date.Date >= StartDate.Date && purchaseOrder.Date.Date <= EndDate.Date)
                     {
                         balance[purchaseOrder.Date.Month - 1] -= purchaseOrder.Price;
                     }
@@ -42,7 +45,7 @@ namespace CSCProject.ViewModels
                 // For each expense, check if it's in the last year
                 foreach (Expense expense in expenses)
                 {
-                    if (expense.Date.Year == DateTime.Today.Year)
+                    if (expense.Date.Date >= StartDate.Date && expense.Date.Date <= EndDate.Date)
                     {
                         balance[expense.Date.Month - 1] -= expense.Price;
                     }
@@ -51,7 +54,7 @@ namespace CSCProject.ViewModels
                 // For each sale order, check if it's in the last year
                 foreach (SaleOrder saleOrder in saleOrders)
                 {
-                    if (saleOrder.Date.Year == DateTime.Today.Year)
+                    if (saleOrder.Date.Date >= StartDate.Date && saleOrder.Date.Date <= EndDate.Date)
                     {
                         balance[saleOrder.Date.Month - 1] += saleOrder.Price;
                     }
@@ -96,4 +99,6 @@ namespace CSCProject.ViewModels
             }
         }
     }
+    
+    class ExtendedMonthlyBalanceViewModel : MonthlyBalanceViewModel { }
 }

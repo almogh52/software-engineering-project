@@ -13,6 +13,9 @@ namespace CSCProject.ViewModels
 {
     class ExpensesDistributionViewModel : Screen, INotifyPropertyChanged
     {
+        public DateTime StartDate { get; set; } = new DateTime(DateTime.Now.Year, 1, 1);
+        public DateTime EndDate { get; set; } = DateTime.Now;
+
         public PlotModel Model {
             get
             {
@@ -27,14 +30,18 @@ namespace CSCProject.ViewModels
                 // For each expense, add it to the employee's total expense
                 foreach (Expense expense in expenses)
                 {
-                    // Check if the employee key exists
-                    if (!employeesExpenses.ContainsKey(expense.Employee))
+                    // If the date of the expense is in the correct date range
+                    if (expense.Date.Date >= StartDate.Date && expense.Date.Date <= EndDate.Date)
                     {
-                        employeesExpenses[expense.Employee] = 0;
-                    }
+                        // Check if the employee key exists
+                        if (!employeesExpenses.ContainsKey(expense.Employee))
+                        {
+                            employeesExpenses[expense.Employee] = 0;
+                        }
 
-                    // Add the expense price to the employee's expense
-                    employeesExpenses[expense.Employee] += expense.Price;
+                        // Add the expense price to the employee's expense
+                        employeesExpenses[expense.Employee] += expense.Price;
+                    }
                 }
 
                 // For each employee, create it's pie slice
@@ -50,4 +57,6 @@ namespace CSCProject.ViewModels
             }
         }
     }
+
+    class ExtendedExpensesDistributionViewModel : ExpensesDistributionViewModel { }
 }

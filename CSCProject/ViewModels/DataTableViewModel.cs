@@ -83,7 +83,7 @@ namespace CSCProject.ViewModels
                 else
                 {
                     // Insert before the deleted field
-                    dataGrid.Columns.Insert(dataGrid.Columns.Count - 1, new DataGridTextColumn { Header = column.Name, Binding = column.PropertyBinding });
+                    dataGrid.Columns.Insert(dataGrid.Columns.Count - 1, new System.Windows.Controls.DataGridTextColumn { Header = column.Name, Binding = column.PropertyBinding });
                 }
             }
         }

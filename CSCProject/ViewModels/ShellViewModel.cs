@@ -47,11 +47,11 @@ namespace CSCProject.ViewModels
                 }
             },
             new TreeViewItem { Header = "Reports", ItemsSource = new List<TreeViewItem> {
-                    new TreeViewItem { Header = "Employee Expenses Distribution", Tag = new ExpensesDistributionViewModel() },
-                    new TreeViewItem { Header = "Sold Goods", Tag = new SoldGoodsViewModel() },
-                    new TreeViewItem { Header = "Monthly Sale Orders", Tag = new MonthlySaleOrdersViewModel() },
-                    new TreeViewItem { Header = "Monthly Purchase Orders", Tag = new MonthlyPurchaseOrdersViewModel() },
-                    new TreeViewItem { Header = "Monthly Balance", Tag = new MonthlyBalanceViewModel() }
+                    new TreeViewItem { Header = "Employee Expenses Distribution", Tag = new ExtendedExpensesDistributionViewModel() },
+                    new TreeViewItem { Header = "Sold Goods", Tag = new ExtendedSoldGoodsViewModel() },
+                    new TreeViewItem { Header = "Monthly Sale Orders", Tag = new ExtendedMonthlySaleOrdersViewModel() },
+                    new TreeViewItem { Header = "Monthly Purchase Orders", Tag = new ExtendedMonthlyPurchaseOrdersViewModel() },
+                    new TreeViewItem { Header = "Monthly Balance", Tag = new ExtendedMonthlyBalanceViewModel() }
                 }
             },
         };

@@ -18,7 +18,7 @@
         <misc:FloatConverter x:Key="floatConverter" />
     </local:Dialog.Resources>
     <StackPanel>
-        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}"
+        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                    Margin="6"
                    HorizontalAlignment="Center"
                    Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PartDialog}}, Path=UpdateDialog, Converter={StaticResource DialogTitleStringConverter}}"/>

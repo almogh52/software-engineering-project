@@ -15,7 +15,7 @@
         <misc:BoolToStringConverter x:Key="DialogTitleStringConverter" FalseValue="New Expense" TrueValue="Edit Expense" />
     </local:Dialog.Resources>
     <StackPanel>
-        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}"
+        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                    Margin="6"
                    HorizontalAlignment="Center" 
                    Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ExpenseDialog}}, Path=UpdateDialog, Converter={StaticResource DialogTitleStringConverter}}"/>

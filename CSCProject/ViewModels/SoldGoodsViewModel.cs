@@ -13,6 +13,9 @@ namespace CSCProject.ViewModels
 {
     class SoldGoodsViewModel : Screen, INotifyPropertyChanged
     {
+        public DateTime StartDate { get; set; } = new DateTime(DateTime.Now.Year, 1, 1);
+        public DateTime EndDate { get; set; } = DateTime.Now;
+
         public PlotModel Model
         {
             get
@@ -28,14 +31,17 @@ namespace CSCProject.ViewModels
                 // For each sale order part, add it to the part's total sale price
                 foreach (SaleOrderPart saleOrderPart in saleOrderParts)
                 {
-                    // Check if the part key exists
-                    if (!soldGoods.ContainsKey(saleOrderPart.Part))
+                    if (saleOrderPart.Order.Date.Date >= StartDate.Date && saleOrderPart.Order.Date.Date <= EndDate.Date)
                     {
-                        soldGoods[saleOrderPart.Part] = 0;
-                    }
+                        // Check if the part key exists
+                        if (!soldGoods.ContainsKey(saleOrderPart.Part))
+                        {
+                            soldGoods[saleOrderPart.Part] = 0;
+                        }
 
-                    // Add the sale price to the part's price
-                    soldGoods[saleOrderPart.Part] += saleOrderPart.Part.Price * saleOrderPart.Quantity;
+                        // Add the sale price to the part's price
+                        soldGoods[saleOrderPart.Part] += saleOrderPart.Part.Price * saleOrderPart.Quantity;
+                    }
                 }
 
                 // For each sold good, add it to the items source
@@ -65,4 +71,6 @@ namespace CSCProject.ViewModels
             }
         }
     }
+
+    class ExtendedSoldGoodsViewModel : SoldGoodsViewModel { }
 }
